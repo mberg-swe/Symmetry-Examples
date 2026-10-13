@@ -1,6 +1,6 @@
 # Symmetry Examples
 
-Examples for the course [FYAD11 Symmetry](https://www.kau.se/utbildning/program-och-kurser/kurser/FYAD11).
+Examples for the course [FYAD11 Symmetry](https://www.kau.se/en/education/programmes-and-courses/courses/FYAD11).
 
 Examples are numbered by chapter in the lecture notes.
 
