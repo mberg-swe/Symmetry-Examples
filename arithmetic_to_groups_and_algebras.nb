@@ -1,0 +1,1328 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 15.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     49728,       1318]
+NotebookOptionsPosition[     41044,       1175]
+NotebookOutlinePosition[     41579,       1195]
+CellTagsIndexPosition[     41536,       1192]
+WindowTitle->From arithmetic to groups and algebras
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[TextData[StyleBox["From arithmetic to groups and algebras", \
+"Subsubsection"]], "Text",
+ CellChangeTimes->{{4.000869389226603*^9, 
+  4.000869392820512*^9}},ExpressionUUID->"ee277c85-991e-4dee-9040-\
+58b6584a0758"],
+
+Cell[TextData[{
+ StyleBox["If you are not used to Mathematica",
+  FontSlant->"Italic"],
+ ": evaluate one input cell at a time, from top to bottom, with Shift+Enter. \
+\[LineSeparator]You can read the outputs below first, and then try evaluating \
+each cell yourself (Shift+Enter). \n\n",
+ StyleBox["Arithmetic",
+  FontSlant->"Italic"],
+ " is the familiar system of rules for combining numbers by operations such \
+as addition and multiplication that you learned in school, from Greek \
+\[OpenCurlyDoubleQuote]",
+ StyleBox["arithmetike tekhne\[CloseCurlyDoubleQuote]",
+  FontSlant->"Italic"],
+ ", meaning \[OpenCurlyDoubleQuote]",
+ StyleBox["the art of counting\[CloseCurlyDoubleQuote]",
+  FontSlant->"Italic"],
+ "."
+}], "Text",
+ CellChangeTimes->{{4.000869429755928*^9, 4.0008694876134577`*^9}, {
+  4.0008712936287737`*^9, 4.000871311600163*^9}, {4.000877387459517*^9, 
+  4.000877389524963*^9}, {4.0008774340114937`*^9, 
+  4.000877498648641*^9}},ExpressionUUID->"6a271cd6-b694-440d-970f-\
+0b271de75d86"],
+
+Cell[TextData[StyleBox["1. Two familiar operations",
+ FontWeight->"Bold"]], "Text",
+ CellChangeTimes->{{4.000869405395198*^9, 
+  4.0008694067016582`*^9}},ExpressionUUID->"c9ea6ba9-35d2-4816-82f6-\
+6b14a4923f79"],
+
+Cell["Addition combines numbers: 2 + 3 = 5. ", "Text",
+ CellChangeTimes->{{4.0008695274753513`*^9, 4.000869597588459*^9}, 
+   4.000871324129594*^9},ExpressionUUID->"3a3f94f8-c36a-4a38-b8cd-\
+2b727a14cb4e"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"2", "+", "3"}]], "Input",
+ CellLabel->
+  "In[4071]:=",ExpressionUUID->"b9ba4ffe-74fe-479a-bc9f-396eddd84594"],
+
+Cell[BoxData[
+ FormBox["5", TraditionalForm]], "Output",
+ CellChangeTimes->{4.0008725985053473`*^9},
+ CellLabel->
+  "Out[4071]=",ExpressionUUID->"df690362-d76f-4a98-9be2-94212a1421a6"]
+}, Open  ]],
+
+Cell["\<\
+In Mathematica, we usually write multiplication with a space, which is shown \
+as a grayed-out cross \[OpenCurlyDoubleQuote]\[Cross]\[CloseCurlyDoubleQuote]:\
+\>", "Text",
+ CellChangeTimes->{{4.000871325309804*^9, 4.0008713282557163`*^9}, {
+  4.000877517051062*^9, 
+  4.000877517796472*^9}},ExpressionUUID->"bc49ac94-c893-4a0b-beef-\
+06c6e5bf81cb"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"2", " ", "3"}]], "Input",
+ CellLabel->
+  "In[4072]:=",ExpressionUUID->"86cc9ccb-d3de-420b-ae1a-e8f685ec6905"],
+
+Cell[BoxData[
+ FormBox["6", TraditionalForm]], "Output",
+ CellChangeTimes->{4.000872598537521*^9},
+ CellLabel->
+  "Out[4072]=",ExpressionUUID->"5be6b709-e88d-44b9-ac09-59462e1490e0"]
+}, Open  ]],
+
+Cell[TextData[{
+ "Multiplication can also be written \[OpenCurlyDoubleQuote]\[Star]\
+\[CloseCurlyDoubleQuote], it\[CloseCurlyQuote]s the same as the above (try \
+exchanging the symbol). \n\nAn ",
+ StyleBox["identity operation",
+  FontSlant->"Italic"],
+ ", like an identity matrix, is the operation that does nothing.\
+\[LineSeparator]For addition, identity is addition by 0. For multiplication, \
+identity is multiplying by 1. Note that these two identity operations are \
+different in detail."
+}], "Text",
+ CellChangeTimes->{{4.0008696094066057`*^9, 4.0008696818808737`*^9}, {
+  4.000869768761874*^9, 4.000869810842045*^9}, {4.000877520939472*^9, 
+  4.000877550108643*^9}},ExpressionUUID->"5d6729e5-2087-445e-9a13-\
+1a0050191ac0"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"0", "+", "7"}], ",", 
+   RowBox[{"1", " ", "7"}]}], "}"}]], "Input",
+ CellLabel->
+  "In[4073]:=",ExpressionUUID->"2b01608d-42d2-490a-8e33-8eb8dc709ec6"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"{", 
+   RowBox[{"7", ",", "7"}], "}"}], TraditionalForm]], "Output",
+ CellChangeTimes->{4.000872598541045*^9},
+ CellLabel->
+  "Out[4073]=",ExpressionUUID->"a8bad121-62e5-4372-8d04-bc094f16faaa"]
+}, Open  ]],
+
+Cell[TextData[{
+ "Here { } denotes a \[OpenCurlyDoubleQuote]list\[CloseCurlyDoubleQuote]: as \
+it sounds, a list of objects with no additional structure. For now, think of \
+a list as a \[OpenCurlyDoubleQuote]computer science thing\
+\[CloseCurlyDoubleQuote], not a physics thing in itself. (Later, we will \
+actually ascribe some more meaning to lists.)\n\nIf you\[CloseCurlyQuote]re \
+not used to Mathematica, try replacing \[OpenCurlyDoubleQuote]7\
+\[CloseCurlyDoubleQuote] above with another integer, and run that cell again \
+(Shift+Enter) to get started experimenting. \n\nAn ",
+ StyleBox["inverse operation",
+  FontSlant->"Italic"],
+ ", like an inverse matrix, reverses an operation, i.e. performs it \
+backwards. An additive inverse of 3 is ",
+ StyleBox["\[Dash]",
+  FontSize->14],
+ "3 because their sum is 0:"
+}], "Text",
+ CellChangeTimes->{{4.00086949485257*^9, 4.000869495981729*^9}, {
+  4.00086968481918*^9, 4.0008698308383102`*^9}, {4.000871344505518*^9, 
+  4.000871493640215*^9}, {4.000877562770597*^9, 
+  4.000877624663931*^9}},ExpressionUUID->"220d8aec-2fe5-443c-b83c-\
+c97b7673ffa6"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"3", "-", "3"}]], "Input",
+ CellLabel->
+  "In[4074]:=",ExpressionUUID->"1f2d5977-fe00-49cc-8819-985480570551"],
+
+Cell[BoxData[
+ FormBox["0", TraditionalForm]], "Output",
+ CellChangeTimes->{4.000872598549116*^9},
+ CellLabel->
+  "Out[4074]=",ExpressionUUID->"a6abcc36-3755-4cb0-b4d9-510b4e4f883a"]
+}, Open  ]],
+
+Cell["\<\
+A multiplicative inverse of 3 is 1/3 because their product is 1:\
+\>", "Text",
+ CellChangeTimes->{{4.00087760783346*^9, 
+  4.000877622032215*^9}},ExpressionUUID->"29061a8a-52fd-4b88-91f1-\
+16e21a7c7784"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"3", "/", "3"}]], "Input",
+ CellChangeTimes->{{4.0008776285483017`*^9, 4.000877629526154*^9}},
+ CellLabel->
+  "In[4104]:=",ExpressionUUID->"ea3c854d-9168-4d71-b754-5409424694af"],
+
+Cell[BoxData[
+ FormBox["1", TraditionalForm]], "Output",
+ CellChangeTimes->{4.000872598556737*^9, 4.000877629753302*^9},
+ CellLabel->
+  "Out[4104]=",ExpressionUUID->"3fc55687-7222-4b78-911e-a8607667e9fc"]
+}, Open  ]],
+
+Cell[TextData[{
+ "Note that again, the details of the two inverse operations are quite \
+different.\n\nIn Mathematica (as in many programming languages), the symbol \
+== is a ",
+ StyleBox["test",
+  FontSlant->"Italic"],
+ " whether two expressions are equal, whereas a single = is ",
+ StyleBox["assignment",
+  FontSlant->"Italic"],
+ ", i.e. assigns a name to a value. \nThe next cells use the \
+\[OpenCurlyDoubleQuote]equal test\[CloseCurlyDoubleQuote] == to compare two \
+ways to put parentheses:"
+}], "Text",
+ CellChangeTimes->{{4.0008698377547817`*^9, 4.00086991946012*^9}, {
+  4.000877613346155*^9, 4.0008776142200537`*^9}, {4.0008776461968727`*^9, 
+  4.000877655614045*^9}},ExpressionUUID->"3e8c4f23-093c-482f-9261-\
+f1218e02623a"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"associativityTest", " ", "=", " ", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"2", "+", "3"}], ")"}], "+", "4"}], "\[Equal]", 
+     RowBox[{"2", "+", 
+      RowBox[{"(", 
+       RowBox[{"3", "+", "4"}], ")"}]}]}], ",", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"2", " ", "3"}], ")"}], " ", "4"}], "\[Equal]", 
+     RowBox[{"2", " ", 
+      RowBox[{"(", 
+       RowBox[{"3", " ", "4"}], ")"}]}]}]}], "}"}]}]], "Input",
+ CellChangeTimes->{{4.000870119405966*^9, 4.0008701234318447`*^9}},
+ CellLabel->
+  "In[4076]:=",ExpressionUUID->"47944c0f-ffc9-4f17-b58c-af16f7b48639"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"{", 
+   RowBox[{"True", ",", "True"}], "}"}], TraditionalForm]], "Output",
+ CellChangeTimes->{4.000870123877694*^9, 4.0008725985651207`*^9},
+ CellLabel->
+  "Out[4076]=",ExpressionUUID->"056a668b-5d87-4636-8102-3257e7b9301b"]
+}, Open  ]],
+
+Cell["and two ways to order the objects: ", "Text",
+ CellChangeTimes->{{4.0008776566829*^9, 
+  4.000877666111616*^9}},ExpressionUUID->"f5119514-b09b-4941-9024-\
+f36f00aef9e4"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"commutativityTest", " ", "=", " ", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"2", "+", "3"}], "\[Equal]", 
+     RowBox[{"3", "+", "2"}]}], ",", 
+    RowBox[{
+     RowBox[{"2", " ", "3"}], "\[Equal]", 
+     RowBox[{"3", " ", "2"}]}]}], "}"}]}]], "Input",
+ CellChangeTimes->{{4.000870124887783*^9, 4.0008701282994223`*^9}},
+ CellLabel->
+  "In[4077]:=",ExpressionUUID->"6a5e1ed7-12ad-4334-b910-a436afff3b23"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"{", 
+   RowBox[{"True", ",", "True"}], "}"}], TraditionalForm]], "Output",
+ CellChangeTimes->{4.00087012867502*^9, 4.000872598576551*^9},
+ CellLabel->
+  "Out[4077]=",ExpressionUUID->"180d46f6-a8d9-4563-92e4-05990ee545af"]
+}, Open  ]],
+
+Cell[TextData[{
+ "The first pair tests ",
+ StyleBox["associativity",
+  FontWeight->"Bold"],
+ ": moving parentheses. The second tests ",
+ StyleBox["commutativity",
+  FontWeight->"Bold"],
+ ": swapping order. \n\nBoth properties are true for ordinary numbers. But \
+they don\[CloseCurlyQuote]t always hold, i.e. for other objects than ordinary \
+numbers. You should be familiar with the non-commutativity of matrices. \
+Non-associativity is probably less familiar. \nAlso keep in mind that \
+examples illustrate a law, but of course don\[CloseCurlyQuote]t prove it for \
+every number. We will typically not prove statements like the above in \
+general, but invite you to try examples to get a feeling. Proofs would be \
+discussed in courses in \[OpenCurlyDoubleQuote]abstract algebra\
+\[CloseCurlyDoubleQuote] (at KaU, the course ",
+ StyleBox["Algebraiska strukturer",
+  FontSlant->"Italic"],
+ "), which typical physics students never take. "
+}], "Text",
+ CellChangeTimes->{{4.000869922802023*^9, 4.000870016073697*^9}, {
+  4.000870060528908*^9, 4.0008701021947193`*^9}, {4.000870136417254*^9, 
+  4.000870221288307*^9}, {4.000877678788612*^9, 
+  4.000877751680173*^9}},ExpressionUUID->"26e5cc4c-5c9d-4f83-b90e-\
+6ae5de33b04a"],
+
+Cell[TextData[StyleBox["2a. The chosen set matters",
+ FontWeight->"Bold"]], "Text",
+ CellChangeTimes->{{4.000870225580888*^9, 4.0008702267105417`*^9}, 
+   4.0008704509925823`*^9},ExpressionUUID->"54274751-ff18-4971-9209-\
+8e02096d81fb"],
+
+Cell[TextData[{
+ "A set is a \[OpenCurlyDoubleQuote]collection of allowed values\
+\[CloseCurlyDoubleQuote]. An operation is ",
+ StyleBox["closed",
+  FontSlant->"Italic"],
+ " on a set when applying it to two allowed values always gives another \
+allowed value. To call a set with an operation a ",
+ StyleBox["group",
+  FontWeight->"Bold"],
+ ", we also need an ",
+ StyleBox["identity",
+  FontWeight->"Bold"],
+ ", an inverse inside the set for every member, and associativity. (Note that \
+commutativity is an ",
+ StyleBox["additional",
+  FontSlant->"Italic"],
+ " requirement, not part of the group requirement.)"
+}], "Text",
+ CellChangeTimes->{{4.0008702475907097`*^9, 4.0008702799096937`*^9}, {
+  4.000877761114952*^9, 
+  4.0008777816404953`*^9}},ExpressionUUID->"375de0df-aea7-4323-ba32-\
+8baafecbd837"],
+
+Cell[TextData[{
+ "For addition, the integers ",
+ Cell[BoxData[
+ "\[DoubleStruckCapitalZ]"], "InlineFormula",ExpressionUUID->
+  "9a08915e-d9ed-4802-82e2-8f60b9b61cde"],
+ " form a group: sums of integers stay integer, 0 is the identity, and every \
+integer has a negative. For multiplication, the integers have no inverse: for \
+example, the inverse of 2 is 1/2, not an integer. \nOn the other hand, the \
+nonzero rational numbers ",
+ Cell[BoxData[
+  SuperscriptBox["\[DoubleStruckCapitalQ]", "\[Times]"]], "InlineFormula",
+  ExpressionUUID->"314fa1fc-4102-43ac-95ac-1cfb6492574b"],
+ " do form a group under multiplication. We exclude 0 because no number \
+multiplied by 0 gives 1."
+}], "Text",
+ CellChangeTimes->{{4.000870292994598*^9, 4.000870310773797*^9}, {
+  4.000870350808667*^9, 
+  4.000870397649105*^9}},ExpressionUUID->"f0412def-ced6-47fe-891f-\
+0388bde3d33f"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"2", "-", "2"}], ",", 
+   FractionBox["2", "2"]}], "}"}]], "Input",
+ CellLabel->
+  "In[4078]:=",ExpressionUUID->"b2dbf298-31a9-4dbe-919c-b94989929059"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"{", 
+   RowBox[{"0", ",", "1"}], "}"}], TraditionalForm]], "Output",
+ CellChangeTimes->{4.000872598589385*^9},
+ CellLabel->
+  "Out[4078]=",ExpressionUUID->"bc4a88fe-e808-4fa1-87b7-e37a0e9dbc92"]
+}, Open  ]],
+
+Cell["\<\
+Both calculations reach the identity appropriate to their operation. But \
+again, 1/2 is outside the integers, so it cannot serve as a multiplicative \
+inverse there. Multiplication by 0 always gives 0. Changing the number we \
+multiply by cannot make 1.\
+\>", "Text",
+ CellChangeTimes->{{4.000870344601647*^9, 4.000870345870751*^9}, {
+  4.000870407408074*^9, 
+  4.000870421294156*^9}},ExpressionUUID->"27544439-f3b5-42a3-9c90-\
+c4d9a210a2b3"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"0", " ", "2"}], ",", 
+   FractionBox["0", "2"], ",", 
+   RowBox[{"0", " ", "100"}]}], "}"}]], "Input",
+ CellLabel->
+  "In[4079]:=",ExpressionUUID->"e9d0821b-2888-4213-ac25-8ad42f9cd79c"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"{", 
+   RowBox[{"0", ",", "0", ",", "0"}], "}"}], TraditionalForm]], "Output",
+ CellChangeTimes->{4.0008725986036997`*^9},
+ CellLabel->
+  "Out[4079]=",ExpressionUUID->"99f211f3-454c-4196-b574-84c47f007e18"]
+}, Open  ]],
+
+Cell[TextData[StyleBox["2b. Two very small examples",
+ FontWeight->"Bold"]], "Text",
+ CellChangeTimes->{{4.000870427392088*^9, 4.000870449309935*^9}, {
+  4.000870557563507*^9, 
+  4.000870561378422*^9}},ExpressionUUID->"aabeccef-f1d7-4cf2-82ed-\
+5bf0c7ab5860"],
+
+Cell["\<\
+Example: choose just the set {\[Dash]1, 1} and multiplication. Its four \
+possible products are shown in the order (-1)\[CenterDot](-1), (-1)\
+\[CenterDot]1, 1\[CenterDot](-1), 1 \[CenterDot] 1. Every answer is still in \
+the set. The identity is 1, and each member is its own inverse.\
+\>", "Text",
+ CellChangeTimes->{{4.0008704563383017`*^9, 4.0008705292654467`*^9}, {
+  4.000870565413711*^9, 4.000870569276002*^9}, {4.000873818120399*^9, 
+  4.000873822007041*^9}},ExpressionUUID->"7a57260a-1163-4423-934a-\
+6eb29983f1f2"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"-", 
+    RowBox[{"(", 
+     RowBox[{"-", "1"}], ")"}]}], ",", 
+   RowBox[{"-", "1"}], ",", 
+   RowBox[{"1", " ", 
+    RowBox[{"(", 
+     RowBox[{"-", "1"}], ")"}]}], ",", 
+   RowBox[{"1", " ", "1"}]}], "}"}]], "Input",
+ CellLabel->
+  "In[4080]:=",ExpressionUUID->"e145a26b-1ebf-4af1-acb4-4915a73483a8"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"{", 
+   RowBox[{"1", ",", 
+    RowBox[{"-", "1"}], ",", 
+    RowBox[{"-", "1"}], ",", "1"}], "}"}], TraditionalForm]], "Output",
+ CellChangeTimes->{4.000872598619794*^9},
+ CellLabel->
+  "Out[4080]=",ExpressionUUID->"0efb9e0a-9974-4b1d-a3d7-3f2faa55e644"]
+}, Open  ]],
+
+Cell["\<\
+Example: {0,1} with addition is not closed: 1+1 leaves that set. \
+\>", "Text",
+ CellChangeTimes->{{4.000870572071105*^9, 4.000870575973363*^9}, 
+   4.000873776854147*^9, 
+   4.000873827628088*^9},ExpressionUUID->"67929f0c-14fe-464b-886d-\
+a5a77ca67df0"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"0", "+", "1"}], ",", 
+   RowBox[{"1", "+", "1"}]}], "}"}]], "Input",
+ CellLabel->
+  "In[4081]:=",ExpressionUUID->"57532b3a-1110-4f59-b64e-3b105095ceb3"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"{", 
+   RowBox[{"1", ",", "2"}], "}"}], TraditionalForm]], "Output",
+ CellChangeTimes->{4.000872598630653*^9},
+ CellLabel->
+  "Out[4081]=",ExpressionUUID->"bad61931-1d20-49f0-93c4-a7f9306b6e41"]
+}, Open  ]],
+
+Cell[TextData[StyleBox["3. Preparation for lecture 3: small matrices",
+ FontWeight->"Bold"]], "Text",
+ CellChangeTimes->{{4.000870589045597*^9, 4.00087059419482*^9}, 
+   4.000871522334353*^9},ExpressionUUID->"cbb47e48-291f-4d82-ab6a-\
+0009619ff97a"],
+
+Cell[TextData[{
+ "Although we shouldn\[CloseCurlyQuote]t look forward ",
+ StyleBox["too",
+  FontSlant->"Italic"],
+ " much, the following can help to understand the point of the discussion of \
+arithmetic above, that might have seemed very boring. You are already \
+familiar with the generalization of ordinary numbers to matrices. But maybe \
+you haven\[CloseCurlyQuote]t thought very much about the choices that were \
+made in this generalization. Thinking about those choices might help us see \
+what ",
+ StyleBox["other kinds of generalizations could be interesting",
+  FontWeight->"Bold"],
+ ", than specifically going from numbers to matrices (that you already know).\
+\n\nConsider 2\[Times]2 matrices. Here ",
+ StyleBox["\[OpenCurlyDoubleQuote]id\[CloseCurlyDoubleQuote]",
+  FontSlant->"Italic"],
+ " is the identity matrix (capital I in Mathematica is reserved for the \
+imaginary unit), ",
+ StyleBox["x",
+  FontSlant->"Italic"],
+ " swaps the two coordinate positions (as the Pauli matrix ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[Sigma]", "x"], TraditionalForm]],
+  FormatType->TraditionalForm,ExpressionUUID->
+  "817e4de7-a970-4650-a8c7-6477cbd3925a"],
+ "), and ",
+ StyleBox["z ",
+  FontSlant->"Italic"],
+ "changes the sign of the second (as the Pauli matrix ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[Sigma]", "z"], TraditionalForm]],
+  FormatType->TraditionalForm,ExpressionUUID->
+  "831460f4-5b84-4740-8d5b-5867069cf79a"],
+ "). A matrix is stored as a list of lists . (The semicolon \
+\[OpenCurlyDoubleQuote];\[CloseCurlyDoubleQuote] below separates assignments \
+and hides their immediate output.)"
+}], "Text",
+ CellChangeTimes->{{4.0008706085011787`*^9, 4.000870734822405*^9}, {
+  4.0008715185909023`*^9, 4.000871539021913*^9}, {4.000872173182797*^9, 
+  4.0008723930717793`*^9}, {4.000876412159317*^9, 4.000876448896789*^9}, {
+  4.000877811899152*^9, 
+  4.000877840228404*^9}},ExpressionUUID->"60d81792-63b4-4467-ba91-\
+a9954d8a7b37"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"id", "=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"1", ",", "0"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "1"}], "}"}]}], "}"}]}], "\[IndentingNewLine]", 
+ RowBox[{"x", "=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"0", ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "0"}], "}"}]}], "}"}]}], "\[IndentingNewLine]", 
+ RowBox[{"z", "=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"1", ",", "0"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", 
+      RowBox[{"-", "1"}]}], "}"}]}], "}"}]}]}], "Input",
+ CellChangeTimes->{{4.0008723998092337`*^9, 4.0008724107125263`*^9}},
+ CellLabel->
+  "In[4082]:=",ExpressionUUID->"796971ce-fc8a-47b0-8fcc-12c86a6e0d38"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"1", "0"},
+     {"0", "1"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}], TraditionalForm]], "Output",
+ CellChangeTimes->{
+  4.0008707379415693`*^9, {4.000872401488441*^9, 4.000872411057342*^9}, 
+   4.000872598674752*^9},
+ CellLabel->
+  "Out[4082]=",ExpressionUUID->"32364148-977d-4c65-8ee5-0019848f45fd"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"0", "1"},
+     {"1", "0"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}], TraditionalForm]], "Output",
+ CellChangeTimes->{
+  4.0008707379415693`*^9, {4.000872401488441*^9, 4.000872411057342*^9}, 
+   4.000872598690007*^9},
+ CellLabel->
+  "Out[4083]=",ExpressionUUID->"4d881f16-b8ac-4498-8b83-b3001ce53abe"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"1", "0"},
+     {"0", 
+      RowBox[{"-", "1"}]}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}], TraditionalForm]], "Output",
+ CellChangeTimes->{
+  4.0008707379415693`*^9, {4.000872401488441*^9, 4.000872411057342*^9}, 
+   4.0008725987029877`*^9},
+ CellLabel->
+  "Out[4084]=",ExpressionUUID->"1dbe534e-f635-442f-9fe9-d686d264f1e5"]
+}, Open  ]],
+
+Cell[TextData[{
+ "Note the assignment of the grouping of the list of lists as rows vs. \
+columns.\nAs you know, ",
+ StyleBox["matrix addition",
+  FontSlant->"Italic"],
+ " adds the corresponding entries of each matrix:"
+}], "Text",
+ CellChangeTimes->{{4.000870756170558*^9, 4.000870789056518*^9}, {
+  4.0008724164644403`*^9, 
+  4.0008724551025953`*^9}},ExpressionUUID->"29de087a-fdfe-44c5-aced-\
+bc72800afec9"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"id", "+", "x"}]], "Input",
+ CellLabel->
+  "In[4085]:=",ExpressionUUID->"a3806c93-b618-49cc-9b55-95cbcb253ae3"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"1", "1"},
+     {"1", "1"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}], TraditionalForm]], "Output",
+ CellChangeTimes->{4.000870748919194*^9, 4.00087259871317*^9},
+ CellLabel->
+  "Out[4085]=",ExpressionUUID->"eac8a1af-5a18-410b-b135-3dfa8cbd1482"]
+}, Open  ]],
+
+Cell[TextData[{
+ "...and ",
+ StyleBox["multiplication by an ordinary number",
+  FontSlant->"Italic"],
+ ", like 2, scales every entry (the number is a \[OpenCurlyDoubleQuote]scalar\
+\[CloseCurlyDoubleQuote]):"
+}], "Text",
+ CellChangeTimes->{{4.000870790197167*^9, 4.000870796271227*^9}, {
+  4.00087246651753*^9, 
+  4.0008724691074553`*^9}},ExpressionUUID->"24353a36-f949-47be-a91a-\
+3e4c6aaf2e2e"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"2", " ", "x"}]], "Input",
+ CellLabel->
+  "In[4086]:=",ExpressionUUID->"4f98fb52-73e7-478d-abbf-13a06e182dd9"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"0", "2"},
+     {"2", "0"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}], TraditionalForm]], "Output",
+ CellChangeTimes->{4.000870750875638*^9, 4.000872598725705*^9},
+ CellLabel->
+  "Out[4086]=",ExpressionUUID->"d67cb05d-449d-40ca-945b-8c921464e0c0"]
+}, Open  ]],
+
+Cell[TextData[{
+ "Reflect for a moment that these two operations, ",
+ StyleBox["matrix addition",
+  FontSlant->"Italic"],
+ " and ",
+ StyleBox["scalar multiplication",
+  FontSlant->"Italic"],
+ ", are the obvious generalizations of the elementary operations ",
+ StyleBox["addition",
+  FontSlant->"Italic"],
+ " and ",
+ StyleBox["multiplication",
+  FontSlant->"Italic"],
+ " on ordinary numbers, now used on a different (here \
+\[OpenCurlyDoubleQuote]bigger\[CloseCurlyDoubleQuote]) object.\nBut how to \
+generalize ",
+ StyleBox["multiplication by matrices",
+  FontWeight->"Bold"],
+ " (as opposed to scalar multiplication) is less obvious. \n\nOf course, you \
+know the answer. A lower dot between matrices, as ",
+ StyleBox["x.z", "Input"],
+ ", means matrix multiplication in the usual sense:"
+}], "Text",
+ CellChangeTimes->{{4.000870797631578*^9, 4.00087089709908*^9}, {
+  4.000872475955415*^9, 4.000872594041403*^9}, {4.000876477793347*^9, 
+  4.0008765213155947`*^9}},ExpressionUUID->"e4820bd5-d3d0-482b-be0a-\
+97661fc90ab5"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"x", ".", "z"}]], "Input",
+ CellLabel->
+  "In[4087]:=",ExpressionUUID->"a1129033-0b82-4264-b720-cafb115389d4"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"0", 
+      RowBox[{"-", "1"}]},
+     {"1", "0"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}], TraditionalForm]], "Output",
+ CellChangeTimes->{4.0008725987367*^9},
+ CellLabel->
+  "Out[4087]=",ExpressionUUID->"d821e7c4-40a9-4638-99ef-40be0c1d8d44"]
+}, Open  ]],
+
+Cell[TextData[{
+ "But now, contrast ordinary multiplication (\[OpenCurlyDoubleQuote]\[Star]\
+\[CloseCurlyDoubleQuote] in Mathematica, or just the \
+\[OpenCurlyDoubleQuote]space\[CloseCurlyDoubleQuote] key), which is ",
+ StyleBox["not",
+  FontSlant->"Italic"],
+ " matrix multiplication, but the product of two lists:"
+}], "Text",
+ CellChangeTimes->{{4.000870898081839*^9, 4.000870912271282*^9}, {
+  4.000871016379306*^9, 4.000871035385601*^9}, {4.000872575597375*^9, 
+  4.000872585990197*^9}, {4.0008726695631943`*^9, 4.000872674887321*^9}, {
+  4.000876525719162*^9, 
+  4.000876543266533*^9}},ExpressionUUID->"371b6fe2-bd08-43b5-8054-\
+450a0a185d25"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"x", "*", "z"}]], "Input",
+ CellChangeTimes->{{4.0008726788087397`*^9, 4.000872679144567*^9}},
+ CellLabel->
+  "In[4094]:=",ExpressionUUID->"97a4fe06-ec7c-4313-9d00-fe96a43d3680"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"0", "0"},
+     {"0", "0"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}], TraditionalForm]], "Output",
+ CellChangeTimes->{4.000872598746826*^9, 4.000872680086006*^9},
+ CellLabel->
+  "Out[4094]=",ExpressionUUID->"d7c48416-7d02-42b4-ad61-b2aff964e80b"]
+}, Open  ]],
+
+Cell["\<\
+The product of two lists, unlike matrix multiplication, works entry by entry:\
+\
+\>", "Text",
+ CellChangeTimes->{{4.0008726127795773`*^9, 4.000872625662549*^9}, {
+  4.000872719800596*^9, 4.00087272387566*^9}, {4.0008765515423727`*^9, 
+  4.000876558409286*^9}},ExpressionUUID->"6a0c5652-d5e7-4365-83c9-\
+1df24554a9b9"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{"a", ",", "b"}], "}"}], "*", 
+  RowBox[{"{", 
+   RowBox[{"c", ",", "d"}], "}"}]}]], "Input",
+ CellChangeTimes->{{4.000872615653672*^9, 4.00087262166621*^9}, {
+  4.000872682456602*^9, 4.0008726842468567`*^9}, {4.0008747661684504`*^9, 
+  4.000874767672797*^9}},
+ CellLabel->
+  "In[4101]:=",ExpressionUUID->"4e4769ea-c10f-4a3c-b775-d9916b0ed233"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"a", " ", "c"}], ",", 
+    RowBox[{"b", " ", "d"}]}], "}"}], TraditionalForm]], "Output",
+ CellChangeTimes->{4.0008726221705503`*^9, 4.000872684740995*^9, 
+  4.000874775151582*^9},
+ CellLabel->
+  "Out[4101]=",ExpressionUUID->"aa296485-914a-4a2e-b19a-0a8d0ec4925f"]
+}, Open  ]],
+
+Cell[TextData[{
+ "If you think Mathematica is crazy for making this choice for the meaning of \
+\[OpenCurlyDoubleQuote]\[Star]\[CloseCurlyDoubleQuote], because you think \
+matrix multiplication is more important than multiplication of lists, you \
+would be missing the point: it is useful to have ",
+ StyleBox["both",
+  FontSlant->"Italic"],
+ " of these operations available. (In Python, there are much crazier, and \
+also useful, choices like this!) In particular: ",
+ StyleBox["conventional matrix multiplication is a choice",
+  FontWeight->"Bold"],
+ ". \n\nAs you know, matrix multiplication is not commutative, in general. \
+The order of x and z matters, i.e. they don\[CloseCurlyQuote]t commute. As \
+above, the test \[OpenCurlyDoubleQuote]==\[CloseCurlyDoubleQuote] reports \
+whether each claim holds."
+}], "Text",
+ CellChangeTimes->{{4.0008709141235027`*^9, 4.0008711475071783`*^9}, {
+  4.000872612198345*^9, 4.0008726586334*^9}, {4.000872692945874*^9, 
+  4.000872768911236*^9}, {4.000874667908619*^9, 4.000874722585887*^9}, {
+  4.000876568670327*^9, 
+  4.00087657064506*^9}},ExpressionUUID->"c62be642-294a-4bd8-890f-\
+57a8eeabcb69"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"x", ".", "z"}], "\[Equal]", 
+  RowBox[{"z", ".", "x"}]}]], "Input",
+ CellChangeTimes->{
+  4.000872777288394*^9, {4.0008728110549307`*^9, 4.000872812224525*^9}},
+ CellLabel->
+  "In[4097]:=",ExpressionUUID->"8422755a-db6b-4baf-826f-39cb34d1def7"],
+
+Cell[BoxData[
+ FormBox["False", TraditionalForm]], "Output",
+ CellChangeTimes->{4.000872598755712*^9, 4.000872812615994*^9},
+ CellLabel->
+  "Out[4097]=",ExpressionUUID->"b0839efe-339c-4181-a9ad-b37239c8f418"]
+}, Open  ]],
+
+Cell["\<\
+(With the other meaning of multiplication of lists above, clearly it is \
+commutative)\
+\>", "Text",
+ CellChangeTimes->{{4.000874735519677*^9, 4.000874749462965*^9}, {
+  4.000874792017363*^9, 4.000874797500277*^9}, {4.000876599931995*^9, 
+  4.000876601586297*^9}},ExpressionUUID->"fac0a9b8-b559-45e3-b4e5-\
+671ad53557b8"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"x", "*", "z"}], " ", "==", " ", 
+  RowBox[{"z", "*", "x"}]}]], "Input",
+ CellChangeTimes->{{4.000874729110413*^9, 4.000874731471983*^9}, {
+  4.000874784436409*^9, 4.0008747897373343`*^9}},
+ CellLabel->
+  "In[4102]:=",ExpressionUUID->"7db918ea-cc69-4aaa-af09-c9678097105d"],
+
+Cell[BoxData[
+ FormBox["True", TraditionalForm]], "Output",
+ CellChangeTimes->{4.000874731879579*^9, 4.000874790253343*^9},
+ CellLabel->
+  "Out[4102]=",ExpressionUUID->"b9915863-7bac-4f9d-91f4-e021d9ef674e"]
+}, Open  ]],
+
+Cell[TextData[{
+ StyleBox["Distributivity",
+  FontSlant->"Italic"],
+ " connects addition and multiplication, here matrix multiplication. The next \
+equality says that multiplying a sum by ",
+ StyleBox["z",
+  FontSlant->"Italic"],
+ " on the right gives the same result as multiplying each summand by Z and \
+adding."
+}], "Text",
+ CellChangeTimes->{{4.000871162358397*^9, 
+  4.000871175165103*^9}},ExpressionUUID->"eb7791e7-5a72-46b2-9d85-\
+1e360ca5880a"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"id", "+", "x"}], ")"}], ".", "z"}], "\[Equal]", 
+  RowBox[{"z", "+", 
+   RowBox[{"x", ".", "z"}]}]}]], "Input",
+ CellLabel->
+  "In[4090]:=",ExpressionUUID->"058cbe5e-9952-4c05-86df-4d467c9043b7"],
+
+Cell[BoxData[
+ FormBox["True", TraditionalForm]], "Output",
+ CellChangeTimes->{4.0008725987648773`*^9},
+ CellLabel->
+  "Out[4090]=",ExpressionUUID->"02b58680-ee24-4f61-9872-e500b8e637a1"]
+}, Open  ]],
+
+Cell[TextData[{
+ StyleBox["Groups and algebras: transformations and linear combinations",
+  FontWeight->"Bold"],
+ "\n\nInspired by matrices, we can now see at least two different \
+generalizations of ordinary arithmetic, that have names.\n\nA ",
+ StyleBox["group",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ " essentially uses the idea of multiplication but leaves out addition. \
+Operations can be combined (multiplied), there is an identity, and every \
+operation can be undone (has an inverse). An example is rotations. If we \
+first rotate something and then rotate it again, the two rotations compose to \
+give another rotation. Every rotation can also be undone. But \
+\[OpenCurlyDoubleQuote]linear combination\[CloseCurlyDoubleQuote] of \
+rotations is not defined. It would be like performing several ",
+ StyleBox["different",
+  FontSlant->"Italic"],
+ " rotations ",
+ StyleBox["simultaneously",
+  FontSlant->"Italic"],
+ ", as opposed to in sequence. (See below for more comments on this.) \n\nAn ",
+ StyleBox["algebra",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ " contains more structure. Its elements can be added and multiplied by \
+ordinary numbers, as in a vector space. They can also be multiplied with each \
+other. Matrices are the main example for us.\n\nMore specifically, ",
+ StyleBox["all 2\[Times]2 complex matrices together form an a \
+(noncommutative) ",
+  FontWeight->"Bold"],
+ StyleBox["algebra",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ ": we can add matrices, multiply them by complex numbers, and multiply \
+matrices among each other. \n\nHowever, ",
+ StyleBox["all matrices do ",
+  FontWeight->"Bold"],
+ StyleBox["not",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ StyleBox[" form a",
+  FontWeight->"Bold"],
+ StyleBox[" group",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ StyleBox[" under multiplication",
+  FontWeight->"Bold"],
+ ". Obviously, the zero matrix has no inverse. But the key new thing is that \
+there are nonzero matrices that also have no inverse, as operations: for \
+example, id \[Dash] ",
+ StyleBox["x",
+  FontSlant->"Italic"],
+ " is a nonzero matrix without an inverse."
+}], "Text",
+ CellChangeTimes->{{4.0008711832135897`*^9, 4.000871236331629*^9}, {
+  4.000872870765923*^9, 4.000872903998921*^9}, {4.000874495592955*^9, 
+  4.000874511761957*^9}, {4.000874557763772*^9, 4.000874616897341*^9}, {
+  4.0008748131143827`*^9, 4.000874858063347*^9}, {4.000875273633751*^9, 
+  4.0008753133523283`*^9}, {4.0008753433554697`*^9, 4.000875439752698*^9}, {
+  4.00087661075004*^9, 4.000876758759354*^9}, {4.0008778729201393`*^9, 
+  4.0008778787386847`*^9}},ExpressionUUID->"a96dfa63-edf7-43f3-b7b0-\
+4bbb8720d5c1"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"(", 
+  RowBox[{"id", "-", "x"}], ")"}]], "Input",
+ CellLabel->
+  "In[4091]:=",ExpressionUUID->"3ab4d1d7-4970-4c6b-97d5-8680d96b35da"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"1", 
+      RowBox[{"-", "1"}]},
+     {
+      RowBox[{"-", "1"}], "1"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}], TraditionalForm]], "Output",
+ CellChangeTimes->{4.000871246494438*^9, 4.000872598785344*^9},
+ CellLabel->
+  "Out[4091]=",ExpressionUUID->"9872da57-3dd8-4c71-b731-d38dd09f2bb4"]
+}, Open  ]],
+
+Cell[TextData[{
+ "Multiplying id \[Dash] ",
+ StyleBox["x",
+  FontSlant->"Italic"],
+ " and the nonzero matrix id + ",
+ StyleBox["x",
+  FontSlant->"Italic"],
+ " gives the zero matrix:"
+}], "Text",
+ CellChangeTimes->{{4.000875440676153*^9, 
+  4.000875443235817*^9}},ExpressionUUID->"9fea6d70-b7db-4178-9530-\
+396540ac4ead"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(", 
+   RowBox[{"id", "-", "x"}], ")"}], ".", 
+  RowBox[{"(", 
+   RowBox[{"id", "+", "x"}], ")"}]}]], "Input",
+ CellChangeTimes->{{4.0008712454493523`*^9, 4.00087128028307*^9}},
+ CellLabel->
+  "In[4092]:=",ExpressionUUID->"c922b316-a58b-4ac1-93b5-339e25de7c22"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"0", "0"},
+     {"0", "0"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}], TraditionalForm]], "Output",
+ CellChangeTimes->{{4.000871253661058*^9, 4.000871280795335*^9}, 
+   4.0008725987928047`*^9},
+ CellLabel->
+  "Out[4092]=",ExpressionUUID->"fc66f0e4-5bb1-4d46-bb8e-d135e4405b46"]
+}, Open  ]],
+
+Cell[TextData[{
+ "Since there exists at least one matrix (here id\[Dash]",
+ StyleBox["x",
+  FontSlant->"Italic"],
+ ") that sends a nonzero matrix to the zero matrix, we can \
+\[OpenCurlyDoubleQuote]get stuck\[CloseCurlyDoubleQuote], i.e. we cannot \
+recover the original matrix we multiplied (here id+x). In other words, we \
+\[OpenCurlyDoubleQuote]lost information\[CloseCurlyDoubleQuote] of what the \
+original matrix we multiplied was, since the transformation cannot be \
+inverted. Information loss appears in many places in physics (e.g. entropy), \
+so don\[CloseCurlyQuote]t view it as something \[OpenCurlyDoubleQuote]wrong\
+\[CloseCurlyDoubleQuote] in itself. Just note this as a fact, something \
+possibly interesting.\n\nActually, you already know how to proceed. ",
+ StyleBox["How can we restrict 2x2 matrices to make them invertible?",
+  FontSlant->"Italic"],
+ " Require nonzero determinant. The \[OpenCurlyDoubleQuote]det \[NotEqual] 0\
+\[CloseCurlyDoubleQuote] matrices do form a group, that we will call \
+\[OpenCurlyDoubleQuote]GL(2)\[CloseCurlyDoubleQuote], for \
+\[OpenCurlyDoubleQuote]General Linear\[CloseCurlyDoubleQuote] (2 x 2 \
+transformation). This restriction excludes the matrix example above:"
+}], "Text",
+ CellChangeTimes->{{4.000871260679344*^9, 4.000871273399742*^9}, {
+  4.000872919351657*^9, 4.0008729364098186`*^9}, {4.000872997788179*^9, 
+  4.000873015614621*^9}, {4.000873061263382*^9, 4.000873169995008*^9}, {
+  4.000873239419949*^9, 4.000873300171555*^9}, {4.00087333768825*^9, 
+  4.0008737002776203`*^9}, {4.000874441139587*^9, 4.000874442158778*^9}, {
+  4.000874869818112*^9, 4.000874954853283*^9}, {4.000875464924137*^9, 
+  4.000875469929867*^9}, {4.000876794477324*^9, 4.0008768119979553`*^9}, {
+  4.000877919786317*^9, 
+  4.000877920954153*^9}},ExpressionUUID->"3dd09c1e-b113-4288-b47f-\
+1e8991e4a7fe"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Det", "[", 
+  RowBox[{"id", "-", "x"}], "]"}]], "Input",
+ CellChangeTimes->{{4.000875456825995*^9, 4.0008754609049873`*^9}},
+ CellLabel->
+  "In[4103]:=",ExpressionUUID->"b37c6421-ce3a-4c0b-b72a-8e663705f064"],
+
+Cell[BoxData[
+ FormBox["0", TraditionalForm]], "Output",
+ CellChangeTimes->{4.0008754620077972`*^9},
+ CellLabel->
+  "Out[4103]=",ExpressionUUID->"cf9bcf51-cc49-40eb-b5e6-85b9375222d5"]
+}, Open  ]],
+
+Cell[TextData[{
+ StyleBox["Summary and outlook: group algebra",
+  FontWeight->"Bold"],
+ "\nThe extra \[OpenCurlyDoubleQuote]linear structure\[CloseCurlyDoubleQuote] \
+of addition (linear combination) that algebras have, but groups do not, is \
+often very useful in physics. Quantum states can be superposed, differential \
+equations used in physics are often linear, and operators can be added and \
+multiplied. If ",
+ StyleBox["A",
+  FontSlant->"Italic"],
+ " and ",
+ StyleBox["B",
+  FontSlant->"Italic"],
+ " are matrices, then 3",
+ StyleBox["A ",
+  FontSlant->"Italic"],
+ "\[Dash] 2",
+ StyleBox["B",
+  FontSlant->"Italic"],
+ " is another matrix. There is no analogous operation in an abstract group: \
+if ",
+ StyleBox["g",
+  FontSlant->"Italic"],
+ " and ",
+ StyleBox["h",
+  FontSlant->"Italic"],
+ " are two group elements, then as noted above, a \
+\[OpenCurlyDoubleQuote]linear combination of operations\
+\[CloseCurlyDoubleQuote], such as 3",
+ StyleBox["g \[Dash] ",
+  FontSlant->"Italic"],
+ "2",
+ StyleBox["h,",
+  FontSlant->"Italic"],
+ " has no meaning. As mentioned above, for rotations, a \
+\[OpenCurlyDoubleQuote]linear combination\[CloseCurlyDoubleQuote] would be \
+something like performing several ",
+ StyleBox["different",
+  FontSlant->"Italic"],
+ " rotations ",
+ StyleBox["simultaneously",
+  FontSlant->"Italic"],
+ ", as opposed to in sequence. \[OpenCurlyDoubleQuote]Simultaneous rotation\
+\[CloseCurlyDoubleQuote] (or more precisely, superposition of different \
+possible rotations) does not seem to make sense.\n\nAs you can maybe guess \
+from this formulation, we will in fact assign meaning to superpositions of \
+operations. This is called a ",
+ StyleBox["group algebra,",
+  FontSlant->"Italic"],
+ " to be defined. Here the point is not to define this new thing, but to \
+point out that such structure is ",
+ StyleBox["not",
+  FontSlant->"Italic"],
+ " included in ordinary groups or algebras, in the sense that neither groups \
+nor algebras separately describe everything that a group algebra is. Instead, \
+understanding ordinary groups and algebras is a necessary starting point.",
+ "\n\n"
+}], "Text",
+ CellChangeTimes->{{4.0008742965755653`*^9, 4.000874446354239*^9}, {
+  4.00087448996163*^9, 4.000874491200439*^9}, {4.000874969202334*^9, 
+  4.000875268103168*^9}, {4.000875482382131*^9, 4.000875605077437*^9}, {
+  4.0008768454901943`*^9, 4.000876891960064*^9}, {4.0008771203811483`*^9, 
+  4.00087712684643*^9}, {4.0008771598073187`*^9, 4.00087720235625*^9}, {
+  4.000877240869494*^9, 4.000877345266214*^9}, {4.00087793478675*^9, 
+  4.000877975676251*^9}},ExpressionUUID->"0c8e0791-e168-45cc-9e0c-\
+e135e0731656"]
+},
+WindowSize->{1752, 1286},
+WindowMargins->{{292, Automatic}, {1052, Automatic}},
+WindowTitle->"From arithmetic to groups and algebras",
+PrintingCopies->1,
+PrintingPageRange->{1, Automatic},
+Magnification:>2. Inherited,
+FrontEndVersion->"15.0 for Mac OS X ARM (64-bit) (July 2, 2026)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"e2913cdf-3bdf-4bc0-b11f-f93c6fb54227"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[606, 21, 219, 4, 77, "Text",ExpressionUUID->"ee277c85-991e-4dee-9040-58b6584a0758"],
+Cell[828, 27, 1003, 22, 242, "Text",ExpressionUUID->"6a271cd6-b694-440d-970f-0b271de75d86"],
+Cell[1834, 51, 211, 4, 67, "Text",ExpressionUUID->"c9ea6ba9-35d2-4816-82f6-6b14a4923f79"],
+Cell[2048, 57, 205, 3, 67, "Text",ExpressionUUID->"3a3f94f8-c36a-4a38-b8cd-2b727a14cb4e"],
+Cell[CellGroupData[{
+Cell[2278, 64, 133, 3, 58, "Input",ExpressionUUID->"b9ba4ffe-74fe-479a-bc9f-396eddd84594"],
+Cell[2414, 69, 184, 4, 87, "Output",ExpressionUUID->"df690362-d76f-4a98-9be2-94212a1421a6"]
+}, Open  ]],
+Cell[2613, 76, 358, 7, 67, "Text",ExpressionUUID->"bc49ac94-c893-4a0b-beef-06c6e5bf81cb"],
+Cell[CellGroupData[{
+Cell[2996, 87, 133, 3, 58, "Input",ExpressionUUID->"86cc9ccb-d3de-420b-ae1a-e8f685ec6905"],
+Cell[3132, 92, 182, 4, 87, "Output",ExpressionUUID->"5be6b709-e88d-44b9-ac09-59462e1490e0"]
+}, Open  ]],
+Cell[3329, 99, 731, 14, 242, "Text",ExpressionUUID->"5d6729e5-2087-445e-9a13-1a0050191ac0"],
+Cell[CellGroupData[{
+Cell[4085, 117, 204, 6, 58, "Input",ExpressionUUID->"2b01608d-42d2-490a-8e33-8eb8dc709ec6"],
+Cell[4292, 125, 229, 6, 87, "Output",ExpressionUUID->"a8bad121-62e5-4372-8d04-bc094f16faaa"]
+}, Open  ]],
+Cell[4536, 134, 1099, 21, 373, "Text",ExpressionUUID->"220d8aec-2fe5-443c-b83c-c97b7673ffa6"],
+Cell[CellGroupData[{
+Cell[5660, 159, 133, 3, 58, "Input",ExpressionUUID->"1f2d5977-fe00-49cc-8819-985480570551"],
+Cell[5796, 164, 182, 4, 70, "Output",ExpressionUUID->"a6abcc36-3755-4cb0-b4d9-510b4e4f883a"]
+}, Open  ]],
+Cell[5993, 171, 213, 5, 70, "Text",ExpressionUUID->"29061a8a-52fd-4b88-91f1-16e21a7c7784"],
+Cell[CellGroupData[{
+Cell[6231, 180, 201, 4, 70, "Input",ExpressionUUID->"ea3c854d-9168-4d71-b754-5409424694af"],
+Cell[6435, 186, 204, 4, 70, "Output",ExpressionUUID->"3fc55687-7222-4b78-911e-a8607667e9fc"]
+}, Open  ]],
+Cell[6654, 193, 735, 16, 70, "Text",ExpressionUUID->"3e8c4f23-093c-482f-9261-f1218e02623a"],
+Cell[CellGroupData[{
+Cell[7414, 213, 662, 20, 70, "Input",ExpressionUUID->"47944c0f-ffc9-4f17-b58c-af16f7b48639"],
+Cell[8079, 235, 259, 6, 70, "Output",ExpressionUUID->"056a668b-5d87-4636-8102-3257e7b9301b"]
+}, Open  ]],
+Cell[8353, 244, 175, 3, 70, "Text",ExpressionUUID->"f5119514-b09b-4941-9024-f36f00aef9e4"],
+Cell[CellGroupData[{
+Cell[8553, 251, 442, 12, 70, "Input",ExpressionUUID->"6a5e1ed7-12ad-4334-b910-a436afff3b23"],
+Cell[8998, 265, 256, 6, 70, "Output",ExpressionUUID->"180d46f6-a8d9-4563-92e4-05990ee545af"]
+}, Open  ]],
+Cell[9269, 274, 1223, 24, 70, "Text",ExpressionUUID->"26e5cc4c-5c9d-4f83-b90e-6ae5de33b04a"],
+Cell[10495, 300, 236, 4, 70, "Text",ExpressionUUID->"54274751-ff18-4971-9209-8e02096d81fb"],
+Cell[10734, 306, 803, 21, 70, "Text",ExpressionUUID->"375de0df-aea7-4323-ba32-8baafecbd837"],
+Cell[11540, 329, 867, 18, 70, "Text",ExpressionUUID->"f0412def-ced6-47fe-891f-0388bde3d33f"],
+Cell[CellGroupData[{
+Cell[12432, 351, 202, 6, 70, "Input",ExpressionUUID->"b2dbf298-31a9-4dbe-919c-b94989929059"],
+Cell[12637, 359, 229, 6, 70, "Output",ExpressionUUID->"bc4a88fe-e808-4fa1-87b7-e37a0e9dbc92"]
+}, Open  ]],
+Cell[12881, 368, 453, 9, 70, "Text",ExpressionUUID->"27544439-f3b5-42a3-9c90-c4d9a210a2b3"],
+Cell[CellGroupData[{
+Cell[13359, 381, 238, 7, 70, "Input",ExpressionUUID->"e9d0821b-2888-4213-ac25-8ad42f9cd79c"],
+Cell[13600, 390, 241, 6, 70, "Output",ExpressionUUID->"99f211f3-454c-4196-b574-84c47f007e18"]
+}, Open  ]],
+Cell[13856, 399, 259, 5, 70, "Text",ExpressionUUID->"aabeccef-f1d7-4cf2-82ed-5bf0c7ab5860"],
+Cell[14118, 406, 534, 9, 70, "Text",ExpressionUUID->"7a57260a-1163-4423-934a-6eb29983f1f2"],
+Cell[CellGroupData[{
+Cell[14677, 419, 354, 12, 70, "Input",ExpressionUUID->"e145a26b-1ebf-4af1-acb4-4915a73483a8"],
+Cell[15034, 433, 289, 8, 70, "Output",ExpressionUUID->"0efb9e0a-9974-4b1d-a3d7-3f2faa55e644"]
+}, Open  ]],
+Cell[15338, 444, 264, 6, 70, "Text",ExpressionUUID->"67929f0c-14fe-464b-886d-a5a77ca67df0"],
+Cell[CellGroupData[{
+Cell[15627, 454, 204, 6, 70, "Input",ExpressionUUID->"57532b3a-1110-4f59-b64e-3b105095ceb3"],
+Cell[15834, 462, 229, 6, 70, "Output",ExpressionUUID->"bad61931-1d20-49f0-93c4-a7f9306b6e41"]
+}, Open  ]],
+Cell[16078, 471, 249, 4, 70, "Text",ExpressionUUID->"cbb47e48-291f-4d82-ab6a-0009619ff97a"],
+Cell[16330, 477, 1957, 44, 70, "Text",ExpressionUUID->"60d81792-63b4-4467-ba91-a9954d8a7b37"],
+Cell[CellGroupData[{
+Cell[18312, 525, 775, 25, 70, "Input",ExpressionUUID->"796971ce-fc8a-47b0-8fcc-12c86a6e0d38"],
+Cell[19090, 552, 651, 18, 70, "Output",ExpressionUUID->"32364148-977d-4c65-8ee5-0019848f45fd"],
+Cell[19744, 572, 651, 18, 70, "Output",ExpressionUUID->"4d881f16-b8ac-4498-8b83-b3001ce53abe"],
+Cell[20398, 592, 675, 19, 70, "Output",ExpressionUUID->"1dbe534e-f635-442f-9fe9-d686d264f1e5"]
+}, Open  ]],
+Cell[21088, 614, 409, 10, 70, "Text",ExpressionUUID->"29de087a-fdfe-44c5-aced-bc72800afec9"],
+Cell[CellGroupData[{
+Cell[21522, 628, 134, 3, 70, "Input",ExpressionUUID->"a3806c93-b618-49cc-9b55-95cbcb253ae3"],
+Cell[21659, 633, 595, 16, 70, "Output",ExpressionUUID->"eac8a1af-5a18-410b-b135-3dfa8cbd1482"]
+}, Open  ]],
+Cell[22269, 652, 396, 10, 70, "Text",ExpressionUUID->"24353a36-f949-47be-a91a-3e4c6aaf2e2e"],
+Cell[CellGroupData[{
+Cell[22690, 666, 133, 3, 70, "Input",ExpressionUUID->"4f98fb52-73e7-478d-abbf-13a06e182dd9"],
+Cell[22826, 671, 596, 16, 70, "Output",ExpressionUUID->"d67cb05d-449d-40ca-945b-8c921464e0c0"]
+}, Open  ]],
+Cell[23437, 690, 1022, 26, 70, "Text",ExpressionUUID->"e4820bd5-d3d0-482b-be0a-97661fc90ab5"],
+Cell[CellGroupData[{
+Cell[24484, 720, 133, 3, 70, "Input",ExpressionUUID->"a1129033-0b82-4264-b720-cafb115389d4"],
+Cell[24620, 725, 594, 17, 70, "Output",ExpressionUUID->"d821e7c4-40a9-4638-99ef-40be0c1d8d44"]
+}, Open  ]],
+Cell[25229, 745, 649, 13, 70, "Text",ExpressionUUID->"371b6fe2-bd08-43b5-8054-450a0a185d25"],
+Cell[CellGroupData[{
+Cell[25903, 762, 201, 4, 70, "Input",ExpressionUUID->"97a4fe06-ec7c-4313-9d00-fe96a43d3680"],
+Cell[26107, 768, 596, 16, 70, "Output",ExpressionUUID->"d7c48416-7d02-42b4-ad61-b2aff964e80b"]
+}, Open  ]],
+Cell[26718, 787, 327, 7, 70, "Text",ExpressionUUID->"6a0c5652-d5e7-4365-83c9-1df24554a9b9"],
+Cell[CellGroupData[{
+Cell[27070, 798, 394, 10, 70, "Input",ExpressionUUID->"4e4769ea-c10f-4a3c-b775-d9916b0ed233"],
+Cell[27467, 810, 328, 9, 70, "Output",ExpressionUUID->"aa296485-914a-4a2e-b19a-0a8d0ec4925f"]
+}, Open  ]],
+Cell[27810, 822, 1140, 21, 70, "Text",ExpressionUUID->"c62be642-294a-4bd8-890f-57a8eeabcb69"],
+Cell[CellGroupData[{
+Cell[28975, 847, 279, 7, 70, "Input",ExpressionUUID->"8422755a-db6b-4baf-826f-39cb34d1def7"],
+Cell[29257, 856, 208, 4, 70, "Output",ExpressionUUID->"b0839efe-339c-4181-a9ad-b37239c8f418"]
+}, Open  ]],
+Cell[29480, 863, 331, 7, 70, "Text",ExpressionUUID->"fac0a9b8-b559-45e3-b4e5-671ad53557b8"],
+Cell[CellGroupData[{
+Cell[29836, 874, 307, 7, 70, "Input",ExpressionUUID->"7db918ea-cc69-4aaa-af09-c9678097105d"],
+Cell[30146, 883, 207, 4, 70, "Output",ExpressionUUID->"b9915863-7bac-4f9d-91f4-e021d9ef674e"]
+}, Open  ]],
+Cell[30368, 890, 453, 12, 70, "Text",ExpressionUUID->"eb7791e7-5a72-46b2-9d85-1e360ca5880a"],
+Cell[CellGroupData[{
+Cell[30846, 906, 260, 8, 70, "Input",ExpressionUUID->"058cbe5e-9952-4c05-86df-4d467c9043b7"],
+Cell[31109, 916, 187, 4, 70, "Output",ExpressionUUID->"02b58680-ee24-4f61-9872-e500b8e637a1"]
+}, Open  ]],
+Cell[31311, 923, 2667, 61, 70, "Text",ExpressionUUID->"a96dfa63-edf7-43f3-b7b0-4bbb8720d5c1"],
+Cell[CellGroupData[{
+Cell[34003, 988, 157, 4, 70, "Input",ExpressionUUID->"3ab4d1d7-4970-4c6b-97d5-8680d96b35da"],
+Cell[34163, 994, 640, 18, 70, "Output",ExpressionUUID->"9872da57-3dd8-4c71-b731-d38dd09f2bb4"]
+}, Open  ]],
+Cell[34818, 1015, 320, 11, 70, "Text",ExpressionUUID->"9fea6d70-b7db-4178-9530-396540ac4ead"],
+Cell[CellGroupData[{
+Cell[35163, 1030, 296, 8, 70, "Input",ExpressionUUID->"c922b316-a58b-4ac1-93b5-339e25de7c22"],
+Cell[35462, 1040, 626, 17, 70, "Output",ExpressionUUID->"fc66f0e4-5bb1-4d46-bb8e-d135e4405b46"]
+}, Open  ]],
+Cell[36103, 1060, 1845, 30, 70, "Text",ExpressionUUID->"3dd09c1e-b113-4288-b47f-1e8991e4a7fe"],
+Cell[CellGroupData[{
+Cell[37973, 1094, 232, 5, 70, "Input",ExpressionUUID->"b37c6421-ce3a-4c0b-b72a-8e663705f064"],
+Cell[38208, 1101, 184, 4, 70, "Output",ExpressionUUID->"cf9bcf51-cc49-40eb-b5e6-85b9375222d5"]
+}, Open  ]],
+Cell[38407, 1108, 2633, 65, 70, "Text",ExpressionUUID->"0c8e0791-e168-45cc-9e0c-e135e0731656"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

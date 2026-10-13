@@ -1,0 +1,2683 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[    105229,       2675]
+NotebookOptionsPosition[     98910,       2572]
+NotebookOutlinePosition[     99393,       2591]
+CellTagsIndexPosition[     99350,       2588]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[TextData[StyleBox["Hopf algebra basics: rooted trees", \
+"Subsubsection"]], "Text",
+ CellChangeTimes->{{3.9725259838504467`*^9, 3.972525985546777*^9}, {
+  3.9725260185421247`*^9, 3.972526019427751*^9}, {3.972527392593976*^9, 
+  3.9725273949334297`*^9}, {3.973154775097678*^9, 
+  3.973154779547008*^9}},ExpressionUUID->"43f521bd-c8ae-4c3e-96f2-\
+aa6d79b2f5e9"],
+
+Cell["\<\
+You don\[CloseCurlyQuote]t need to read the following notes by Foissy, but I \
+refer to them a few times here, for completeness:
+http://loic.foissy.free.fr/pageperso/preprint3.pdf\
+\>", "Text",
+ CellChangeTimes->{{3.972533694156989*^9, 3.9725337074362307`*^9}, {
+  3.9725396425579243`*^9, 3.97253965758902*^9}, {3.9726973578186197`*^9, 
+  3.972697371409593*^9}},ExpressionUUID->"85d7ac1c-7cd0-41dc-bb45-\
+f1ec4d44db27"],
+
+Cell[TextData[{
+ "In a way, what I do here is the \[OpenCurlyDoubleQuote]complement\
+\[CloseCurlyDoubleQuote] of what I did with the symmetric group in ",
+ StyleBox["finite_groups_basic.nb",
+  FontSlant->"Italic"],
+ ", where we focused on the ",
+ StyleBox["cycles",
+  FontSlant->"Italic"],
+ " (think of the Cayley graph). Here we focus on ",
+ StyleBox["graphs ",
+  FontWeight->"Bold"],
+ StyleBox["without cycles, called trees",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ StyleBox[". ",
+  FontSlant->"Italic"],
+ "They are also a special kind of tree graphs: trees that have a ",
+ StyleBox["root",
+  FontWeight->"Bold"],
+ ". "
+}], "Text",
+ CellChangeTimes->{{3.972527424057089*^9, 3.9725274613699007`*^9}, {
+  3.972539660463724*^9, 3.972539723959416*^9}, {3.972697386490243*^9, 
+  3.972697397799223*^9}, {3.974338215811328*^9, 
+  3.974338243151919*^9}},ExpressionUUID->"d95902b4-31c3-4e5e-b9fe-\
+e6ccba3ac862"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Remove", "[", "\"\<Global`*\>\"", "]"}], "//", "Quiet"}]], "Input",\
+
+ CellLabel->
+  "In[1766]:=",ExpressionUUID->"d26911f0-080a-4b07-bb02-21a0d934e299"],
+
+Cell["Here\[CloseCurlyQuote]s the example in Foissy:", "Text",
+ CellChangeTimes->{{3.972539729358759*^9, 
+  3.9725397346799498`*^9}},ExpressionUUID->"a523bf31-39e8-4cbe-ac5d-\
+c3f4b2df4fc0"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"example", " ", "=", 
+  RowBox[{"TreeGraph", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"1", "\[DirectedEdge]", "2"}], ",", 
+      RowBox[{"1", "\[DirectedEdge]", "3"}], ",", 
+      RowBox[{"3", "\[DirectedEdge]", "4"}]}], "}"}], ",", 
+    RowBox[{"VertexLabels", "->", 
+     RowBox[{"Placed", "[", 
+      RowBox[{"\"\<Name\>\"", ",", "Center"}], "]"}]}], ",", 
+    RowBox[{"VertexSize", "->", "0.3"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.972528252264757*^9, 3.972528252266417*^9}, {
+   3.972528315011609*^9, 3.97252832982663*^9}, {3.9725319540731163`*^9, 
+   3.972531954750698*^9}, 3.9725355440386457`*^9, {3.972535585354678*^9, 
+   3.972535586162101*^9}, {3.9725356343258743`*^9, 3.9725356762632723`*^9}, {
+   3.972536923298324*^9, 3.972536928033293*^9}},
+ CellLabel->
+  "In[1767]:=",ExpressionUUID->"33d7d488-085a-434a-85a3-8f0a08b60847"],
+
+Cell[BoxData[
+ FormBox[
+  GraphicsBox[
+   NamespaceBox["NetworkGraphics",
+    DynamicModuleBox[{Typeset`graph = HoldComplete[
+      Graph[{1, 2, 3, 4}, {{{1, 2}, {1, 3}, {3, 4}}, Null}, {
+       VertexLabels -> {
+          Placed["Name", Center]}, VertexSize -> {0.3}}]]}, 
+     TagBox[GraphicsGroupBox[{
+        {Hue[0.6, 0.7, 0.7], Opacity[0.7], CapForm["Round"], Arrowheads[
+         Medium], 
+         ArrowBox[{{{0.4629100498862757, 1.8516401995451028`}, {0., 
+          0.9258200997725514}}, {{0.4629100498862757, 1.8516401995451028`}, {
+          0.9258200997725514, 0.9258200997725514}}, {{0.9258200997725514, 
+          0.9258200997725514}, {0.9258200997725514, 0.}}}, 
+          0.1388730149658827]}, 
+        {Hue[0.6, 0.5, 1.], EdgeForm[{GrayLevel[0], Opacity[
+         0.7]}], {
+          DiskBox[{0.4629100498862757, 1.8516401995451028`}, 
+           0.1388730149658827], 
+          InsetBox["1", {0.4629100498862757, 1.8516401995451028},
+           BaseStyle->"Graphics"]}, {
+          DiskBox[{0., 0.9258200997725514}, 0.1388730149658827], 
+          InsetBox["2", {0., 0.9258200997725514},
+           BaseStyle->"Graphics"]}, {
+          DiskBox[{0.9258200997725514, 0.9258200997725514}, 
+           0.1388730149658827], 
+          InsetBox["3", {0.9258200997725514, 0.9258200997725514},
+           BaseStyle->"Graphics"]}, {
+          DiskBox[{0.9258200997725514, 0.}, 0.1388730149658827], 
+          InsetBox["4", {0.9258200997725514, 0.},
+           BaseStyle->"Graphics"]}}}],
+      MouseAppearanceTag["NetworkGraphics"]],
+     AllowKernelInitialization->False]],
+   DefaultBaseStyle->"NetworkGraphics",
+   FormatType->TraditionalForm,
+   FrameTicks->None,
+   ImageSize->{74.84375, Automatic}], TraditionalForm]], "Output",
+ CellChangeTimes->{
+  3.972528255585318*^9, {3.972528324348723*^9, 3.972528330028431*^9}, 
+   3.972530166194663*^9, 3.972531185106183*^9, 3.9725318076353817`*^9, 
+   3.972531955185192*^9, 3.972535544573389*^9, {3.9725355829706383`*^9, 
+   3.972535586658124*^9}, 3.972535635058467*^9, 3.97253567669044*^9, 
+   3.9725359075709257`*^9, 3.972536933031633*^9, 3.972538540505588*^9, {
+   3.972539853309513*^9, 3.9725398766287813`*^9}, 3.97269799618366*^9, 
+   3.973135494963719*^9, 3.973136324899867*^9},
+ CellLabel->
+  "Out[1767]=",ExpressionUUID->"cffe7677-e2b7-4421-bfa2-7d72f66d9750"]
+}, Open  ]],
+
+Cell[TextData[{
+ "This is a ",
+ StyleBox["Graph", "Input"],
+ " data structure, as in ",
+ StyleBox["finite_groups_basic.nb",
+  FontSlant->"Italic"],
+ ".\nActually, ",
+ StyleBox["Tree", "Input"],
+ " is its own data structure, in computer science more generally. Think an \
+actual tree with root and branches, but ",
+ StyleBox["upside down",
+  FontSlant->"Italic"],
+ ". Or, a ",
+ StyleBox["family tree",
+  FontSlant->"Italic"],
+ " going downwards, with grandparent, children, and so on). We convert with \
+",
+ StyleBox["GraphTree", "Input"],
+ ":"
+}], "Text",
+ CellChangeTimes->{{3.972530197459607*^9, 3.9725302098551903`*^9}, {
+   3.9725397386072397`*^9, 3.972539765718358*^9}, {3.972697272735824*^9, 
+   3.972697313361659*^9}, {3.972697406772868*^9, 3.9726974342703323`*^9}, {
+   3.972697779681613*^9, 3.9726978404602213`*^9}, {3.972698208952641*^9, 
+   3.97269824945891*^9}, {3.9743382705401382`*^9, 3.974338321165187*^9}, 
+   3.974338498466551*^9},ExpressionUUID->"518747f9-2933-4113-8eba-\
+5a5dd8cf4e29"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"exampleTree", " ", "=", " ", 
+  RowBox[{"GraphTree", "[", "%", "]"}]}]], "Input",
+ CellChangeTimes->{{3.972530161611597*^9, 3.9725301639111347`*^9}, {
+   3.972531180303911*^9, 3.9725311824630213`*^9}, 3.972531804010027*^9, {
+   3.9725358910754213`*^9, 3.972535893700831*^9}},
+ CellLabel->
+  "In[1768]:=",ExpressionUUID->"2f0efda0-db85-4fb8-9b56-edbfa11e3e09"],
+
+Cell[BoxData[
+ FormBox[
+  GraphicsBox[
+   NamespaceBox["Trees",
+    DynamicModuleBox[{Typeset`tree = HoldComplete[
+      Tree[1, {
+        Tree[2, None], 
+        Tree[3, {
+          Tree[4, None]}]}]]}, 
+     NamespaceBox[{
+       {Hue[0.6, 0.7, 0.7], Opacity[0.7], CapForm["Round"], Arrowheads[
+        Medium], 
+        {RGBColor[0.6, 0.5882352941176471, 0.5529411764705883], 
+         AbsoluteThickness[1], 
+         LineBox[{{0.4629100498862757, 1.773860283795727}, {0., 
+          0.8869301418978635}}]}, 
+        {RGBColor[0.6, 0.5882352941176471, 0.5529411764705883], 
+         AbsoluteThickness[1], 
+         LineBox[{{0.4629100498862757, 1.773860283795727}, {
+          0.9258200997725514, 0.8869301418978635}}]}, 
+        {RGBColor[0.6, 0.5882352941176471, 0.5529411764705883], 
+         AbsoluteThickness[1], 
+         LineBox[{{0.9258200997725514, 0.8869301418978635}, {
+          0.9258200997725514, 0.}}]}}, 
+       {Hue[0.6, 0.5, 1.], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+        TagBox[InsetBox[
+          FrameBox["1",
+           Background->Directive[
+             RGBColor[
+             0.9607843137254902, 0.9882352941176471, 0.9764705882352941]],
+           BaseStyle->GrayLevel[0],
+           FrameMargins->{{2, 2}, {1, 1}},
+           FrameStyle->Directive[
+             RGBColor[
+             0.4196078431372549, 0.6313725490196078, 0.4196078431372549], 
+             AbsoluteThickness[1], 
+             Opacity[1]],
+           ImageSize->Automatic,
+           RoundingRadius->4,
+           StripOnInput->False], {0.4629100498862757, 1.773860283795727}],
+         "DynamicName",
+         BoxID -> "VertexID$1"], 
+        TagBox[InsetBox[
+          FrameBox["2",
+           Background->Directive[
+             RGBColor[
+             0.9607843137254902, 0.9882352941176471, 0.9764705882352941]],
+           BaseStyle->GrayLevel[0],
+           FrameMargins->{{2, 2}, {1, 1}},
+           FrameStyle->Directive[
+             RGBColor[
+             0.4196078431372549, 0.6313725490196078, 0.4196078431372549], 
+             AbsoluteThickness[1], 
+             Opacity[1]],
+           ImageSize->Automatic,
+           RoundingRadius->0,
+           StripOnInput->False], {0., 0.8869301418978635}],
+         "DynamicName",
+         BoxID -> "VertexID$2"], 
+        TagBox[InsetBox[
+          FrameBox["3",
+           Background->Directive[
+             RGBColor[
+             0.9607843137254902, 0.9882352941176471, 0.9764705882352941]],
+           BaseStyle->GrayLevel[0],
+           FrameMargins->{{2, 2}, {1, 1}},
+           FrameStyle->Directive[
+             RGBColor[
+             0.4196078431372549, 0.6313725490196078, 0.4196078431372549], 
+             AbsoluteThickness[1], 
+             Opacity[1]],
+           ImageSize->Automatic,
+           RoundingRadius->4,
+           StripOnInput->False], {0.9258200997725514, 0.8869301418978635}],
+         "DynamicName",
+         BoxID -> "VertexID$3"], 
+        TagBox[InsetBox[
+          FrameBox["4",
+           Background->Directive[
+             RGBColor[
+             0.9607843137254902, 0.9882352941176471, 0.9764705882352941]],
+           BaseStyle->GrayLevel[0],
+           FrameMargins->{{2, 2}, {1, 1}},
+           FrameStyle->Directive[
+             RGBColor[
+             0.4196078431372549, 0.6313725490196078, 0.4196078431372549], 
+             AbsoluteThickness[1], 
+             Opacity[1]],
+           ImageSize->Automatic,
+           RoundingRadius->0,
+           StripOnInput->False], {0.9258200997725514, 0.}],
+         "DynamicName",
+         BoxID -> "VertexID$4"]}}]]],
+   AlignmentPoint->Center,
+   Axes->False,
+   AxesLabel->None,
+   AxesOrigin->Automatic,
+   AxesStyle->{},
+   Background->None,
+   BaseStyle->{},
+   BaselinePosition->Automatic,
+   ContentSelectable->Automatic,
+   DefaultBaseStyle->"TreeGraphics",
+   DisplayFunction->Identity,
+   Epilog->{},
+   FormatType->StandardForm,
+   Frame->False,
+   FrameLabel->None,
+   FrameStyle->{},
+   FrameTicks->None,
+   FrameTicksStyle->{},
+   GridLines->None,
+   GridLinesStyle->{},
+   ImageMargins->0.,
+   ImagePadding->All,
+   ImageSize->{58.48382395510862, Automatic},
+   LabelStyle->{},
+   PlotLabel->None,
+   PlotRange->All,
+   PlotRangeClipping->False,
+   PlotRangePadding->Automatic,
+   PlotRegion->Automatic,
+   Prolog->{},
+   RotateLabel->True,
+   Ticks->Automatic,
+   TicksStyle->{}], TraditionalForm]], "Output",
+ CellChangeTimes->{{3.972530164340975*^9, 3.9725301671542177`*^9}, {
+   3.972531182799788*^9, 3.972531186985168*^9}, {3.97253180482087*^9, 
+   3.972531809549677*^9}, 3.972531957932601*^9, {3.972535559389037*^9, 
+   3.9725355888594103`*^9}, 3.9725356791927423`*^9, {3.97253589405233*^9, 
+   3.972535909997629*^9}, 3.972536935185276*^9, 3.9725385405351257`*^9, {
+   3.972539853343646*^9, 3.9725398766610823`*^9}, 3.9726979962203817`*^9, 
+   3.973135494999955*^9, 3.973136324936571*^9},
+ CellLabel->
+  "Out[1768]=",ExpressionUUID->"05a01956-c87a-428d-bbee-f614cfa4ae01"]
+}, Open  ]],
+
+Cell[TextData[{
+ "The top node is the ",
+ StyleBox["root",
+  FontWeight->"Bold"],
+ ". (Unlike for graphs, Mathematica draws the ",
+ StyleBox["bottom",
+  FontSlant->"Italic"],
+ " nodes in trees with a slightly different symbol than the ones higher up in \
+the tree, like ",
+ Cell[BoxData[
+  GraphicsBox[
+   TagBox[RasterBox[CompressedData["
+1:eJzt2d1L01Ecx/E9soebxa62S8kbw6WXYd10GanUTN3sSnGuoGbMQCzRiCzF
+SMV/QKTLUJFlIYpIIEL0gGZpqFEIwmw+LBc2g28/B/706Hbh0HbO4fOF92A7
+u/i+2DgMllVV667RaTSaOrPy4K6svxgMVjaUnFKelAbqbvoDvupLgbs+vy94
+rkqvvFisVKBkUKIMTTwep1cv+9VGhkOZWuVEB065Bk65Bs7/P/U9d4QOTjhF
+LF3n779/uA5OOOHkNzjhhJPf4IQTTn6DE044+Q3OzDtfDPSRwWAgvV6vthRe
+lsr5ae4z2Ww22vnbbn8yOX9G1yjXlXvIKJuz3OtJapTJ+bTzGeNyOp3SOUfH
+xxL3zq7JddZFre1tUjkXl76Tw+FQPSaTid5NfaBHT1qkcUa3YlRw4Tzj6eju
+Spzdb2qUxnkrcJuxeK9X7O13r0EKZ8/zXsaRl59HkV/rUjnffnxPVqtVNdjt
+dvoyP8fuJ7hzORKm09nZ6v46nY5Cr4cO7yewM7a9RZeLCpn9d+7VpPsJ7Gx+
++IDZ3X2tJPV+gjoHh0Kk1WrVvXPO5FB4PSKVc3bha+Ku2b933+AATc/OpKzm
+hp95/5vJCfVs/sc3Lp2eCm/K3+fpthaLcue84r567M7VzQ3unGWecrJYLEfq
+oMtsNjPnPH6ead0fAt5DcMIJJ5wiOltaH6tGo9FIKxurUjqP7XsBJ5xwchuc
+cMLJb3DCCSe/wQlnMqdowQmniGEwGDHmH/iJiJU=
+     "], {{0, 39.}, {29., 0}}, {0, 255},
+     ColorFunction->RGBColor,
+     ImageResolution->{144, 144}],
+    BoxForm`ImageTag["Byte", ColorSpace -> ColorProfileData[CompressedData["
+1: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
+de8et/vinog9TfUe9Vv2mu6t2Af2Kfc92Z+9/9qBuAMtB5kH6390/LH6EP1Q
+eQPSMLWhtzG3sbMps6njcOzhluag5kM/ef6044jtkaqjJkeXHqMem3+s/3jp
+8b4TshM9J8UnH7RMbLl1asypK63Jre2n406f/Tnq51NnWGeOnw0+e+Rc4LnD
+vzB/aTzvd76hzbft0K++vx5q92tvuOB/oeliwMXmjlEdxy6FXjp5OeLyz1c4
+V85fTbjacS3t2o3r46533hDeeHyz4Obz30p++3Br9m3C7fI7Bncq71rerfnd
+9fe9nX6dR+9F3Gu7n3L/1gPBg6d/KP742DX/Ie1h5SObR7WPvR8f6Y7qvvhk
+7JOup7KnH3rK/jT8s/qZy7Mf/wr7q613TG/Xc/nz/heLX5q/3PHK51VLX1Lf
+3deFrz+8KX9r/nbnO+a7M+8z3j/6MPkj6ePaT66fmj/Hfb7dX9jfL+PJeepf
+AQxWNCcHgBc7AKBlAkCH5zPqWM35T10QzZlVjcB/wpozorr4AVAP/9+Te+Df
+zXUA9m2Dxy+orz8OgCQaAKkBAB05crAOnNXU50pVIcJzwObIT/xCPvg3RXPm
+/Crub69ApeoDvr3+C8rCiac=
+       "], "RGB", "XYZ"], Interleaving -> True, 
+     MetaInformation -> <|"XMP" -> <||>|>],
+    Selectable->False],
+   DefaultBaseStyle->"ImageGraphics",
+   ImageSize->{11., Automatic},
+   ImageSizeRaw->{29., 39.},
+   PlotRange->{{0, 29.}, {0, 39.}}]], "Input",ExpressionUUID->
+  "20ef8e31-0931-4722-967c-422498255948"],
+ " vs. ",
+ Cell[BoxData[
+  GraphicsBox[
+   TagBox[RasterBox[CompressedData["
+1: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
+rNz+A7JU+Ro=
+     "], {{0, 43.}, {39., 0}}, {0, 255},
+     ColorFunction->RGBColor,
+     ImageResolution->{144, 144}],
+    BoxForm`ImageTag["Byte", ColorSpace -> ColorProfileData[CompressedData["
+1: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
+de8et/vinog9TfUe9Vv2mu6t2Af2Kfc92Z+9/9qBuAMtB5kH6390/LH6EP1Q
+eQPSMLWhtzG3sbMps6njcOzhluag5kM/ef6044jtkaqjJkeXHqMem3+s/3jp
+8b4TshM9J8UnH7RMbLl1asypK63Jre2n406f/Tnq51NnWGeOnw0+e+Rc4LnD
+vzB/aTzvd76hzbft0K++vx5q92tvuOB/oeliwMXmjlEdxy6FXjp5OeLyz1c4
+V85fTbjacS3t2o3r46533hDeeHyz4Obz30p++3Br9m3C7fI7Bncq71rerfnd
+9fe9nX6dR+9F3Gu7n3L/1gPBg6d/KP742DX/Ie1h5SObR7WPvR8f6Y7qvvhk
+7JOup7KnH3rK/jT8s/qZy7Mf/wr7q613TG/Xc/nz/heLX5q/3PHK51VLX1Lf
+3deFrz+8KX9r/nbnO+a7M+8z3j/6MPkj6ePaT66fmj/Hfb7dX9jfL+PJeepf
+AQxWNCcHgBc7AKBlAkCH5zPqWM35T10QzZlVjcB/wpozorr4AVAP/9+Te+Df
+zXUA9m2Dxy+orz8OgCQaAKkBAB05crAOnNXU50pVIcJzwObIT/xCPvg3RXPm
+/Crub69ApeoDvr3+C8rCiac=
+       "], "RGB", "XYZ"], Interleaving -> True, 
+     MetaInformation -> <|"XMP" -> <||>|>],
+    Selectable->False],
+   DefaultBaseStyle->"ImageGraphics",
+   ImageSize->{13.69921875, Automatic},
+   ImageSizeRaw->{39., 43.},
+   PlotRange->{{0, 39.}, {0, 43.}}]], "Input",ExpressionUUID->
+  "c57be88f-ec68-4354-b367-ac6cb12e26a3"],
+ "but that\[CloseCurlyQuote]s not important here. Also note the arrows are \
+implicit: always down.)\nInternally a ",
+ StyleBox["Tree", "Input"],
+ " data structure is stored by nesting:\n (for more details on this data \
+structure, see below)"
+}], "Text",
+ CellChangeTimes->{{3.972536949968358*^9, 3.9725369560894957`*^9}, {
+  3.9725397745790253`*^9, 3.972539801276491*^9}, {3.97269713485347*^9, 
+  3.972697266326068*^9}, {3.972697319895288*^9, 3.972697346079241*^9}, {
+  3.972697453813403*^9, 3.9726975760820723`*^9}, {3.972698258834614*^9, 
+  3.972698260042295*^9}, {3.974338358879099*^9, 
+  3.9743384808922377`*^9}},ExpressionUUID->"4314dd83-66e4-4994-b6dd-\
+d8b5b27c443f"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"InputForm", "[", "%", "]"}]], "Input",
+ CellChangeTimes->{{3.972536939894085*^9, 3.9725369413632927`*^9}},
+ CellLabel->
+  "In[1769]:=",ExpressionUUID->"dd3a4f56-c300-4467-9ba2-b961293d99d3"],
+
+Cell["Tree[1, {Tree[2, None], Tree[3, {Tree[4, None]}]}]", "Output",
+ CellChangeTimes->{
+  3.972536941771167*^9, 3.972538540540085*^9, {3.972539853362626*^9, 
+   3.972539876682046*^9}, 3.972697996225368*^9, 3.9731354950085917`*^9, 
+   3.973136324941996*^9},
+ CellLabel->
+  "Out[1769]//InputForm=",ExpressionUUID->"623a756f-10f2-4e78-8dfe-\
+fcc8bfc8fef4"]
+}, Open  ]],
+
+Cell[TextData[{
+ "where \[OpenCurlyDoubleQuote]",
+ StyleBox["None", "Input"],
+ "\[CloseCurlyDoubleQuote] means \[OpenCurlyDoubleQuote]no child\
+\[CloseCurlyDoubleQuote] (using the terminology of ",
+ StyleBox["family",
+  FontSlant->"Italic"],
+ " trees).\n\nNow, to make a bialgebra, we cut the tree branches, and keep \
+the fallen pieces separate from the root-connected piece by the tensor \
+product symbol \[TensorProduct]. An ",
+ StyleBox["admissible cut",
+  FontWeight->"Bold"],
+ " is one where no path through the original tree meets more than one cut. \
+Let\[CloseCurlyQuote]s get started.\n\nCut the edge 1 \[DirectedEdge] 2, and \
+put the \[OpenCurlyDoubleQuote]pruned\[CloseCurlyDoubleQuote] piece that \
+falls down first:"
+}], "Text",
+ CellChangeTimes->{{3.972531895226946*^9, 3.9725319086492662`*^9}, {
+  3.972532005443564*^9, 3.972532012063067*^9}, {3.972537793111856*^9, 
+  3.972537823874878*^9}, {3.972538163238736*^9, 3.9725381713008413`*^9}, {
+  3.9726975894919786`*^9, 3.9726977061873903`*^9}, {3.97269775755569*^9, 
+  3.972697773531967*^9}, {3.97269791439426*^9, 3.972697930824287*^9}, {
+  3.972698264936531*^9, 3.972698334274878*^9}, {3.974338511136145*^9, 
+  3.9743385497634706`*^9}},ExpressionUUID->"28541fa0-9cf7-40ca-8ec7-\
+158c09a0afaf"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"cut1", " ", "=", " ", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"Tree", "[", 
+     RowBox[{"2", ",", "None"}], "]"}], ",", 
+    RowBox[{"TreeDelete", "[", 
+     RowBox[{"exampleTree", ",", "1"}], "]"}]}], "}"}]}]], "Input",
+ CellChangeTimes->{{3.972537040202711*^9, 3.9725370549216623`*^9}, {
+  3.97253812313544*^9, 3.972538126512583*^9}},
+ CellLabel->
+  "In[1770]:=",ExpressionUUID->"b60bb292-8349-45bb-9d0f-6d0f27c7b764"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"{", 
+   RowBox[{
+    GraphicsBox[
+     NamespaceBox["Trees",
+      DynamicModuleBox[{Typeset`tree = HoldComplete[
+        Tree[2, None]]}, 
+       NamespaceBox[{{}, 
+         {Hue[0.6, 0.5, 1.], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+          TagBox[InsetBox[
+            FrameBox["2",
+             Background->Directive[
+               RGBColor[
+               0.9607843137254902, 0.9882352941176471, 0.9764705882352941]],
+             BaseStyle->GrayLevel[0],
+             FrameMargins->{{2, 2}, {1, 1}},
+             FrameStyle->Directive[
+               RGBColor[
+               0.4196078431372549, 0.6313725490196078, 0.4196078431372549], 
+               AbsoluteThickness[1], 
+               Opacity[1]],
+             ImageSize->Automatic,
+             RoundingRadius->0,
+             StripOnInput->False], {1., 1.}],
+           "DynamicName",
+           BoxID -> "VertexID$1"]}}]]],
+     AlignmentPoint->Center,
+     Axes->False,
+     AxesLabel->None,
+     AxesOrigin->Automatic,
+     AxesStyle->{},
+     Background->None,
+     BaseStyle->{},
+     BaselinePosition->Automatic,
+     ContentSelectable->Automatic,
+     DefaultBaseStyle->"TreeGraphics",
+     DisplayFunction->Identity,
+     Epilog->{},
+     FormatType->StandardForm,
+     Frame->False,
+     FrameLabel->None,
+     FrameStyle->{},
+     FrameTicks->None,
+     FrameTicksStyle->{},
+     GridLines->None,
+     GridLinesStyle->{},
+     ImageMargins->0.,
+     ImagePadding->All,
+     ImageSize->{72.03125, Automatic},
+     LabelStyle->{},
+     PlotLabel->None,
+     PlotRange->All,
+     PlotRangeClipping->False,
+     PlotRangePadding->0.1,
+     PlotRegion->Automatic,
+     Prolog->{},
+     RotateLabel->True,
+     Ticks->Automatic,
+     TicksStyle->{}], ",", 
+    GraphicsBox[
+     NamespaceBox["Trees",
+      DynamicModuleBox[{Typeset`tree = HoldComplete[
+        Tree[1, {
+          Tree[3, {
+            Tree[4, None]}]}, {}]]}, 
+       NamespaceBox[{
+         {Hue[0.6, 0.7, 0.7], Opacity[0.7], CapForm["Round"], Arrowheads[
+          Medium], 
+          {RGBColor[0.6, 0.5882352941176471, 0.5529411764705883], 
+           AbsoluteThickness[1], LineBox[{{0., 2.}, {0., 1.}}]}, 
+          {RGBColor[0.6, 0.5882352941176471, 0.5529411764705883], 
+           AbsoluteThickness[1], LineBox[{{0., 1.}, {0., 0.}}]}}, 
+         {Hue[0.6, 0.5, 1.], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+          TagBox[InsetBox[
+            FrameBox["1",
+             Background->Directive[
+               RGBColor[
+               0.9607843137254902, 0.9882352941176471, 0.9764705882352941]],
+             BaseStyle->GrayLevel[0],
+             FrameMargins->{{2, 2}, {1, 1}},
+             FrameStyle->Directive[
+               RGBColor[
+               0.4196078431372549, 0.6313725490196078, 0.4196078431372549], 
+               AbsoluteThickness[1], 
+               Opacity[1]],
+             ImageSize->Automatic,
+             RoundingRadius->4,
+             StripOnInput->False], {0., 2.}],
+           "DynamicName",
+           BoxID -> "VertexID$1"], 
+          TagBox[InsetBox[
+            FrameBox["3",
+             Background->Directive[
+               RGBColor[
+               0.9607843137254902, 0.9882352941176471, 0.9764705882352941]],
+             BaseStyle->GrayLevel[0],
+             FrameMargins->{{2, 2}, {1, 1}},
+             FrameStyle->Directive[
+               RGBColor[
+               0.4196078431372549, 0.6313725490196078, 0.4196078431372549], 
+               AbsoluteThickness[1], 
+               Opacity[1]],
+             ImageSize->Automatic,
+             RoundingRadius->4,
+             StripOnInput->False], {0., 1.}],
+           "DynamicName",
+           BoxID -> "VertexID$2"], 
+          TagBox[InsetBox[
+            FrameBox["4",
+             Background->Directive[
+               RGBColor[
+               0.9607843137254902, 0.9882352941176471, 0.9764705882352941]],
+             BaseStyle->GrayLevel[0],
+             FrameMargins->{{2, 2}, {1, 1}},
+             FrameStyle->Directive[
+               RGBColor[
+               0.4196078431372549, 0.6313725490196078, 0.4196078431372549], 
+               AbsoluteThickness[1], 
+               Opacity[1]],
+             ImageSize->Automatic,
+             RoundingRadius->0,
+             StripOnInput->False], {0., 0.}],
+           "DynamicName",
+           BoxID -> "VertexID$3"]}}]]],
+     AlignmentPoint->Center,
+     Axes->False,
+     AxesLabel->None,
+     AxesOrigin->Automatic,
+     AxesStyle->{},
+     Background->None,
+     BaseStyle->{},
+     BaselinePosition->Automatic,
+     ContentSelectable->Automatic,
+     DefaultBaseStyle->"TreeGraphics",
+     DisplayFunction->Identity,
+     Epilog->{},
+     FormatType->StandardForm,
+     Frame->False,
+     FrameLabel->None,
+     FrameStyle->{},
+     FrameTicks->None,
+     FrameTicksStyle->{},
+     GridLines->None,
+     GridLinesStyle->{},
+     ImageMargins->0.,
+     ImagePadding->All,
+     ImageSize->{85.59375, Automatic},
+     LabelStyle->{},
+     PlotLabel->None,
+     PlotRange->All,
+     PlotRangeClipping->False,
+     PlotRangePadding->Automatic,
+     PlotRegion->Automatic,
+     Prolog->{},
+     RotateLabel->True,
+     Ticks->Automatic,
+     TicksStyle->{}]}], "}"}], TraditionalForm]], "Output",
+ CellChangeTimes->{{3.97253704058147*^9, 3.9725370553456993`*^9}, 
+   3.972538127034745*^9, 3.9725385405739326`*^9, {3.972539853411995*^9, 
+   3.972539876735518*^9}, 3.972697996269949*^9, 3.973135495054761*^9, {
+   3.973136321061926*^9, 3.97313632499298*^9}},
+ CellLabel->
+  "Out[1770]=",ExpressionUUID->"706c6b6c-5813-4777-8aa4-63d35a3982bb"]
+}, Open  ]],
+
+Cell[TextData[{
+ "This is number 4 in Foissy\[CloseCurlyQuote]s table. \n(I did it by hand; \
+below is an automated version.)\nIt\[CloseCurlyQuote]s not admissible to cut \
+this again (cf. definition of ",
+ StyleBox["admissible",
+  FontSlant->"Italic"],
+ " above).\nNow cut the edge 1 \[DirectedEdge] 3:"
+}], "Text",
+ CellChangeTimes->{{3.972537139685528*^9, 3.972537147061138*^9}, {
+  3.97253818915517*^9, 3.97253819447217*^9}, {3.9726979420990562`*^9, 
+  3.97269796380079*^9}, {3.972698028580968*^9, 3.9726980430522423`*^9}, {
+  3.974338559397159*^9, 
+  3.9743386261038*^9}},ExpressionUUID->"f09eb0a6-a8f2-4943-bcd5-d43dea02193b"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"cut2", " ", "=", " ", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"TreeChildren", "[", "exampleTree", "]"}], "[", 
+     RowBox[{"[", "2", "]"}], "]"}], ",", 
+    RowBox[{"TreeDelete", "[", 
+     RowBox[{"exampleTree", ",", 
+      RowBox[{"{", "2", "}"}]}], "]"}]}], "}"}]}]], "Input",
+ CellChangeTimes->{{3.972537155731982*^9, 3.9725372104388523`*^9}, {
+   3.9725372499179792`*^9, 3.9725372709635563`*^9}, 3.972537447361456*^9, {
+   3.97253758929383*^9, 3.972537591276514*^9}, {3.972537623966406*^9, 
+   3.972537625260181*^9}, {3.9726979852316837`*^9, 3.972697991169433*^9}},
+ CellLabel->
+  "In[1771]:=",ExpressionUUID->"7589de7c-f07a-437d-9a3d-682ae4d47cfe"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"{", 
+   RowBox[{
+    GraphicsBox[
+     NamespaceBox["Trees",
+      DynamicModuleBox[{Typeset`tree = HoldComplete[
+        Tree[3, {
+          Tree[4, None]}]]}, 
+       NamespaceBox[{
+         {RGBColor[0.6, 0.5882352941176471, 0.5529411764705883], 
+          AbsoluteThickness[1], Opacity[0.7], CapForm["Round"], Arrowheads[
+          Medium], LineBox[{{0., 1.}, {0., 0.}}]}, 
+         {Hue[0.6, 0.5, 1.], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+          TagBox[InsetBox[
+            FrameBox["3",
+             Background->Directive[
+               RGBColor[
+               0.9607843137254902, 0.9882352941176471, 0.9764705882352941]],
+             BaseStyle->GrayLevel[0],
+             FrameMargins->{{2, 2}, {1, 1}},
+             FrameStyle->Directive[
+               RGBColor[
+               0.4196078431372549, 0.6313725490196078, 0.4196078431372549], 
+               AbsoluteThickness[1], 
+               Opacity[1]],
+             ImageSize->Automatic,
+             RoundingRadius->4,
+             StripOnInput->False], {0., 1.}],
+           "DynamicName",
+           BoxID -> "VertexID$1"], 
+          TagBox[InsetBox[
+            FrameBox["4",
+             Background->Directive[
+               RGBColor[
+               0.9607843137254902, 0.9882352941176471, 0.9764705882352941]],
+             BaseStyle->GrayLevel[0],
+             FrameMargins->{{2, 2}, {1, 1}},
+             FrameStyle->Directive[
+               RGBColor[
+               0.4196078431372549, 0.6313725490196078, 0.4196078431372549], 
+               AbsoluteThickness[1], 
+               Opacity[1]],
+             ImageSize->Automatic,
+             RoundingRadius->0,
+             StripOnInput->False], {0., 0.}],
+           "DynamicName",
+           BoxID -> "VertexID$2"]}}]]],
+     AlignmentPoint->Center,
+     Axes->False,
+     AxesLabel->None,
+     AxesOrigin->Automatic,
+     AxesStyle->{},
+     Background->None,
+     BaseStyle->{},
+     BaselinePosition->Automatic,
+     ContentSelectable->Automatic,
+     DefaultBaseStyle->"TreeGraphics",
+     DisplayFunction->Identity,
+     Epilog->{},
+     FormatType->StandardForm,
+     Frame->False,
+     FrameLabel->None,
+     FrameStyle->{},
+     FrameTicks->None,
+     FrameTicksStyle->{},
+     GridLines->None,
+     GridLinesStyle->{},
+     ImageMargins->0.,
+     ImagePadding->All,
+     ImageSize->{93.90234375, Automatic},
+     LabelStyle->{},
+     PlotLabel->None,
+     PlotRange->All,
+     PlotRangeClipping->False,
+     PlotRangePadding->Automatic,
+     PlotRegion->Automatic,
+     Prolog->{},
+     RotateLabel->True,
+     Ticks->Automatic,
+     TicksStyle->{}], ",", 
+    GraphicsBox[
+     NamespaceBox["Trees",
+      DynamicModuleBox[{Typeset`tree = HoldComplete[
+        Tree[1, {
+          Tree[2, None]}, {}]]}, 
+       NamespaceBox[{
+         {RGBColor[0.6, 0.5882352941176471, 0.5529411764705883], 
+          AbsoluteThickness[1], Opacity[0.7], CapForm["Round"], Arrowheads[
+          Medium], LineBox[{{0., 1.}, {0., 0.}}]}, 
+         {Hue[0.6, 0.5, 1.], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+          TagBox[InsetBox[
+            FrameBox["1",
+             Background->Directive[
+               RGBColor[
+               0.9607843137254902, 0.9882352941176471, 0.9764705882352941]],
+             BaseStyle->GrayLevel[0],
+             FrameMargins->{{2, 2}, {1, 1}},
+             FrameStyle->Directive[
+               RGBColor[
+               0.4196078431372549, 0.6313725490196078, 0.4196078431372549], 
+               AbsoluteThickness[1], 
+               Opacity[1]],
+             ImageSize->Automatic,
+             RoundingRadius->4,
+             StripOnInput->False], {0., 1.}],
+           "DynamicName",
+           BoxID -> "VertexID$1"], 
+          TagBox[InsetBox[
+            FrameBox["2",
+             Background->Directive[
+               RGBColor[
+               0.9607843137254902, 0.9882352941176471, 0.9764705882352941]],
+             BaseStyle->GrayLevel[0],
+             FrameMargins->{{2, 2}, {1, 1}},
+             FrameStyle->Directive[
+               RGBColor[
+               0.4196078431372549, 0.6313725490196078, 0.4196078431372549], 
+               AbsoluteThickness[1], 
+               Opacity[1]],
+             ImageSize->Automatic,
+             RoundingRadius->0,
+             StripOnInput->False], {0., 0.}],
+           "DynamicName",
+           BoxID -> "VertexID$2"]}}]]],
+     AlignmentPoint->Center,
+     Axes->False,
+     AxesLabel->None,
+     AxesOrigin->Automatic,
+     AxesStyle->{},
+     Background->None,
+     BaseStyle->{},
+     BaselinePosition->Automatic,
+     ContentSelectable->Automatic,
+     DefaultBaseStyle->"TreeGraphics",
+     DisplayFunction->Identity,
+     Epilog->{},
+     FormatType->StandardForm,
+     Frame->False,
+     FrameLabel->None,
+     FrameStyle->{},
+     FrameTicks->None,
+     FrameTicksStyle->{},
+     GridLines->None,
+     GridLinesStyle->{},
+     ImageMargins->0.,
+     ImagePadding->All,
+     ImageSize->{86.650390625, Automatic},
+     LabelStyle->{},
+     PlotLabel->None,
+     PlotRange->All,
+     PlotRangeClipping->False,
+     PlotRangePadding->Automatic,
+     PlotRegion->Automatic,
+     Prolog->{},
+     RotateLabel->True,
+     Ticks->Automatic,
+     TicksStyle->{}]}], "}"}], TraditionalForm]], "Output",
+ CellChangeTimes->{{3.972537149447773*^9, 3.9725372108655863`*^9}, {
+   3.972537252412401*^9, 3.972537271343696*^9}, 3.9725374479263573`*^9, 
+   3.9725375916662703`*^9, 3.972537625823998*^9, 3.972538540613064*^9, {
+   3.972539853461637*^9, 3.972539876785379*^9}, {3.972697993922743*^9, 
+   3.972697996319891*^9}, 3.973135495121718*^9, 3.973136325039359*^9},
+ CellLabel->
+  "Out[1771]=",ExpressionUUID->"1fc57a69-da58-4307-b3e3-7cfe862e088a"]
+}, Open  ]],
+
+Cell["\<\
+The above is number 2 in Foissy\[CloseCurlyQuote]s table. 
+Disconnected parts are allowed, so we can further cut the edge 1 \
+\[DirectedEdge] 2 above:\
+\>", "Text",
+ CellChangeTimes->{{3.9725374312993917`*^9, 3.972537443027502*^9}, {
+  3.972537741895504*^9, 3.972537764551876*^9}, {3.9725378283860188`*^9, 
+  3.972537836842005*^9}, {3.9725382143260603`*^9, 3.9725382459280787`*^9}, {
+  3.9726980097425003`*^9, 
+  3.972698019573285*^9}},ExpressionUUID->"8c8025bf-6c5e-412d-8575-\
+afcbd92f1291"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"cut3", " ", "=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"Tree", "[", 
+     RowBox[{"3", ",", 
+      RowBox[{"{", 
+       RowBox[{"Tree", "[", 
+        RowBox[{"4", ",", "None"}], "]"}], "}"}]}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Tree", "[", 
+       RowBox[{"1", ",", "None"}], "]"}], ",", 
+      RowBox[{"Tree", "[", 
+       RowBox[{"2", ",", "None"}], "]"}]}], "}"}]}], "}"}]}]], "Input",
+ CellChangeTimes->{{3.972537396780998*^9, 3.972537397089264*^9}, {
+  3.972537463887287*^9, 3.972537601348901*^9}, {3.972537664598875*^9, 
+  3.9725376847163*^9}, {3.972698373331649*^9, 3.972698379066231*^9}},
+ CellLabel->
+  "In[1772]:=",ExpressionUUID->"f416128c-eebf-4957-b4f7-e032245bfa26"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"{", 
+   RowBox[{
+    GraphicsBox[
+     NamespaceBox["Trees",
+      DynamicModuleBox[{Typeset`tree = HoldComplete[
+        Tree[3, {
+          Tree[4, None]}]]}, 
+       NamespaceBox[{
+         {RGBColor[0.6, 0.5882352941176471, 0.5529411764705883], 
+          AbsoluteThickness[1], Opacity[0.7], CapForm["Round"], Arrowheads[
+          Medium], LineBox[{{0., 1.}, {0., 0.}}]}, 
+         {Hue[0.6, 0.5, 1.], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+          TagBox[InsetBox[
+            FrameBox["3",
+             Background->Directive[
+               RGBColor[
+               0.9607843137254902, 0.9882352941176471, 0.9764705882352941]],
+             BaseStyle->GrayLevel[0],
+             FrameMargins->{{2, 2}, {1, 1}},
+             FrameStyle->Directive[
+               RGBColor[
+               0.4196078431372549, 0.6313725490196078, 0.4196078431372549], 
+               AbsoluteThickness[1], 
+               Opacity[1]],
+             ImageSize->Automatic,
+             RoundingRadius->4,
+             StripOnInput->False], {0., 1.}],
+           "DynamicName",
+           BoxID -> "VertexID$1"], 
+          TagBox[InsetBox[
+            FrameBox["4",
+             Background->Directive[
+               RGBColor[
+               0.9607843137254902, 0.9882352941176471, 0.9764705882352941]],
+             BaseStyle->GrayLevel[0],
+             FrameMargins->{{2, 2}, {1, 1}},
+             FrameStyle->Directive[
+               RGBColor[
+               0.4196078431372549, 0.6313725490196078, 0.4196078431372549], 
+               AbsoluteThickness[1], 
+               Opacity[1]],
+             ImageSize->Automatic,
+             RoundingRadius->0,
+             StripOnInput->False], {0., 0.}],
+           "DynamicName",
+           BoxID -> "VertexID$2"]}}]]],
+     AlignmentPoint->Center,
+     Axes->False,
+     AxesLabel->None,
+     AxesOrigin->Automatic,
+     AxesStyle->{},
+     Background->None,
+     BaseStyle->{},
+     BaselinePosition->Automatic,
+     ContentSelectable->Automatic,
+     DefaultBaseStyle->"TreeGraphics",
+     DisplayFunction->Identity,
+     Epilog->{},
+     FormatType->StandardForm,
+     Frame->False,
+     FrameLabel->None,
+     FrameStyle->{},
+     FrameTicks->None,
+     FrameTicksStyle->{},
+     GridLines->None,
+     GridLinesStyle->{},
+     ImageMargins->0.,
+     ImagePadding->All,
+     ImageSize->{81.87890625, Automatic},
+     LabelStyle->{},
+     PlotLabel->None,
+     PlotRange->All,
+     PlotRangeClipping->False,
+     PlotRangePadding->Automatic,
+     PlotRegion->Automatic,
+     Prolog->{},
+     RotateLabel->True,
+     Ticks->Automatic,
+     TicksStyle->{}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      GraphicsBox[
+       NamespaceBox["Trees",
+        DynamicModuleBox[{Typeset`tree = HoldComplete[
+          Tree[1, None]]}, 
+         NamespaceBox[{{}, 
+           {Hue[0.6, 0.5, 1.], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+            TagBox[InsetBox[
+              FrameBox["1",
+               Background->Directive[
+                 RGBColor[
+                 0.9607843137254902, 0.9882352941176471, 0.9764705882352941]],
+               
+               BaseStyle->GrayLevel[0],
+               FrameMargins->{{2, 2}, {1, 1}},
+               FrameStyle->Directive[
+                 RGBColor[
+                 0.4196078431372549, 0.6313725490196078, 0.4196078431372549], 
+                 
+                 AbsoluteThickness[1], 
+                 Opacity[1]],
+               ImageSize->Automatic,
+               RoundingRadius->0,
+               StripOnInput->False], {1., 1.}],
+             "DynamicName",
+             BoxID -> "VertexID$1"]}}]]],
+       AlignmentPoint->Center,
+       Axes->False,
+       AxesLabel->None,
+       AxesOrigin->Automatic,
+       AxesStyle->{},
+       Background->None,
+       BaseStyle->{},
+       BaselinePosition->Automatic,
+       ContentSelectable->Automatic,
+       DefaultBaseStyle->"TreeGraphics",
+       DisplayFunction->Identity,
+       Epilog->{},
+       FormatType->StandardForm,
+       Frame->False,
+       FrameLabel->None,
+       FrameStyle->{},
+       FrameTicks->None,
+       FrameTicksStyle->{},
+       GridLines->None,
+       GridLinesStyle->{},
+       ImageMargins->0.,
+       ImagePadding->All,
+       ImageSize->{79.42578125, Automatic},
+       LabelStyle->{},
+       PlotLabel->None,
+       PlotRange->All,
+       PlotRangeClipping->False,
+       PlotRangePadding->0.1,
+       PlotRegion->Automatic,
+       Prolog->{},
+       RotateLabel->True,
+       Ticks->Automatic,
+       TicksStyle->{}], ",", 
+      GraphicsBox[
+       NamespaceBox["Trees",
+        DynamicModuleBox[{Typeset`tree = HoldComplete[
+          Tree[2, None]]}, 
+         NamespaceBox[{{}, 
+           {Hue[0.6, 0.5, 1.], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+            TagBox[InsetBox[
+              FrameBox["2",
+               Background->Directive[
+                 RGBColor[
+                 0.9607843137254902, 0.9882352941176471, 0.9764705882352941]],
+               
+               BaseStyle->GrayLevel[0],
+               FrameMargins->{{2, 2}, {1, 1}},
+               FrameStyle->Directive[
+                 RGBColor[
+                 0.4196078431372549, 0.6313725490196078, 0.4196078431372549], 
+                 
+                 AbsoluteThickness[1], 
+                 Opacity[1]],
+               ImageSize->Automatic,
+               RoundingRadius->0,
+               StripOnInput->False], {1., 1.}],
+             "DynamicName",
+             BoxID -> "VertexID$1"]}}]]],
+       AlignmentPoint->Center,
+       Axes->False,
+       AxesLabel->None,
+       AxesOrigin->Automatic,
+       AxesStyle->{},
+       Background->None,
+       BaseStyle->{},
+       BaselinePosition->Automatic,
+       ContentSelectable->Automatic,
+       DefaultBaseStyle->"TreeGraphics",
+       DisplayFunction->Identity,
+       Epilog->{},
+       FormatType->StandardForm,
+       Frame->False,
+       FrameLabel->None,
+       FrameStyle->{},
+       FrameTicks->None,
+       FrameTicksStyle->{},
+       GridLines->None,
+       GridLinesStyle->{},
+       ImageMargins->0.,
+       ImagePadding->All,
+       ImageSize->{68.96484375, Automatic},
+       LabelStyle->{},
+       PlotLabel->None,
+       PlotRange->All,
+       PlotRangeClipping->False,
+       PlotRangePadding->0.1,
+       PlotRegion->Automatic,
+       Prolog->{},
+       RotateLabel->True,
+       Ticks->Automatic,
+       TicksStyle->{}]}], "}"}]}], "}"}], TraditionalForm]], "Output",
+ CellChangeTimes->{
+  3.972537476230979*^9, {3.972537507937595*^9, 3.9725376018931103`*^9}, 
+   3.972537666644825*^9, 3.972538540667611*^9, {3.972539853517499*^9, 
+   3.972539876841588*^9}, 3.972697996377969*^9, 3.972698379588046*^9, 
+   3.973135495189687*^9, 3.973136325095106*^9},
+ CellLabel->
+  "Out[1772]=",ExpressionUUID->"07ecdfbe-7f00-4b99-af24-8fdebf560bae"]
+}, Open  ]],
+
+Cell["It can also be grouped like this.", "Text",
+ CellChangeTimes->{{3.972537770196075*^9, 
+  3.972537776994698*^9}},ExpressionUUID->"742b4507-c867-4f62-b16f-\
+7befaa2c7e58"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"cut4", "=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Tree", "[", 
+       RowBox[{"2", ",", "None"}], "]"}], ",", 
+      RowBox[{"Tree", "[", 
+       RowBox[{"3", ",", 
+        RowBox[{"{", 
+         RowBox[{"Tree", "[", 
+          RowBox[{"4", ",", "None"}], "]"}], "}"}]}], "]"}]}], "}"}], ",", 
+    RowBox[{"Tree", "[", 
+     RowBox[{"1", ",", "None"}], "]"}]}], "}"}]}]], "Input",
+ CellChangeTimes->{{3.972537691527215*^9, 3.972537720914307*^9}, {
+  3.972698389505533*^9, 3.972698393663904*^9}},
+ CellLabel->
+  "In[1773]:=",ExpressionUUID->"a40db62b-da47-400c-b803-17decf1fbea0"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      GraphicsBox[
+       NamespaceBox["Trees",
+        DynamicModuleBox[{Typeset`tree = HoldComplete[
+          Tree[2, None]]}, 
+         NamespaceBox[{{}, 
+           {Hue[0.6, 0.5, 1.], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+            TagBox[InsetBox[
+              FrameBox["2",
+               Background->Directive[
+                 RGBColor[
+                 0.9607843137254902, 0.9882352941176471, 0.9764705882352941]],
+               
+               BaseStyle->GrayLevel[0],
+               FrameMargins->{{2, 2}, {1, 1}},
+               FrameStyle->Directive[
+                 RGBColor[
+                 0.4196078431372549, 0.6313725490196078, 0.4196078431372549], 
+                 
+                 AbsoluteThickness[1], 
+                 Opacity[1]],
+               ImageSize->Automatic,
+               RoundingRadius->0,
+               StripOnInput->False], {1., 1.}],
+             "DynamicName",
+             BoxID -> "VertexID$1"]}}]]],
+       AlignmentPoint->Center,
+       Axes->False,
+       AxesLabel->None,
+       AxesOrigin->Automatic,
+       AxesStyle->{},
+       Background->None,
+       BaseStyle->{},
+       BaselinePosition->Automatic,
+       ContentSelectable->Automatic,
+       DefaultBaseStyle->"TreeGraphics",
+       DisplayFunction->Identity,
+       Epilog->{},
+       FormatType->StandardForm,
+       Frame->False,
+       FrameLabel->None,
+       FrameStyle->{},
+       FrameTicks->None,
+       FrameTicksStyle->{},
+       GridLines->None,
+       GridLinesStyle->{},
+       ImageMargins->0.,
+       ImagePadding->All,
+       ImageSize->{73.20703125, Automatic},
+       LabelStyle->{},
+       PlotLabel->None,
+       PlotRange->All,
+       PlotRangeClipping->False,
+       PlotRangePadding->0.1,
+       PlotRegion->Automatic,
+       Prolog->{},
+       RotateLabel->True,
+       Ticks->Automatic,
+       TicksStyle->{}], ",", 
+      GraphicsBox[
+       NamespaceBox["Trees",
+        DynamicModuleBox[{Typeset`tree = HoldComplete[
+          Tree[3, {
+            Tree[4, None]}]]}, 
+         NamespaceBox[{
+           {RGBColor[0.6, 0.5882352941176471, 0.5529411764705883], 
+            AbsoluteThickness[1], Opacity[0.7], CapForm["Round"], Arrowheads[
+            Medium], LineBox[{{0., 1.}, {0., 0.}}]}, 
+           {Hue[0.6, 0.5, 1.], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+            TagBox[InsetBox[
+              FrameBox["3",
+               Background->Directive[
+                 RGBColor[
+                 0.9607843137254902, 0.9882352941176471, 0.9764705882352941]],
+               
+               BaseStyle->GrayLevel[0],
+               FrameMargins->{{2, 2}, {1, 1}},
+               FrameStyle->Directive[
+                 RGBColor[
+                 0.4196078431372549, 0.6313725490196078, 0.4196078431372549], 
+                 
+                 AbsoluteThickness[1], 
+                 Opacity[1]],
+               ImageSize->Automatic,
+               RoundingRadius->4,
+               StripOnInput->False], {0., 1.}],
+             "DynamicName",
+             BoxID -> "VertexID$1"], 
+            TagBox[InsetBox[
+              FrameBox["4",
+               Background->Directive[
+                 RGBColor[
+                 0.9607843137254902, 0.9882352941176471, 0.9764705882352941]],
+               
+               BaseStyle->GrayLevel[0],
+               FrameMargins->{{2, 2}, {1, 1}},
+               FrameStyle->Directive[
+                 RGBColor[
+                 0.4196078431372549, 0.6313725490196078, 0.4196078431372549], 
+                 
+                 AbsoluteThickness[1], 
+                 Opacity[1]],
+               ImageSize->Automatic,
+               RoundingRadius->0,
+               StripOnInput->False], {0., 0.}],
+             "DynamicName",
+             BoxID -> "VertexID$2"]}}]]],
+       AlignmentPoint->Center,
+       Axes->False,
+       AxesLabel->None,
+       AxesOrigin->Automatic,
+       AxesStyle->{},
+       Background->None,
+       BaseStyle->{},
+       BaselinePosition->Automatic,
+       ContentSelectable->Automatic,
+       DefaultBaseStyle->"TreeGraphics",
+       DisplayFunction->Identity,
+       Epilog->{},
+       FormatType->StandardForm,
+       Frame->False,
+       FrameLabel->None,
+       FrameStyle->{},
+       FrameTicks->None,
+       FrameTicksStyle->{},
+       GridLines->None,
+       GridLinesStyle->{},
+       ImageMargins->0.,
+       ImagePadding->All,
+       ImageSize->{66.56640625000003, Automatic},
+       LabelStyle->{},
+       PlotLabel->None,
+       PlotRange->All,
+       PlotRangeClipping->False,
+       PlotRangePadding->Automatic,
+       PlotRegion->Automatic,
+       Prolog->{},
+       RotateLabel->True,
+       Ticks->Automatic,
+       TicksStyle->{}]}], "}"}], ",", 
+    GraphicsBox[
+     NamespaceBox["Trees",
+      DynamicModuleBox[{Typeset`tree = HoldComplete[
+        Tree[1, None]]}, 
+       NamespaceBox[{{}, 
+         {Hue[0.6, 0.5, 1.], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+          TagBox[InsetBox[
+            FrameBox["1",
+             Background->Directive[
+               RGBColor[
+               0.9607843137254902, 0.9882352941176471, 0.9764705882352941]],
+             BaseStyle->GrayLevel[0],
+             FrameMargins->{{2, 2}, {1, 1}},
+             FrameStyle->Directive[
+               RGBColor[
+               0.4196078431372549, 0.6313725490196078, 0.4196078431372549], 
+               AbsoluteThickness[1], 
+               Opacity[1]],
+             ImageSize->Automatic,
+             RoundingRadius->0,
+             StripOnInput->False], {1., 1.}],
+           "DynamicName",
+           BoxID -> "VertexID$1"]}}]]],
+     AlignmentPoint->Center,
+     Axes->False,
+     AxesLabel->None,
+     AxesOrigin->Automatic,
+     AxesStyle->{},
+     Background->None,
+     BaseStyle->{},
+     BaselinePosition->Automatic,
+     ContentSelectable->Automatic,
+     DefaultBaseStyle->"TreeGraphics",
+     DisplayFunction->Identity,
+     Epilog->{},
+     FormatType->StandardForm,
+     Frame->False,
+     FrameLabel->None,
+     FrameStyle->{},
+     FrameTicks->None,
+     FrameTicksStyle->{},
+     GridLines->None,
+     GridLinesStyle->{},
+     ImageMargins->0.,
+     ImagePadding->All,
+     ImageSize->{56.54492187499952, Automatic},
+     LabelStyle->{},
+     PlotLabel->None,
+     PlotRange->All,
+     PlotRangeClipping->False,
+     PlotRangePadding->0.1,
+     PlotRegion->Automatic,
+     Prolog->{},
+     RotateLabel->True,
+     Ticks->Automatic,
+     TicksStyle->{}]}], "}"}], TraditionalForm]], "Output",
+ CellChangeTimes->{{3.972537694579514*^9, 3.97253772147556*^9}, 
+   3.972538540727621*^9, {3.972539853584716*^9, 3.972539876898284*^9}, 
+   3.9726979964284286`*^9, 3.972698394082955*^9, 3.973135495255445*^9, 
+   3.973136325153241*^9},
+ CellLabel->
+  "Out[1773]=",ExpressionUUID->"93b03d62-9cc0-4030-ab02-e4a3642a1be9"]
+}, Open  ]],
+
+Cell[TextData[{
+ "Note that cutting the edge 3 \[DirectedEdge] 4 in these last things is not \
+admissible anymore, since we already cut one edge on the same path: 1 \
+\[DirectedEdge] 3.\n\nThere is now only one admissible cut left, that I leave \
+for you as exercise.\n\nThe coproduct \[CapitalDelta] of the bialgebra is:\
+\[LineSeparator]",
+ StyleBox["e",
+  FontSlant->"Italic"],
+ " \[TensorProduct] ",
+ StyleBox["t",
+  FontSlant->"Italic"],
+ " + ",
+ StyleBox["t",
+  FontSlant->"Italic"],
+ " \[TensorProduct] ",
+ StyleBox["e",
+  FontSlant->"Italic"],
+ " + (what falls down \[TensorProduct] what is left), \[LineSeparator]where \
+\[OpenCurlyDoubleQuote]e\[CloseCurlyDoubleQuote] is the empty tree. The role \
+of \[TensorProduct] is simply to keep the two pieces apart.\nThis bialgebra \
+becomes ",
+ StyleBox["Hopf",
+  FontWeight->"Bold"],
+ " by finding an \[OpenCurlyDoubleQuote]inverse\[CloseCurlyDoubleQuote]: the ",
+ StyleBox["antipode",
+  FontWeight->"Bold"],
+ " ",
+ StyleBox["s",
+  FontSlant->"Italic"],
+ ".\n\nFirst for just a single node \[Bullet], call it \[Bullet] = ",
+ StyleBox["a",
+  FontSlant->"Italic"],
+ " to make it easier to type. "
+}], "Text",
+ CellChangeTimes->{{3.972537778512191*^9, 3.9725377791262302`*^9}, {
+  3.972537840759446*^9, 3.9725378810507402`*^9}, {3.972696829026781*^9, 
+  3.972696909973908*^9}, {3.9726969551287947`*^9, 3.972696962598681*^9}, {
+  3.9726981091568737`*^9, 3.972698139593502*^9}, {3.9726984103992453`*^9, 
+  3.972698497525298*^9}, {3.973154609257936*^9, 3.973154637633333*^9}, {
+  3.974338642929154*^9, 
+  3.974338767767661*^9}},ExpressionUUID->"b9719d6f-6f58-4917-b8a3-\
+98e6a7572023"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"\[CapitalDelta]a", " ", "=", "  ", 
+   RowBox[{
+    RowBox[{"e", " ", "\[TensorProduct]", " ", "a"}], "+", " ", 
+    RowBox[{"a", " ", "\[TensorProduct]", " ", "e"}]}]}], " ", ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"sId\[CapitalDelta]a", " ", "=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"s", "[", "e", "]"}], "\[TensorProduct]", " ", "a"}], " ", "+", 
+    " ", 
+    RowBox[{
+     RowBox[{"s", "[", "a", "]"}], " ", "\[TensorProduct]", " ", "e"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"rule\[Mu]", " ", "=", " ", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"a_", " ", "\[TensorProduct]", " ", "b_"}], ")"}], "->", " ", 
+      RowBox[{"a", " ", "b"}]}], "}"}]}], ";", " ", 
+   RowBox[{"ruleS", " ", "=", " ", 
+    RowBox[{
+     RowBox[{"s", "[", "e", "]"}], "->", "e"}]}], ";"}], " "}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"sId\[CapitalDelta]a", "  ", "/.", " ", "rules"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"%", " ", "//.", "rule\[Mu]"}], " "}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"%", " ", "==", "0"}], "/.", " ", 
+  RowBox[{"e", "->", "1"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Solve", "[", 
+   RowBox[{"%", ",", 
+    RowBox[{"s", "[", "a", "]"}]}], "]"}], "//", "First"}]}], "Input",
+ CellChangeTimes->{{3.972539370713579*^9, 3.972539546610724*^9}, {
+  3.9725395862927237`*^9, 3.972539592119323*^9}, {3.97269693520858*^9, 
+  3.972696953465502*^9}, {3.973136379684626*^9, 3.973136382741951*^9}, {
+  3.974338787765601*^9, 
+  3.974338802837082*^9}},ExpressionUUID->"1a281cef-0097-4a96-9ae0-\
+26918ea5be6b"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{"e", " ", 
+    RowBox[{"S", "(", "a", ")"}]}], "+", 
+   RowBox[{"a", " ", "e"}]}], TraditionalForm]], "Output",
+ CellChangeTimes->{{3.9725393777433167`*^9, 3.972539509788892*^9}, {
+   3.972539540296629*^9, 3.9725395470275908`*^9}, {3.972539586776309*^9, 
+   3.972539592552951*^9}, {3.9725398535913887`*^9, 3.972539876905328*^9}, 
+   3.972697996441462*^9, 3.973135495276733*^9, 3.973136325160563*^9},
+ CellLabel->
+  "Out[1778]=",ExpressionUUID->"8069bc30-5e9e-456a-99cd-12fa475aa9ee"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{"S", "(", "a", ")"}], "+", "a"}], "\[LongEqual]", "0"}], 
+  TraditionalForm]], "Output",
+ CellChangeTimes->{{3.9725393777433167`*^9, 3.972539509788892*^9}, {
+   3.972539540296629*^9, 3.9725395470275908`*^9}, {3.972539586776309*^9, 
+   3.972539592552951*^9}, {3.9725398535913887`*^9, 3.972539876905328*^9}, 
+   3.972697996441462*^9, 3.973135495276733*^9, 3.973136325162163*^9},
+ CellLabel->
+  "Out[1779]=",ExpressionUUID->"aa2b2d4a-4435-4313-886d-b30940db03eb"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"S", "(", "a", ")"}], "\[Rule]", 
+    RowBox[{"-", "a"}]}], "}"}], TraditionalForm]], "Output",
+ CellChangeTimes->{{3.9725393777433167`*^9, 3.972539509788892*^9}, {
+   3.972539540296629*^9, 3.9725395470275908`*^9}, {3.972539586776309*^9, 
+   3.972539592552951*^9}, {3.9725398535913887`*^9, 3.972539876905328*^9}, 
+   3.972697996441462*^9, 3.973135495276733*^9, 3.973136325163334*^9},
+ CellLabel->
+  "Out[1780]=",ExpressionUUID->"e49d6be1-5ffd-4e94-925a-0ea9fc653df4"]
+}, Open  ]],
+
+Cell[TextData[{
+ "OK. \nNow the tree with two nodes, call it ",
+ StyleBox["t. ",
+  FontSlant->"Italic"],
+ "As is intuitive, cutting it produces two pieces",
+ StyleBox[" a",
+  FontSlant->"Italic"],
+ " \[TensorProduct] ",
+ StyleBox["a, ",
+  FontSlant->"Italic"],
+ "where again ",
+ StyleBox["a",
+  FontSlant->"Italic"],
+ " = \[Bullet].\nThe coproduct is:"
+}], "Text",
+ CellChangeTimes->{{3.97315464872974*^9, 3.973154743061162*^9}, 
+   3.974338780210935*^9},ExpressionUUID->"74522416-50be-4254-b275-\
+1c852d791f9a"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"\[CapitalDelta]t", " ", "=", "  ", 
+   RowBox[{
+    RowBox[{"e", " ", "\[TensorProduct]", " ", "t"}], "+", " ", 
+    RowBox[{"t", " ", "\[TensorProduct]", " ", "e"}], " ", "+", " ", 
+    RowBox[{"a", " ", "\[TensorProduct]", " ", "a"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"sId\[CapitalDelta]t", " ", "=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"s", "[", "e", "]"}], "\[TensorProduct]", " ", "t"}], " ", "+", 
+    " ", 
+    RowBox[{
+     RowBox[{"s", "[", "t", "]"}], " ", "\[TensorProduct]", " ", "e"}], " ", "+", 
+    RowBox[{
+     RowBox[{"s", "[", "a", "]"}], " ", "\[TensorProduct]", " ", "a"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ruleS", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"s", "[", "e", "]"}], "->", "e"}], ",", 
+     RowBox[{
+      RowBox[{"s", "[", "a", "]"}], "->", 
+      RowBox[{"-", "a"}]}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"SId\[CapitalDelta]t", "  ", "/.", " ", "ruleS"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"%", " ", "//.", "rule\[Mu]"}], " "}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"%", " ", "==", "0"}], "/.", " ", 
+  RowBox[{"e", "->", "1"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Solve", "[", 
+   RowBox[{"%", ",", 
+    RowBox[{"s", "[", "t", "]"}]}], "]"}], "//", "First"}]}], "Input",
+ CellChangeTimes->{{3.972538973649778*^9, 3.972538988102908*^9}, {
+  3.9725390435750427`*^9, 3.97253906247913*^9}, {3.972539162331901*^9, 
+  3.972539273046273*^9}, {3.972539305859655*^9, 3.972539335797263*^9}, {
+  3.9725395224189453`*^9, 3.972539580304885*^9}, {3.9725396185763407`*^9, 
+  3.972539619771826*^9}, {3.9743388070033092`*^9, 
+  3.9743388220736513`*^9}},ExpressionUUID->"5ffb37ef-38d0-436d-b383-\
+206f93bfda84"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{"-", 
+    RowBox[{"a", "\[TensorProduct]", "a"}]}], "+", 
+   RowBox[{
+    RowBox[{"S", "(", "t", ")"}], "\[TensorProduct]", "e"}], "+", 
+   RowBox[{"e", "\[TensorProduct]", "t"}]}], TraditionalForm]], "Output",
+ CellChangeTimes->{{3.9725390583103733`*^9, 3.9725390627891703`*^9}, {
+   3.972539097378462*^9, 3.972539119814007*^9}, {3.9725391674322577`*^9, 
+   3.972539184653962*^9}, {3.972539218934531*^9, 3.972539336075839*^9}, {
+   3.9725395192419147`*^9, 3.972539523323148*^9}, 3.972539553961788*^9, {
+   3.972539613258275*^9, 3.972539620164689*^9}, {3.972539853613536*^9, 
+   3.9725398769285917`*^9}, 3.972697996456711*^9, 3.973135495287513*^9, 
+   3.973136325175666*^9},
+ CellLabel->
+  "Out[1784]=",ExpressionUUID->"b936fce9-2ee8-4ae7-8a70-21838875c5aa"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{"-", 
+    SuperscriptBox["a", "2"]}], "+", 
+   RowBox[{"e", " ", 
+    RowBox[{"S", "(", "t", ")"}]}], "+", 
+   RowBox[{"e", " ", "t"}]}], TraditionalForm]], "Output",
+ CellChangeTimes->{{3.9725390583103733`*^9, 3.9725390627891703`*^9}, {
+   3.972539097378462*^9, 3.972539119814007*^9}, {3.9725391674322577`*^9, 
+   3.972539184653962*^9}, {3.972539218934531*^9, 3.972539336075839*^9}, {
+   3.9725395192419147`*^9, 3.972539523323148*^9}, 3.972539553961788*^9, {
+   3.972539613258275*^9, 3.972539620164689*^9}, {3.972539853613536*^9, 
+   3.9725398769285917`*^9}, 3.972697996456711*^9, 3.973135495287513*^9, 
+   3.9731363251772413`*^9},
+ CellLabel->
+  "Out[1785]=",ExpressionUUID->"1131d69b-64e1-41dc-8f00-17af008a5422"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{"-", 
+     SuperscriptBox["a", "2"]}], "+", 
+    RowBox[{"S", "(", "t", ")"}], "+", "t"}], "\[LongEqual]", "0"}], 
+  TraditionalForm]], "Output",
+ CellChangeTimes->{{3.9725390583103733`*^9, 3.9725390627891703`*^9}, {
+   3.972539097378462*^9, 3.972539119814007*^9}, {3.9725391674322577`*^9, 
+   3.972539184653962*^9}, {3.972539218934531*^9, 3.972539336075839*^9}, {
+   3.9725395192419147`*^9, 3.972539523323148*^9}, 3.972539553961788*^9, {
+   3.972539613258275*^9, 3.972539620164689*^9}, {3.972539853613536*^9, 
+   3.9725398769285917`*^9}, 3.972697996456711*^9, 3.973135495287513*^9, 
+   3.973136325178363*^9},
+ CellLabel->
+  "Out[1786]=",ExpressionUUID->"f52db274-25e1-4778-b21b-093e2abbe4bb"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"S", "(", "t", ")"}], "\[Rule]", 
+    RowBox[{
+     SuperscriptBox["a", "2"], "-", "t"}]}], "}"}], 
+  TraditionalForm]], "Output",
+ CellChangeTimes->{{3.9725390583103733`*^9, 3.9725390627891703`*^9}, {
+   3.972539097378462*^9, 3.972539119814007*^9}, {3.9725391674322577`*^9, 
+   3.972539184653962*^9}, {3.972539218934531*^9, 3.972539336075839*^9}, {
+   3.9725395192419147`*^9, 3.972539523323148*^9}, 3.972539553961788*^9, {
+   3.972539613258275*^9, 3.972539620164689*^9}, {3.972539853613536*^9, 
+   3.9725398769285917`*^9}, 3.972697996456711*^9, 3.973135495287513*^9, 
+   3.9731363251794558`*^9},
+ CellLabel->
+  "Out[1787]=",ExpressionUUID->"6262c039-36b3-4513-8fc4-127b25e38041"]
+}, Open  ]],
+
+Cell[TextData[{
+ "There is a general formula in Foissy, which this can be compared to.\nNow \
+some more generic but related comments. \n\nWe can construct binary \
+operations by ",
+ StyleBox["Groupings", "Input"],
+ ".\nFor example, on four ordered elements ",
+ StyleBox["a,b,c,d",
+  FontSlant->"Italic"],
+ " we have:"
+}], "Text",
+ CellChangeTimes->{{3.9725308360604*^9, 3.972530846190295*^9}, {
+   3.9725310457076473`*^9, 3.972531060581724*^9}, {3.972531095931815*^9, 
+   3.9725310969447803`*^9}, {3.97253437137873*^9, 3.972534387424899*^9}, 
+   3.972535339536878*^9, {3.972539840971499*^9, 3.972539862329143*^9}, {
+   3.972698608250813*^9, 3.972698629168418*^9}, 
+   3.97315474725904*^9},ExpressionUUID->"2738445d-e862-42f5-9124-\
+6c632429f643"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Groupings", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"a", ",", "b", ",", "c", ",", "d"}], "}"}], ",", 
+   RowBox[{"CircleTimes", "->", "2"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.9725304809910297`*^9, 3.9725304809919853`*^9}, {
+  3.9725305502070312`*^9, 3.972530567902087*^9}, {3.972530601321122*^9, 
+  3.972530616383462*^9}, {3.972530660587224*^9, 3.972530672099832*^9}, {
+  3.97253074936421*^9, 3.972530751569726*^9}, {3.972530932929667*^9, 
+  3.972530936647213*^9}, {3.972531113033905*^9, 3.972531130714666*^9}},
+ CellLabel->
+  "In[1788]:=",ExpressionUUID->"ae3b51cd-11d8-4ee2-9577-20d1ec2defc4"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"a", "\[CircleTimes]", "b"}], ")"}], "\[CircleTimes]", "c"}], 
+      ")"}], "\[CircleTimes]", "d"}], ",", 
+    RowBox[{"a", "\[CircleTimes]", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"b", "\[CircleTimes]", "c"}], ")"}], "\[CircleTimes]", "d"}], 
+      ")"}]}], ",", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"a", "\[CircleTimes]", 
+       RowBox[{"(", 
+        RowBox[{"b", "\[CircleTimes]", "c"}], ")"}]}], ")"}], "\[CircleTimes]",
+      "d"}], ",", 
+    RowBox[{"a", "\[CircleTimes]", 
+     RowBox[{"(", 
+      RowBox[{"b", "\[CircleTimes]", 
+       RowBox[{"(", 
+        RowBox[{"c", "\[CircleTimes]", "d"}], ")"}]}], ")"}]}], ",", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"a", "\[CircleTimes]", "b"}], ")"}], "\[CircleTimes]", 
+     RowBox[{"(", 
+      RowBox[{"c", "\[CircleTimes]", "d"}], ")"}]}]}], "}"}], 
+  TraditionalForm]], "Output",
+ CellChangeTimes->{
+  3.9725304815891457`*^9, {3.972530558830327*^9, 3.972530616649611*^9}, {
+   3.972530661016185*^9, 3.9725306726033897`*^9}, {3.9725307529051523`*^9, 
+   3.972530780725689*^9}, 3.972530937100119*^9, {3.972531113520946*^9, 
+   3.972531131113434*^9}, 3.972538540955385*^9, {3.9725398536242867`*^9, 
+   3.97253987693637*^9}, 3.972697996469005*^9, 3.973135495308621*^9, 
+   3.973136325184084*^9},
+ CellLabel->
+  "Out[1788]=",ExpressionUUID->"ffd5848c-2233-44c9-9fd4-97dc63a1ed5e"]
+}, Open  ]],
+
+Cell["Take the first term. It can be represented as a tree:", "Text",
+ CellChangeTimes->{{3.972530856099019*^9, 
+  3.972530875948965*^9}},ExpressionUUID->"43344ace-46ff-4165-88af-\
+a3c2f0c91219"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"example", " ", "=", " ", 
+  RowBox[{"%", "[", 
+   RowBox[{"[", "1", "]"}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"exampleTree", " ", "=", " ", 
+  RowBox[{"TreeForm", "[", "example", "]"}]}]}], "Input",
+ CellChangeTimes->{{3.9725305822292643`*^9, 3.972530585251278*^9}, {
+  3.9725307789276133`*^9, 3.972530804837618*^9}, {3.9725309310504913`*^9, 
+  3.9725309884635*^9}, {3.972531132735661*^9, 3.972531133169964*^9}},
+ CellLabel->
+  "In[1789]:=",ExpressionUUID->"1c7c507e-da5b-43b5-a147-415a58fc3c7b"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"a", "\[CircleTimes]", "b"}], ")"}], "\[CircleTimes]", "c"}], 
+    ")"}], "\[CircleTimes]", "d"}], TraditionalForm]], "Output",
+ CellChangeTimes->{{3.972530585584392*^9, 3.9725306179583197`*^9}, {
+   3.972530662190463*^9, 3.972530674608307*^9}, {3.9725307815281076`*^9, 
+   3.9725308050907307`*^9}, {3.972530944774454*^9, 3.972530988911478*^9}, 
+   3.972531133500774*^9, 3.9725385409999743`*^9, {3.972539853639138*^9, 
+   3.972539876954204*^9}, 3.972697996474381*^9, 3.973135495319377*^9, 
+   3.9731363251949663`*^9},
+ CellLabel->
+  "Out[1789]=",ExpressionUUID->"9a4911a0-ae66-4542-84ca-e43e17141e15"],
+
+Cell[BoxData[
+ FormBox[
+  InterpretationBox[
+   GraphicsBox[
+    TagBox[
+     GraphicsComplexBox[{{1.3416407864998738`, 2.6832815729997477`}, {
+      0.8944271909999159, 1.788854381999832}, {0.4472135954999579, 
+      0.894427190999916}, {0., 0.}, {0.8944271909999159, 0.}, {
+      1.3416407864998738`, 0.894427190999916}, {1.7888543819998317`, 
+      1.788854381999832}}, {
+       {RGBColor[0.55, 0.45, 0.45], 
+        LineBox[{{1, 2}, {1, 7}, {2, 3}, {2, 6}, {3, 4}, {3, 5}}]}, {
+        TagBox[
+         TooltipBox[InsetBox[
+           FrameBox[
+            StyleBox["CircleTimes", "TraditionalForm", "Output",
+             StripOnInput->False,
+             LineColor->GrayLevel[0],
+             FrontFaceColor->GrayLevel[0],
+             BackFaceColor->GrayLevel[0],
+             GraphicsColor->GrayLevel[0],
+             FontSize->Scaled[0.05],
+             FontColor->GrayLevel[0]],
+            Background->RGBColor[1., 1., 0.871],
+            FrameStyle->GrayLevel[0.5],
+            StripOnInput->False], 1],
+          TagBox[
+           RowBox[{
+             RowBox[{"(", 
+               RowBox[{
+                 RowBox[{"(", 
+                   RowBox[{"a", "\[CircleTimes]", "b"}], ")"}], 
+                 "\[CircleTimes]", "c"}], ")"}], "\[CircleTimes]", "d"}], 
+           HoldForm]],
+         Annotation[#, 
+          HoldForm[
+           CircleTimes[
+            CircleTimes[
+             
+             CircleTimes[$CellContext`a, $CellContext`b], $CellContext`c], \
+$CellContext`d]], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[InsetBox[
+           FrameBox[
+            StyleBox["CircleTimes", "TraditionalForm", "Output",
+             StripOnInput->False,
+             LineColor->GrayLevel[0],
+             FrontFaceColor->GrayLevel[0],
+             BackFaceColor->GrayLevel[0],
+             GraphicsColor->GrayLevel[0],
+             FontSize->Scaled[0.05],
+             FontColor->GrayLevel[0]],
+            Background->RGBColor[1., 1., 0.871],
+            FrameStyle->GrayLevel[0.5],
+            StripOnInput->False], 2],
+          TagBox[
+           RowBox[{
+             RowBox[{"(", 
+               RowBox[{"a", "\[CircleTimes]", "b"}], ")"}], "\[CircleTimes]", 
+             "c"}], HoldForm]],
+         Annotation[#, 
+          HoldForm[
+           CircleTimes[
+            CircleTimes[$CellContext`a, $CellContext`b], $CellContext`c]], 
+          "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[InsetBox[
+           FrameBox[
+            StyleBox["CircleTimes", "TraditionalForm", "Output",
+             StripOnInput->False,
+             LineColor->GrayLevel[0],
+             FrontFaceColor->GrayLevel[0],
+             BackFaceColor->GrayLevel[0],
+             GraphicsColor->GrayLevel[0],
+             FontSize->Scaled[0.05],
+             FontColor->GrayLevel[0]],
+            Background->RGBColor[1., 1., 0.871],
+            FrameStyle->GrayLevel[0.5],
+            StripOnInput->False], 3],
+          TagBox[
+           RowBox[{"a", "\[CircleTimes]", "b"}], HoldForm]],
+         Annotation[#, 
+          HoldForm[
+           CircleTimes[$CellContext`a, $CellContext`b]], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[InsetBox[
+           FrameBox[
+            StyleBox[
+             TagBox["a",
+              HoldForm], "TraditionalForm", "Output",
+             StripOnInput->False,
+             LineColor->GrayLevel[0],
+             FrontFaceColor->GrayLevel[0],
+             BackFaceColor->GrayLevel[0],
+             GraphicsColor->GrayLevel[0],
+             FontSize->Scaled[0.05],
+             FontColor->GrayLevel[0]],
+            Background->RGBColor[1., 1., 0.871],
+            FrameStyle->GrayLevel[0.5],
+            StripOnInput->False], 4],
+          TagBox["a", HoldForm]],
+         Annotation[#, 
+          HoldForm[$CellContext`a], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[InsetBox[
+           FrameBox[
+            StyleBox[
+             TagBox["b",
+              HoldForm], "TraditionalForm", "Output",
+             StripOnInput->False,
+             LineColor->GrayLevel[0],
+             FrontFaceColor->GrayLevel[0],
+             BackFaceColor->GrayLevel[0],
+             GraphicsColor->GrayLevel[0],
+             FontSize->Scaled[0.05],
+             FontColor->GrayLevel[0]],
+            Background->RGBColor[1., 1., 0.871],
+            FrameStyle->GrayLevel[0.5],
+            StripOnInput->False], 5],
+          TagBox["b", HoldForm]],
+         Annotation[#, 
+          HoldForm[$CellContext`b], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[InsetBox[
+           FrameBox[
+            StyleBox[
+             TagBox["c",
+              HoldForm], "TraditionalForm", "Output",
+             StripOnInput->False,
+             LineColor->GrayLevel[0],
+             FrontFaceColor->GrayLevel[0],
+             BackFaceColor->GrayLevel[0],
+             GraphicsColor->GrayLevel[0],
+             FontSize->Scaled[0.05],
+             FontColor->GrayLevel[0]],
+            Background->RGBColor[1., 1., 0.871],
+            FrameStyle->GrayLevel[0.5],
+            StripOnInput->False], 6],
+          TagBox["c", HoldForm]],
+         Annotation[#, 
+          HoldForm[$CellContext`c], "Tooltip"]& ], 
+        TagBox[
+         TooltipBox[InsetBox[
+           FrameBox[
+            StyleBox[
+             TagBox["d",
+              HoldForm], "TraditionalForm", "Output",
+             StripOnInput->False,
+             LineColor->GrayLevel[0],
+             FrontFaceColor->GrayLevel[0],
+             BackFaceColor->GrayLevel[0],
+             GraphicsColor->GrayLevel[0],
+             FontSize->Scaled[0.05],
+             FontColor->GrayLevel[0]],
+            Background->RGBColor[1., 1., 0.871],
+            FrameStyle->GrayLevel[0.5],
+            StripOnInput->False], 7],
+          TagBox["d", HoldForm]],
+         Annotation[#, 
+          HoldForm[$CellContext`d], "Tooltip"]& ]}}],
+     Annotation[#, 
+      VertexCoordinateRules -> {{1.3416407864998738`, 2.6832815729997477`}, {
+       0.8944271909999159, 1.788854381999832}, {0.4472135954999579, 
+       0.894427190999916}, {0., 0.}, {0.8944271909999159, 0.}, {
+       1.3416407864998738`, 0.894427190999916}, {1.7888543819998317`, 
+       1.788854381999832}}]& ],
+    AspectRatio->NCache[Rational[2, 3]^Rational[1, 2], 0.816496580927726],
+    FormatType:>StandardForm,
+    FrameTicks->Automatic,
+    ImageSize->{148.2890625, Automatic},
+    PlotRange->All,
+    PlotRangePadding->Scaled[0.1]],
+   TreeForm[
+    CircleTimes[
+     CircleTimes[
+      CircleTimes[$CellContext`a, $CellContext`b], $CellContext`c], \
+$CellContext`d]],
+   Editable->False], TraditionalForm]], "Output",
+ CellChangeTimes->{{3.972530585584392*^9, 3.9725306179583197`*^9}, {
+   3.972530662190463*^9, 3.972530674608307*^9}, {3.9725307815281076`*^9, 
+   3.9725308050907307`*^9}, {3.972530944774454*^9, 3.972530988911478*^9}, 
+   3.972531133500774*^9, 3.9725385409999743`*^9, {3.972539853639138*^9, 
+   3.972539876954204*^9}, 3.972697996474381*^9, 3.973135495319377*^9, 
+   3.9731363251965714`*^9},
+ CellLabel->
+  "Out[1790]//TreeForm=",ExpressionUUID->"57070ab3-e8ed-4f8a-9be8-\
+ceae913ac0b2"]
+}, Open  ]],
+
+Cell["\<\
+At first, it\[CloseCurlyQuote]s easiest to read this from bottom to top. 
+More broadly, the importance of this is that symbolic manipulation software \
+like Mathematica in fact stores mathematical expressions as trees internally. \
+\>", "Text",
+ CellChangeTimes->{{3.972530877883337*^9, 3.972530920122566*^9}, {
+   3.972534392364841*^9, 3.972534436907872*^9}, 3.9726986630962057`*^9, {
+   3.9743388515108013`*^9, 
+   3.974338864636691*^9}},ExpressionUUID->"3770729d-7632-423e-9871-\
+a5b85155ef3d"],
+
+Cell[TextData[{
+ "Use one of the predefined graphs as example, here the ",
+ StyleBox["complete Kary tree",
+  FontSlant->"Italic"],
+ " (the name doesn\[CloseCurlyQuote]t matter, it\[CloseCurlyQuote]s pretty \
+obvious what it is):"
+}], "Text",
+ CellChangeTimes->{{3.972528495024584*^9, 3.97252853994237*^9}, {
+  3.9726986908711967`*^9, 
+  3.972698691949999*^9}},ExpressionUUID->"235e93dd-6c02-4c56-b968-\
+932219b4be48"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"biggerExample", " ", "=", " ", 
+  RowBox[{"CompleteKaryTree", "[", 
+   RowBox[{"3", ",", 
+    RowBox[{"VertexLabels", "->", 
+     RowBox[{"Placed", "[", 
+      RowBox[{"\"\<Name\>\"", ",", "Center"}], "]"}]}], ",", 
+    RowBox[{"VertexSize", "->", "0.3"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.972528474980301*^9, 3.972528519999308*^9}, {
+   3.972528955557064*^9, 3.9725289583539867`*^9}, {3.972529027818379*^9, 
+   3.972529034127851*^9}, {3.972529075227282*^9, 3.972529082422139*^9}, {
+   3.9725318242892323`*^9, 3.972531837031383*^9}, {3.972531962345952*^9, 
+   3.972531975317953*^9}, 3.972532692691546*^9, {3.972532751374412*^9, 
+   3.972532757394285*^9}, {3.972535621358747*^9, 3.972535623617485*^9}, {
+   3.972536788278322*^9, 3.972536790123088*^9}, {3.9731356265163717`*^9, 
+   3.9731356300282516`*^9}},
+ CellLabel->
+  "In[1791]:=",ExpressionUUID->"b66fd495-0bb8-48b3-99e6-d9aca4f755eb"],
+
+Cell[BoxData[
+ FormBox[
+  GraphicsBox[
+   NamespaceBox["NetworkGraphics",
+    DynamicModuleBox[{Typeset`graph = HoldComplete[
+      Graph[{1, 2, 3, 4, 5, 6, 7}, {Null, 
+        SparseArray[
+        Automatic, {7, 7}, 0, {
+         1, {{0, 2, 5, 8, 9, 10, 11, 12}, {{2}, {3}, {1}, {4}, {5}, {1}, {
+           6}, {7}, {2}, {2}, {3}, {3}}}, Pattern}]}, {VertexLabels -> {
+          Placed["Name", Center]}, VertexSize -> {0.3}}]]}, 
+     TagBox[GraphicsGroupBox[{
+        {Hue[0.6, 0.7, 0.7], Opacity[0.7], CapForm["Round"], Arrowheads[0.], 
+         ArrowBox[{{{1.2247448713915892`, 1.6329931618554523`}, {
+          0.4082482904638631, 0.8164965809277261}}, {{1.2247448713915892`, 
+          1.6329931618554523`}, {2.041241452319315, 0.8164965809277261}}, {{
+          0.4082482904638631, 0.8164965809277261}, {0., 0.}}, {{
+          0.4082482904638631, 0.8164965809277261}, {0.8164965809277261, 
+          0.}}, {{2.041241452319315, 0.8164965809277261}, {
+          1.6329931618554523`, 0.}}, {{2.041241452319315, 
+          0.8164965809277261}, {2.4494897427831783`, 0.}}}, 
+          0.1224744871391589]}, 
+        {Hue[0.6, 0.5, 1.], EdgeForm[{GrayLevel[0], Opacity[
+         0.7]}], {
+          DiskBox[{1.2247448713915892`, 1.6329931618554523`}, 
+           0.1224744871391589], 
+          InsetBox["1", {1.2247448713915892, 1.6329931618554523},
+           BaseStyle->"Graphics"]}, {
+          DiskBox[{0.4082482904638631, 0.8164965809277261}, 
+           0.1224744871391589], 
+          InsetBox["2", {0.4082482904638631, 0.8164965809277261},
+           BaseStyle->"Graphics"]}, {
+          DiskBox[{2.041241452319315, 0.8164965809277261}, 
+           0.1224744871391589], 
+          InsetBox["3", {2.041241452319315, 0.8164965809277261},
+           BaseStyle->"Graphics"]}, {DiskBox[{0., 0.}, 0.1224744871391589], 
+          InsetBox["4", {0., 0.},
+           BaseStyle->"Graphics"]}, {
+          DiskBox[{0.8164965809277261, 0.}, 0.1224744871391589], 
+          InsetBox["5", {0.8164965809277261, 0.},
+           BaseStyle->"Graphics"]}, {
+          DiskBox[{1.6329931618554523`, 0.}, 0.1224744871391589], 
+          InsetBox["6", {1.6329931618554523, 0.},
+           BaseStyle->"Graphics"]}, {
+          DiskBox[{2.4494897427831783`, 0.}, 0.1224744871391589], 
+          InsetBox["7", {2.4494897427831783, 0.},
+           BaseStyle->"Graphics"]}}}],
+      MouseAppearanceTag["NetworkGraphics"]],
+     AllowKernelInitialization->False]],
+   DefaultBaseStyle->"NetworkGraphics",
+   FormatType->TraditionalForm,
+   FrameTicks->None], TraditionalForm]], "Output",
+ CellChangeTimes->{3.973135630363719*^9, 3.97313632521765*^9},
+ CellLabel->
+  "Out[1791]=",ExpressionUUID->"eda673fb-a6c0-4655-a065-37378ae1029b"]
+}, Open  ]],
+
+Cell[TextData[{
+ "As mentioned above, the \
+\[OpenCurlyDoubleQuote]lines\[CloseCurlyDoubleQuote] in this ",
+ StyleBox["Tree", "Input"],
+ " data structure aren\[CloseCurlyQuote]t their own objects, so it\
+\[CloseCurlyQuote]s more natural to cut edges in the corresponding ",
+ StyleBox["Graph", "Input"],
+ ":"
+}], "Text",
+ CellChangeTimes->{{3.973135536447691*^9, 
+  3.973135610244916*^9}},ExpressionUUID->"5b048c0a-8ff4-4390-ad45-\
+8de426d3b585"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ConnectedGraphComponents", "[", 
+  RowBox[{"EdgeDelete", "[", 
+   RowBox[{"biggerExample", ",", 
+    RowBox[{"{", 
+     RowBox[{"1", "\[UndirectedEdge]", " ", "3"}], "}"}]}], "]"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.972536794396337*^9, 3.972536849869502*^9}},
+ CellLabel->
+  "In[1792]:=",ExpressionUUID->"6ec08788-58ee-4990-807c-fd92e085425f"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"{", 
+   RowBox[{
+    GraphicsBox[
+     NamespaceBox["NetworkGraphics",
+      DynamicModuleBox[{Typeset`graph = HoldComplete[
+        Graph[{1, 2, 4, 5}, {Null, 
+          SparseArray[
+          Automatic, {4, 4}, 0, {
+           1, {{0, 1, 4, 5, 6}, {{2}, {1}, {3}, {4}, {2}, {2}}}, Pattern}]}, {
+         VertexLabels -> {
+            Placed["Name", Center]}, VertexSize -> {0.3}}]]}, 
+       TagBox[GraphicsGroupBox[{
+          {Hue[0.6, 0.7, 0.7], Opacity[0.7], CapForm["Round"], Arrowheads[0.],
+            ArrowBox[{{{0., 0.}, {0.7745966692414834, 0.7745966692414834}}, {{
+            0.7745966692414834, 0.7745966692414834}, {0.7745966692414834, 
+            0.}}, {{0.7745966692414834, 0.7745966692414834}, {
+            1.5491933384829668`, 0.}}}, 0.1161895003862225]}, 
+          {Hue[0.6, 0.5, 1.], EdgeForm[{GrayLevel[0], Opacity[
+           0.7]}], {DiskBox[{0., 0.}, 0.1161895003862225], 
+            InsetBox["1", {0., 0.},
+             BaseStyle->"Graphics"]}, {
+            DiskBox[{0.7745966692414834, 0.7745966692414834}, 
+             0.1161895003862225], 
+            InsetBox["2", {0.7745966692414834, 0.7745966692414834},
+             BaseStyle->"Graphics"]}, {
+            DiskBox[{0.7745966692414834, 0.}, 0.1161895003862225], 
+            InsetBox["4", {0.7745966692414834, 0.},
+             BaseStyle->"Graphics"]}, {
+            DiskBox[{1.5491933384829668`, 0.}, 0.1161895003862225], 
+            InsetBox["5", {1.5491933384829668, 0.},
+             BaseStyle->"Graphics"]}}}],
+        MouseAppearanceTag["NetworkGraphics"]],
+       AllowKernelInitialization->False]],
+     DefaultBaseStyle->"NetworkGraphics",
+     FormatType->TraditionalForm,
+     FrameTicks->None], ",", 
+    GraphicsBox[
+     NamespaceBox["NetworkGraphics",
+      DynamicModuleBox[{Typeset`graph = HoldComplete[
+        Graph[{3, 6, 7}, {Null, 
+          SparseArray[
+          Automatic, {3, 3}, 0, {
+           1, {{0, 2, 3, 4}, {{2}, {3}, {1}, {1}}}, Pattern}]}, {VertexLabels -> {
+            Placed["Name", Center]}, VertexSize -> {0.3}}]]}, 
+       TagBox[GraphicsGroupBox[{
+          {Hue[0.6, 0.7, 0.7], Opacity[0.7], CapForm["Round"], Arrowheads[0.],
+            ArrowBox[{{{1., 2.4492935982947064`*^-16}, {0., 
+            3.6739403974420594`*^-16}}, {{1., 2.4492935982947064`*^-16}, {2., 
+            0.}}}, 0.15]}, 
+          {Hue[0.6, 0.5, 1.], EdgeForm[{GrayLevel[0], Opacity[
+           0.7]}], {DiskBox[{1., 2.4492935982947064`*^-16}, 0.15], 
+            InsetBox["3", {1., 2.4492935982947064*^-16},
+             BaseStyle->"Graphics"]}, {
+            DiskBox[{0., 3.6739403974420594`*^-16}, 0.15], 
+            InsetBox["6", {0., 3.6739403974420594*^-16},
+             BaseStyle->"Graphics"]}, {DiskBox[{2., 0.}, 0.15], 
+            InsetBox["7", {2., 0.},
+             BaseStyle->"Graphics"]}}}],
+        MouseAppearanceTag["NetworkGraphics"]],
+       AllowKernelInitialization->False]],
+     DefaultBaseStyle->"NetworkGraphics",
+     FormatType->TraditionalForm,
+     FrameTicks->None]}], "}"}], TraditionalForm]], "Output",
+ CellChangeTimes->{{3.9725368055392923`*^9, 3.9725368502527523`*^9}, 
+   3.972538541155455*^9, {3.9725398536909733`*^9, 3.9725398770207357`*^9}, 
+   3.9726979965363693`*^9, 3.973135495380989*^9, {3.973136116753934*^9, 
+   3.973136142852951*^9}, 3.9731361773863783`*^9, 3.973136325236836*^9},
+ CellLabel->
+  "Out[1792]=",ExpressionUUID->"f8e9e118-18d7-48a7-964c-5a3817b22af5"]
+}, Open  ]],
+
+Cell[TextData[{
+ "This is the automated cutting procedure, use ",
+ StyleBox["EdgeDelete", "Input"],
+ ".\nAgain, ",
+ StyleBox["Graphs", "Input"],
+ " don\[CloseCurlyQuote]t have a root, but we can easily display them as ",
+ StyleBox["Trees", "Input"],
+ ":"
+}], "Text",
+ CellChangeTimes->{{3.9731356367728043`*^9, 3.9731356928310823`*^9}, {
+  3.9743388795727882`*^9, 
+  3.9743389048156347`*^9}},ExpressionUUID->"c2328035-9cd0-40a9-87c8-\
+7f5ab92a589a"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Map", "[", 
+  RowBox[{"GraphTree", ",", "%"}], "]"}]], "Input",
+ CellChangeTimes->{{3.973136171843218*^9, 3.973136174925853*^9}},
+ CellLabel->
+  "In[1793]:=",ExpressionUUID->"3ed7812e-4d59-43c7-b1fe-9244f76a4a06"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"{", 
+   RowBox[{
+    GraphicsBox[
+     NamespaceBox["Trees",
+      DynamicModuleBox[{Typeset`tree = HoldComplete[
+        Tree[1, {
+          Tree[2, {
+            Tree[4, None], 
+            Tree[5, None]}]}]]}, 
+       NamespaceBox[{
+         {Hue[0.6, 0.7, 0.7], Opacity[0.7], CapForm["Round"], Arrowheads[
+          Medium], 
+          {RGBColor[0.6, 0.5882352941176471, 0.5529411764705883], 
+           AbsoluteThickness[1], 
+           LineBox[{{0.4629100498862757, 1.773860283795727}, {
+            0.4629100498862757, 0.8869301418978635}}]}, 
+          {RGBColor[0.6, 0.5882352941176471, 0.5529411764705883], 
+           AbsoluteThickness[1], 
+           LineBox[{{0.4629100498862757, 0.8869301418978635}, {0., 0.}}]}, 
+          {RGBColor[0.6, 0.5882352941176471, 0.5529411764705883], 
+           AbsoluteThickness[1], 
+           LineBox[{{0.4629100498862757, 0.8869301418978635}, {
+            0.9258200997725514, 0.}}]}}, 
+         {Hue[0.6, 0.5, 1.], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+          TagBox[InsetBox[
+            FrameBox["1",
+             Background->Directive[
+               RGBColor[
+               0.9607843137254902, 0.9882352941176471, 0.9764705882352941]],
+             BaseStyle->GrayLevel[0],
+             FrameMargins->{{2, 2}, {1, 1}},
+             FrameStyle->Directive[
+               RGBColor[
+               0.4196078431372549, 0.6313725490196078, 0.4196078431372549], 
+               AbsoluteThickness[1], 
+               Opacity[1]],
+             ImageSize->Automatic,
+             RoundingRadius->4,
+             StripOnInput->False], {0.4629100498862757, 1.773860283795727}],
+           "DynamicName",
+           BoxID -> "VertexID$1"], 
+          TagBox[InsetBox[
+            FrameBox["2",
+             Background->Directive[
+               RGBColor[
+               0.9607843137254902, 0.9882352941176471, 0.9764705882352941]],
+             BaseStyle->GrayLevel[0],
+             FrameMargins->{{2, 2}, {1, 1}},
+             FrameStyle->Directive[
+               RGBColor[
+               0.4196078431372549, 0.6313725490196078, 0.4196078431372549], 
+               AbsoluteThickness[1], 
+               Opacity[1]],
+             ImageSize->Automatic,
+             RoundingRadius->4,
+             StripOnInput->False], {0.4629100498862757, 0.8869301418978635}],
+           "DynamicName",
+           BoxID -> "VertexID$2"], 
+          TagBox[InsetBox[
+            FrameBox["4",
+             Background->Directive[
+               RGBColor[
+               0.9607843137254902, 0.9882352941176471, 0.9764705882352941]],
+             BaseStyle->GrayLevel[0],
+             FrameMargins->{{2, 2}, {1, 1}},
+             FrameStyle->Directive[
+               RGBColor[
+               0.4196078431372549, 0.6313725490196078, 0.4196078431372549], 
+               AbsoluteThickness[1], 
+               Opacity[1]],
+             ImageSize->Automatic,
+             RoundingRadius->0,
+             StripOnInput->False], {0., 0.}],
+           "DynamicName",
+           BoxID -> "VertexID$3"], 
+          TagBox[InsetBox[
+            FrameBox["5",
+             Background->Directive[
+               RGBColor[
+               0.9607843137254902, 0.9882352941176471, 0.9764705882352941]],
+             BaseStyle->GrayLevel[0],
+             FrameMargins->{{2, 2}, {1, 1}},
+             FrameStyle->Directive[
+               RGBColor[
+               0.4196078431372549, 0.6313725490196078, 0.4196078431372549], 
+               AbsoluteThickness[1], 
+               Opacity[1]],
+             ImageSize->Automatic,
+             RoundingRadius->0,
+             StripOnInput->False], {0.9258200997725514, 0.}],
+           "DynamicName",
+           BoxID -> "VertexID$4"]}}]]],
+     AlignmentPoint->Center,
+     Axes->False,
+     AxesLabel->None,
+     AxesOrigin->Automatic,
+     AxesStyle->{},
+     Background->None,
+     BaseStyle->{},
+     BaselinePosition->Automatic,
+     ContentSelectable->Automatic,
+     DefaultBaseStyle->"TreeGraphics",
+     DisplayFunction->Identity,
+     Epilog->{},
+     FormatType->StandardForm,
+     Frame->False,
+     FrameLabel->None,
+     FrameStyle->{},
+     FrameTicks->None,
+     FrameTicksStyle->{},
+     GridLines->None,
+     GridLinesStyle->{},
+     ImageMargins->0.,
+     ImagePadding->All,
+     ImageSize->{56.480680702646794`, Automatic},
+     LabelStyle->{},
+     PlotLabel->None,
+     PlotRange->All,
+     PlotRangeClipping->False,
+     PlotRangePadding->Automatic,
+     PlotRegion->Automatic,
+     Prolog->{},
+     RotateLabel->True,
+     Ticks->Automatic,
+     TicksStyle->{}], ",", 
+    GraphicsBox[
+     NamespaceBox["Trees",
+      DynamicModuleBox[{Typeset`tree = HoldComplete[
+        Tree[3, {
+          Tree[6, None], 
+          Tree[7, None]}]]}, 
+       NamespaceBox[{
+         {Hue[0.6, 0.7, 0.7], Opacity[0.7], CapForm["Round"], Arrowheads[
+          Medium], 
+          {RGBColor[0.6, 0.5882352941176471, 0.5529411764705883], 
+           AbsoluteThickness[1], 
+           LineBox[{{0.4472135954999579, 0.8929961074943159}, {0., 0.}}]}, 
+          {RGBColor[0.6, 0.5882352941176471, 0.5529411764705883], 
+           AbsoluteThickness[1], 
+           LineBox[{{0.4472135954999579, 0.8929961074943159}, {
+            0.8944271909999159, 0.}}]}}, 
+         {Hue[0.6, 0.5, 1.], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+          TagBox[InsetBox[
+            FrameBox["3",
+             Background->Directive[
+               RGBColor[
+               0.9607843137254902, 0.9882352941176471, 0.9764705882352941]],
+             BaseStyle->GrayLevel[0],
+             FrameMargins->{{2, 2}, {1, 1}},
+             FrameStyle->Directive[
+               RGBColor[
+               0.4196078431372549, 0.6313725490196078, 0.4196078431372549], 
+               AbsoluteThickness[1], 
+               Opacity[1]],
+             ImageSize->Automatic,
+             RoundingRadius->4,
+             StripOnInput->False], {0.4472135954999579, 0.8929961074943159}],
+           "DynamicName",
+           BoxID -> "VertexID$1"], 
+          TagBox[InsetBox[
+            FrameBox["6",
+             Background->Directive[
+               RGBColor[
+               0.9607843137254902, 0.9882352941176471, 0.9764705882352941]],
+             BaseStyle->GrayLevel[0],
+             FrameMargins->{{2, 2}, {1, 1}},
+             FrameStyle->Directive[
+               RGBColor[
+               0.4196078431372549, 0.6313725490196078, 0.4196078431372549], 
+               AbsoluteThickness[1], 
+               Opacity[1]],
+             ImageSize->Automatic,
+             RoundingRadius->0,
+             StripOnInput->False], {0., 0.}],
+           "DynamicName",
+           BoxID -> "VertexID$2"], 
+          TagBox[InsetBox[
+            FrameBox["7",
+             Background->Directive[
+               RGBColor[
+               0.9607843137254902, 0.9882352941176471, 0.9764705882352941]],
+             BaseStyle->GrayLevel[0],
+             FrameMargins->{{2, 2}, {1, 1}},
+             FrameStyle->Directive[
+               RGBColor[
+               0.4196078431372549, 0.6313725490196078, 0.4196078431372549], 
+               AbsoluteThickness[1], 
+               Opacity[1]],
+             ImageSize->Automatic,
+             RoundingRadius->0,
+             StripOnInput->False], {0.8944271909999159, 0.}],
+           "DynamicName",
+           BoxID -> "VertexID$3"]}}]]],
+     AlignmentPoint->Center,
+     Axes->False,
+     AxesLabel->None,
+     AxesOrigin->Automatic,
+     AxesStyle->{},
+     Background->None,
+     BaseStyle->{},
+     BaselinePosition->Automatic,
+     ContentSelectable->Automatic,
+     DefaultBaseStyle->"TreeGraphics",
+     DisplayFunction->Identity,
+     Epilog->{},
+     FormatType->StandardForm,
+     Frame->False,
+     FrameLabel->None,
+     FrameStyle->{},
+     FrameTicks->None,
+     FrameTicksStyle->{},
+     GridLines->None,
+     GridLinesStyle->{},
+     ImageMargins->0.,
+     ImagePadding->All,
+     ImageSize->{88.1796875, Automatic},
+     LabelStyle->{},
+     PlotLabel->None,
+     PlotRange->All,
+     PlotRangeClipping->False,
+     PlotRangePadding->Automatic,
+     PlotRegion->Automatic,
+     Prolog->{},
+     RotateLabel->True,
+     Ticks->Automatic,
+     TicksStyle->{}]}], "}"}], TraditionalForm]], "Output",
+ CellChangeTimes->{3.973136178713447*^9, 3.9731363252809763`*^9},
+ CellLabel->
+  "Out[1793]=",ExpressionUUID->"5077fca3-507d-44a7-ac07-f1114da649cc"]
+}, Open  ]],
+
+Cell["\<\
+Notice the difference to the graphs above.
+To get the above Hopf algebra, these have to be ordered.
+
+Comment: the Kirchhoff matrix (same as in the circuit laws):\
+\>", "Text",
+ CellChangeTimes->{{3.972528638098342*^9, 3.972528654521607*^9}, {
+  3.973136217208808*^9, 3.973136222249414*^9}, {3.973136271983514*^9, 
+  3.973136292575975*^9}, {3.9731547683554983`*^9, 3.973154768671294*^9}, {
+  3.974338927593841*^9, 
+  3.97433898930529*^9}},ExpressionUUID->"d0fec592-2b5f-43cd-b679-\
+609bc38d414b"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"KirchhoffMatrix", "[", "biggerExample", "]"}], "//", 
+  "Normal"}]], "Input",
+ CellChangeTimes->{{3.972528617778988*^9, 3.972528626814608*^9}, 
+   3.972539873696373*^9},
+ CellLabel->
+  "In[1794]:=",ExpressionUUID->"22a55be2-4163-4b93-b631-edfaee865652"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"2", 
+      RowBox[{"-", "1"}], 
+      RowBox[{"-", "1"}], "0", "0", "0", "0"},
+     {
+      RowBox[{"-", "1"}], "3", "0", 
+      RowBox[{"-", "1"}], 
+      RowBox[{"-", "1"}], "0", "0"},
+     {
+      RowBox[{"-", "1"}], "0", "3", "0", "0", 
+      RowBox[{"-", "1"}], 
+      RowBox[{"-", "1"}]},
+     {"0", 
+      RowBox[{"-", "1"}], "0", "1", "0", "0", "0"},
+     {"0", 
+      RowBox[{"-", "1"}], "0", "0", "1", "0", "0"},
+     {"0", "0", 
+      RowBox[{"-", "1"}], "0", "0", "1", "0"},
+     {"0", "0", 
+      RowBox[{"-", "1"}], "0", "0", "0", "1"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}], TraditionalForm]], "Output",
+ CellChangeTimes->{{3.972528621750766*^9, 3.972528633183144*^9}, 
+   3.972538541205158*^9, {3.972539853716262*^9, 3.972539877055217*^9}, 
+   3.972697996548168*^9, 3.97313549544156*^9, 3.97313632528981*^9},
+ CellLabel->
+  "Out[1794]=",ExpressionUUID->"66c6c488-71ee-422b-9413-f06449d5314e"]
+}, Open  ]],
+
+Cell["\<\
+One recent application is solvable quantum \
+circuits:\[LineSeparator]https://arxiv.org/abs/2409.17215\
+\>", "Text",
+ CellChangeTimes->{{3.972527194797969*^9, 3.97252720863869*^9}, {
+   3.973136274843442*^9, 3.973136275132259*^9}, 
+   3.974338982698955*^9},ExpressionUUID->"8aaed749-6ec5-41f6-abd1-\
+c794d27071ec"]
+},
+WindowSize->{1276, 804},
+WindowMargins->{{40, Automatic}, {-497, Automatic}},
+PrintingCopies->1,
+PrintingPageRange->{1, Automatic},
+Magnification:>2. Inherited,
+FrontEndVersion->"14.2 for Mac OS X ARM (64-bit) (December 26, 2024)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"8a764404-6a1b-4446-b502-adea2eae85d6"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 364, 6, 77, "Text",ExpressionUUID->"43f521bd-c8ae-4c3e-96f2-aa6d79b2f5e9"],
+Cell[921, 28, 429, 8, 155, "Text",ExpressionUUID->"85d7ac1c-7cd0-41dc-bb45-f1ec4d44db27"],
+Cell[1353, 38, 912, 25, 198, "Text",ExpressionUUID->"d95902b4-31c3-4e5e-b9fe-e6ccba3ac862"],
+Cell[2268, 65, 188, 5, 58, "Input",ExpressionUUID->"d26911f0-080a-4b07-bb02-21a0d934e299"],
+Cell[2459, 72, 190, 3, 67, "Text",ExpressionUUID->"a523bf31-39e8-4cbe-ac5d-c3f4b2df4fc0"],
+Cell[CellGroupData[{
+Cell[2674, 79, 892, 19, 99, "Input",ExpressionUUID->"33d7d488-085a-434a-85a3-8f0a08b60847"],
+Cell[3569, 100, 2327, 47, 293, "Output",ExpressionUUID->"cffe7677-e2b7-4421-bfa2-7d72f66d9750"]
+}, Open  ]],
+Cell[5911, 150, 1005, 26, 198, "Text",ExpressionUUID->"518747f9-2933-4113-8eba-5a5dd8cf4e29"],
+Cell[CellGroupData[{
+Cell[6941, 180, 383, 7, 58, "Input",ExpressionUUID->"2f0efda0-db85-4fb8-9b56-edbfa11e3e09"],
+Cell[7327, 189, 4942, 134, 244, "Output",ExpressionUUID->"05a01956-c87a-428d-bbee-f614cfa4ae01"]
+}, Open  ]],
+Cell[12284, 326, 13569, 242, 244, "Text",ExpressionUUID->"4314dd83-66e4-4994-b6dd-d8b5b27c443f"],
+Cell[CellGroupData[{
+Cell[25878, 572, 214, 4, 58, "Input",ExpressionUUID->"dd3a4f56-c300-4467-9ba2-b961293d99d3"],
+Cell[26095, 578, 354, 7, 94, "Output",ExpressionUUID->"623a756f-10f2-4e78-8dfe-fcc8bfc8fef4"]
+}, Open  ]],
+Cell[26464, 588, 1260, 24, 373, "Text",ExpressionUUID->"28541fa0-9cf7-40ca-8ec7-158c09a0afaf"],
+Cell[CellGroupData[{
+Cell[27749, 616, 446, 11, 58, "Input",ExpressionUUID->"b60bb292-8349-45bb-9d0f-6d0f27c7b764"],
+Cell[28198, 629, 5570, 163, 231, "Output",ExpressionUUID->"706c6b6c-5813-4777-8aa4-63d35a3982bb"]
+}, Open  ]],
+Cell[33783, 795, 632, 12, 198, "Text",ExpressionUUID->"f09eb0a6-a8f2-4943-bcd5-d43dea02193b"],
+Cell[CellGroupData[{
+Cell[34440, 811, 694, 15, 58, "Input",ExpressionUUID->"7589de7c-f07a-437d-9a3d-682ae4d47cfe"],
+Cell[35137, 828, 5702, 164, 157, "Output",ExpressionUUID->"1fc57a69-da58-4307-b3e3-7cfe862e088a"]
+}, Open  ]],
+Cell[40854, 995, 503, 10, 111, "Text",ExpressionUUID->"8c8025bf-6c5e-412d-8575-afcbd92f1291"],
+Cell[CellGroupData[{
+Cell[41382, 1009, 733, 19, 58, "Input",ExpressionUUID->"f416128c-eebf-4957-b4f7-e032245bfa26"],
+Cell[42118, 1030, 6799, 205, 192, "Output",ExpressionUUID->"07ecdfbe-7f00-4b99-af24-8fdebf560bae"]
+}, Open  ]],
+Cell[48932, 1238, 175, 3, 67, "Text",ExpressionUUID->"742b4507-c867-4f62-b16f-7befaa2c7e58"],
+Cell[CellGroupData[{
+Cell[49132, 1245, 641, 18, 58, "Input",ExpressionUUID->"a40db62b-da47-400c-b803-17decf1fbea0"],
+Cell[49776, 1265, 6839, 206, 180, "Output",ExpressionUUID->"93b03d62-9cc0-4030-ab02-e4a3642a1be9"]
+}, Open  ]],
+Cell[56630, 1474, 1634, 41, 504, "Text",ExpressionUUID->"b9719d6f-6f58-4917-b8a3-98e6a7572023"],
+Cell[CellGroupData[{
+Cell[58289, 1519, 1660, 42, 303, "Input",ExpressionUUID->"1a281cef-0097-4a96-9ae0-26918ea5be6b"],
+Cell[59952, 1563, 529, 11, 60, "Output",ExpressionUUID->"8069bc30-5e9e-456a-99cd-12fa475aa9ee"],
+Cell[60484, 1576, 519, 11, 60, "Output",ExpressionUUID->"aa2b2d4a-4435-4313-886d-b30940db03eb"],
+Cell[61006, 1589, 531, 11, 60, "Output",ExpressionUUID->"e49d6be1-5ffd-4e94-925a-0ea9fc653df4"]
+}, Open  ]],
+Cell[61552, 1603, 512, 17, 198, "Text",ExpressionUUID->"74522416-50be-4254-b275-1c852d791f9a"],
+Cell[CellGroupData[{
+Cell[62089, 1624, 1796, 43, 303, "Input",ExpressionUUID->"5ffb37ef-38d0-436d-b383-206f93bfda84"],
+Cell[63888, 1669, 804, 16, 60, "Output",ExpressionUUID->"b936fce9-2ee8-4ae7-8a70-21838875c5aa"],
+Cell[64695, 1687, 762, 16, 63, "Output",ExpressionUUID->"1131d69b-64e1-41dc-8f00-17af008a5422"],
+Cell[65460, 1705, 752, 16, 63, "Output",ExpressionUUID->"f52db274-25e1-4778-b21b-093e2abbe4bb"],
+Cell[66215, 1723, 744, 16, 65, "Output",ExpressionUUID->"6262c039-36b3-4513-8fc4-127b25e38041"]
+}, Open  ]],
+Cell[66974, 1742, 746, 16, 242, "Text",ExpressionUUID->"2738445d-e862-42f5-9124-6c632429f643"],
+Cell[CellGroupData[{
+Cell[67745, 1762, 632, 12, 58, "Input",ExpressionUUID->"ae3b51cd-11d8-4ee2-9577-20d1ec2defc4"],
+Cell[68380, 1776, 1518, 41, 60, "Output",ExpressionUUID->"ffd5848c-2233-44c9-9fd4-97dc63a1ed5e"]
+}, Open  ]],
+Cell[69913, 1820, 195, 3, 67, "Text",ExpressionUUID->"43344ace-46ff-4165-88af-a3c2f0c91219"],
+Cell[CellGroupData[{
+Cell[70133, 1827, 528, 10, 99, "Input",ExpressionUUID->"1c7c507e-da5b-43b5-a147-415a58fc3c7b"],
+Cell[70664, 1839, 699, 15, 60, "Output",ExpressionUUID->"9a4911a0-ae66-4542-84ca-e43e17141e15"],
+Cell[71366, 1856, 7084, 186, 303, "Output",ExpressionUUID->"57070ab3-e8ed-4f8a-9be8-ceae913ac0b2"]
+}, Open  ]],
+Cell[78465, 2045, 507, 9, 155, "Text",ExpressionUUID->"3770729d-7632-423e-9871-a5b85155ef3d"],
+Cell[78975, 2056, 417, 10, 111, "Text",ExpressionUUID->"235e93dd-6c02-4c56-b968-932219b4be48"],
+Cell[CellGroupData[{
+Cell[79417, 2070, 923, 17, 140, "Input",ExpressionUUID->"b66fd495-0bb8-48b3-99e6-d9aca4f755eb"],
+Cell[80343, 2089, 2716, 54, 543, "Output",ExpressionUUID->"eda673fb-a6c0-4655-a065-37378ae1029b"]
+}, Open  ]],
+Cell[83074, 2146, 445, 11, 111, "Text",ExpressionUUID->"5b048c0a-8ff4-4390-ad45-8de426d3b585"],
+Cell[CellGroupData[{
+Cell[83544, 2161, 375, 9, 58, "Input",ExpressionUUID->"6ec08788-58ee-4990-807c-fd92e085425f"],
+Cell[83922, 2172, 3453, 70, 243, "Output",ExpressionUUID->"f8e9e118-18d7-48a7-964c-5a3817b22af5"]
+}, Open  ]],
+Cell[87390, 2245, 449, 12, 111, "Text",ExpressionUUID->"c2328035-9cd0-40a9-87c8-7f5ab92a589a"],
+Cell[CellGroupData[{
+Cell[87864, 2261, 237, 5, 58, "Input",ExpressionUUID->"3ed7812e-4d59-43c7-b1fe-9244f76a4a06"],
+Cell[88104, 2268, 8365, 230, 236, "Output",ExpressionUUID->"5077fca3-507d-44a7-ac07-f1114da649cc"]
+}, Open  ]],
+Cell[96484, 2501, 505, 11, 198, "Text",ExpressionUUID->"d0fec592-2b5f-43cd-b679-609bc38d414b"],
+Cell[CellGroupData[{
+Cell[97014, 2516, 288, 7, 58, "Input",ExpressionUUID->"22a55be2-4163-4b93-b631-edfaee865652"],
+Cell[97305, 2525, 1262, 35, 260, "Output",ExpressionUUID->"66c6c488-71ee-422b-9413-f06449d5314e"]
+}, Open  ]],
+Cell[98582, 2563, 324, 7, 111, "Text",ExpressionUUID->"8aaed749-6ec5-41f6-abd1-c794d27071ec"]
+}
+]
+*)
+
