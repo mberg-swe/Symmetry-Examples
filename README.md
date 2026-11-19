@@ -17,7 +17,7 @@ Examples are numbered by chapter in the lecture notes.
 - **11.1 Rotation from spin:** [Mathematica](Mathematica_notebooks/L_from_sigma.nb) · [PDF](Mathematica_notebooks/L_from_sigma.pdf)
 - **12.1 Roots and weights for a three-level system:** *to appear*
 - **13.1 Exchange energies for two spins:** *to appear*
-- **16.1 Lorentz vs. fractional linear transformations:** [Mathematica](Mathematica_notebooks/sl_from_so.nb) · [PDF](Mathematica_notebooks/sl_from_so.pdf)
+- **16.1 Lorentz vs. fractional linear transformations:** [Video](https://youtu.be/f2J3M99XijI) · [Mathematica](Mathematica_notebooks/sl_from_so.nb) · [PDF](Mathematica_notebooks/sl_from_so.pdf)
 - **16.2 Representing a Lie algebra by differential operators:** [Mathematica](Mathematica_notebooks/Differential_operators_from_algebra_SL_2.nb) · [PDF](Mathematica_notebooks/Differential_operators_from_algebra_SL_2.pdf)
 - (**Background: rotation matrices for $\mathfrak{so}(3)$ Lie algebra:** [Mathematica](Mathematica_notebooks/so3.nb) · [PDF](Mathematica_notebooks/so3.pdf))
 - **17.1 Frobenius condition for $\mathrm{C}S_3$:** [Mathematica](Mathematica_notebooks/frobenius_condition.nb) · [PDF](Mathematica_notebooks/frobenius_condition.pdf)
