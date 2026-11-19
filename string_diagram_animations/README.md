@@ -4,70 +4,70 @@ Each animation shows two equations above the pictures: first applied to elements
 
 ### Composition of maps
 
-![Composition of maps](composition_2_24_with_eqs.gif)
+<img src="composition_2_24_with_eqs.gif" alt="Composition of maps" width="279">
 
 ### Snake identity
 
-![Snake identity](snake_2_91_with_eqs.gif)
+<img src="snake_2_91_with_eqs.gif" alt="Snake identity" width="428">
 
 ### Dual map
 
-![Dual map](dual_map_2_92_with_eqs.gif)
+<img src="dual_map_2_92_with_eqs.gif" alt="Dual map" width="616">
 
 The same animation [without equations](dual_map_2_92.gif).
 
 ### A proof by crossing two wires: k k F = 0
 
-![A proof by crossing two wires](flip_kkF_3_59_with_eqs.gif)
+<img src="flip_kkF_3_59_with_eqs.gif" alt="A proof by crossing two wires" width="506">
 
 ### Representation property
 
-![Representation property](representation_4_24_with_eqs.gif)
+<img src="representation_4_24_with_eqs.gif" alt="Representation property" width="328">
 
 ### Unit of an action
 
-![Unit of an action](unit_action_4_25_with_eqs.gif)
+<img src="unit_action_4_25_with_eqs.gif" alt="Unit of an action" width="220">
 
 ### Intertwiner
 
-![Intertwiner](intertwiner_4_31_with_eqs.gif)
+<img src="intertwiner_4_31_with_eqs.gif" alt="Intertwiner" width="287">
 
 ### Trace and character
 
-![Trace and character](character_4_75_with_eqs.gif)
+<img src="character_4_75_with_eqs.gif" alt="Trace and character" width="432">
 
 ### Normal modes of three masses and springs
 
-![Normal modes of three masses and springs](triangle_modes_lecture_4_with_eqs.gif)
+<img src="triangle_modes_lecture_4_with_eqs.gif" alt="Normal modes of three masses and springs" width="1183">
 
 ### Interchange law
 
-![Interchange law](interchange_17_8_with_eqs.gif)
+<img src="interchange_17_8_with_eqs.gif" alt="Interchange law" width="505">
 
 ### Associativity
 
-![Associativity](associativity_17_11_with_eqs.gif)
+<img src="associativity_17_11_with_eqs.gif" alt="Associativity" width="346">
 
 ### Unit
 
-![Unit](unit_17_12_with_eqs.gif)
+<img src="unit_17_12_with_eqs.gif" alt="Unit" width="373">
 
 ### Coassociativity
 
-![Coassociativity](coassociativity_17_14_with_eqs.gif)
+<img src="coassociativity_17_14_with_eqs.gif" alt="Coassociativity" width="549">
 
 ### Counit
 
-![Counit](counit_17_14_with_eqs.gif)
+<img src="counit_17_14_with_eqs.gif" alt="Counit" width="378">
 
 ### Frobenius property
 
-![Frobenius property](frobenius_17_35_with_eqs.gif)
+<img src="frobenius_17_35_with_eqs.gif" alt="Frobenius property" width="565">
 
 ### Crossing and its inverse
 
-![Crossing and its inverse](crossing_inverse_19_41_with_eqs.gif)
+<img src="crossing_inverse_19_41_with_eqs.gif" alt="Crossing and its inverse" width="499">
 
 ### Double braiding
 
-![Double braiding](double_braiding_19_6_with_eqs.gif)
+<img src="double_braiding_19_6_with_eqs.gif" alt="Double braiding" width="427">
