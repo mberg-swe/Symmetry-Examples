@@ -6,7 +6,7 @@ Recommended: read the Outlook (Ch.19) first, at least superficially.
 
 <img src="string_diagram_animations/dual_map_2_92_with_eqs.gif" alt="String diagram animation: the two ways of bending a map give the same dual map" width="616">
 
-More animations, with their equations: [string_diagram_animations](string_diagram_animations/)
+More animations, with their equations: [string_diagram_animations](string_diagram_animations/README.md)
 
 ## Mathematica notebooks
 
