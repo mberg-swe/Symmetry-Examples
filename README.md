@@ -26,7 +26,7 @@ Examples are numbered by chapter in the lecture notes.
 - **16.1 Lorentz vs. fractional linear transformations:** [Video](https://youtu.be/f2J3M99XijI) · [Mathematica](Mathematica_notebooks/sl_from_so.nb) · [PDF](Mathematica_notebooks/sl_from_so.pdf)
 - **16.2 Representing a Lie algebra by differential operators:** [Mathematica](Mathematica_notebooks/Differential_operators_from_algebra_SL_2.nb) · [PDF](Mathematica_notebooks/Differential_operators_from_algebra_SL_2.pdf)
 - (**Background: rotation matrices for $\mathfrak{so}(3)$ Lie algebra:** [Mathematica](Mathematica_notebooks/so3.nb) · [PDF](Mathematica_notebooks/so3.pdf))
-- **17.1 Frobenius condition for $\mathrm{C}S_3$:** [Mathematica](Mathematica_notebooks/frobenius_condition.nb) · [PDF](Mathematica_notebooks/frobenius_condition.pdf)
+- **17.1 Frobenius condition for ${\mathbb C}S_3$:** [Mathematica](Mathematica_notebooks/frobenius_condition.nb) · [PDF](Mathematica_notebooks/frobenius_condition.pdf)
 - **17.2 Levi-Civita $\epsilon$ as invariant tensor:** [Mathematica](Mathematica_notebooks/levicivita.nb) · [PDF](Mathematica_notebooks/levicivita.pdf)
 - **18.1 The quantum three-body problem:** [Mathematica](Mathematica_notebooks/quantum_three_body.nb) · [PDF](Mathematica_notebooks/quantum_three_body.pdf)
 - **19.1 From fusion to the pentagon identity:** [Mathematica](Mathematica_notebooks/from_fusion_to_solving_pentagon.nb) · [PDF](Mathematica_notebooks/from_fusion_to_solving_pentagon.pdf)
