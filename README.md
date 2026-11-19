@@ -4,6 +4,8 @@ Examples for the course [FYAD11 Symmetry](https://www.kau.se/en/education/progra
 
 Recommended: read the Outlook (Ch.19) first, at least superficially.
 
+![String diagram animation: the two ways of bending a map give the same dual map](string_diagram_animations/dual_map_2_92.gif)
+
 ## Mathematica notebooks
 
 Examples are numbered by chapter in the lecture notes.
