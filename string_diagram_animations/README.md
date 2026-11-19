@@ -36,10 +36,6 @@ The same animation [without equations](dual_map_2_92.gif).
 
 <img src="character_4_75_with_eqs.gif" alt="Trace and character" width="432">
 
-### Normal modes of three masses and springs
-
-<img src="triangle_modes_lecture_4_with_eqs.gif" alt="Normal modes of three masses and springs" width="1183">
-
 ### Interchange law
 
 <img src="interchange_17_8_with_eqs.gif" alt="Interchange law" width="505">
