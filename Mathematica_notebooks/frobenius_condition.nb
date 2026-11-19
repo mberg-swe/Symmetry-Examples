@@ -1,0 +1,1612 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 15.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     59769,       1604]
+NotebookOptionsPosition[     52510,       1480]
+NotebookOutlinePosition[     52979,       1498]
+CellTagsIndexPosition[     52936,       1495]
+WindowTitle->Frobenius: joining and splitting
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[TextData[StyleBox["Frobenius: joining and splitting group labels", \
+"Subsubsection"]], "Title",ExpressionUUID->"2a60d4f9-b28e-4991-a955-\
+b2ccaea448d4"],
+
+Cell["\<\
+The Frobenius condition says that three ways of joining and splitting labels \
+give the same answer. We will see each term of that answer for the six \
+permutations of three objects. The main calculation uses lists of group \
+labels, not index contractions. Evaluate the cells in order in a fresh \
+kernel. All definitions and saved outputs are here; no companion file is \
+needed.\
+\>", "Text",ExpressionUUID->"4c583e09-0c58-429d-b020-48e3cf895a48"],
+
+Cell[TextData[{
+ "Source: smsa.pdf v7.7, \[Section]17.2, Frobenius algebras, \
+(17.35)\[Dash](17.38) and (17.42). This is a pedagogical adaptation of \
+Symmetri2025/frobenius_condition.nb; the original is preserved. The matching \
+v7.7 TeX and equation labels were unavailable. We work over the complex \
+numbers, write ",
+ Cell[BoxData[
+  SubscriptBox["e", "g"]], "InlineFormula",ExpressionUUID->
+  "4e7227eb-edaa-4f54-b023-2a90f5d46211"],
+ " for the notes' delta-function basis, and initially use coproduct scale c = \
+1. Section 6 restores the exact normalization in (17.38). These are \
+rescalings of the notes' example, not proposed corrections."
+}], "Text",ExpressionUUID->"d3daea10-532a-4a9c-9dcb-90cbd7758f3d"],
+
+Cell[CellGroupData[{
+
+Cell["1. A basis vector carries a group label", "Section",ExpressionUUID->"cc5716b1-a94d-4d72-b946-3d4f3e71c45f"],
+
+Cell[TextData[{
+ "Let ",
+ Cell[BoxData[
+  RowBox[{"A", "\[LongEqual]", 
+   RowBox[{"\[DoubleStruckCapitalC]", "(", 
+    SubscriptBox["S", "3"], ")"}]}]], "InlineFormula",ExpressionUUID->
+  "ac9f3941-00ac-4002-85a9-9008b275ac35"],
+ ". There is one basis vector ",
+ Cell[BoxData[
+  SubscriptBox["e", "g"]], "InlineFormula",ExpressionUUID->
+  "d16e3176-0ff2-4169-98ba-8274b92d917d"],
+ " for each permutation g. A general element is a complex linear combination \
+of these six basis vectors. Multiplication joins two labels: ",
+ Cell[BoxData[
+  RowBox[{
+   RowBox[{"\[Mu]", "(", 
+    RowBox[{
+     SubscriptBox["e", "g"], "\[CircleTimes]", 
+     SubscriptBox["e", "h"]}], ")"}], "\[LongEqual]", 
+   SubscriptBox["e", 
+    RowBox[{"g", " ", "h"}]]}]], "InlineFormula",ExpressionUUID->
+  "e4e38d9f-8f4c-4911-8062-0784b2440384"],
+ ". The unit is the basis vector labelled by the identity permutation."
+}], "Text",ExpressionUUID->"c8e8a710-f6c6-41dd-b73f-53b3157f85be"],
+
+Cell["\<\
+Represent a permutation by the images of 1, 2 and 3. Thus {2,1,3} swaps 1 and \
+2. Our product applies the right permutation first: p[[q]] lists p(q(1)), \
+p(q(2)), p(q(3)). Ordering[p] is the inverse permutation. The short names \
+below are only for displaying answers.\
+\>", "Text",ExpressionUUID->"5e62cbc1-80ee-4710-87ec-1d8de92cf980"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Clear", "[", 
+   RowBox[{
+   "elements", ",", "identity", ",", "product", ",", "inverse", ",", "names", 
+    ",", "name", ",", "split"}], "]"}], ";", 
+  RowBox[{"elements", "=", 
+   RowBox[{"Permutations", "[", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "2", ",", "3"}], "}"}], "]"}]}], ";", 
+  RowBox[{"identity", "=", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2", ",", "3"}], "}"}]}], ";", 
+  RowBox[{
+   RowBox[{"product", "[", 
+    RowBox[{"p_", ",", "q_"}], "]"}], ":=", 
+   RowBox[{"p", "\[LeftDoubleBracket]", "q", "\[RightDoubleBracket]"}]}], ";", 
+  RowBox[{
+   RowBox[{"inverse", "[", "p_", "]"}], ":=", 
+   RowBox[{"Ordering", "[", "p", "]"}]}], ";", 
+  RowBox[{"names", "=", 
+   RowBox[{"{", 
+    RowBox[{"\"\<1\>\"", ",", "\"\<(23)\>\"", ",", "\"\<(12)\>\"", 
+     ",", "\"\<(123)\>\"", ",", "\"\<(132)\>\"", ",", "\"\<(13)\>\""}], 
+    "}"}]}], ";", 
+  RowBox[{
+   RowBox[{"name", "[", "p_", "]"}], ":=", 
+   RowBox[{"names", "\[LeftDoubleBracket]", 
+    RowBox[{"First", "[", 
+     RowBox[{"FirstPosition", "[", 
+      RowBox[{"elements", ",", "p"}], "]"}], "]"}], 
+    "\[RightDoubleBracket]"}]}], ";", 
+  TagBox[
+   TemplateBox[{
+     RowBox[{"{", 
+       RowBox[{"elements", ",", "names"}], "}"}]},
+    "Transpose"],
+   Function[BoxForm`e$, 
+    TableForm[
+    BoxForm`e$, 
+     TableHeadings -> {None, {"Images of 1,2,3", "Cycle name"}}]]]}]], "Input",\
+
+ CellLabel->
+  "In[192]:=",ExpressionUUID->"007385b3-ba2f-405e-af9e-6158df87fa7e"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {
+      RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}], "\<\"1\"\>"},
+     {
+      RowBox[{"{", 
+       RowBox[{"1", ",", "3", ",", "2"}], "}"}], "\<\"(23)\"\>"},
+     {
+      RowBox[{"{", 
+       RowBox[{"2", ",", "1", ",", "3"}], "}"}], "\<\"(12)\"\>"},
+     {
+      RowBox[{"{", 
+       RowBox[{"2", ",", "3", ",", "1"}], "}"}], "\<\"(123)\"\>"},
+     {
+      RowBox[{"{", 
+       RowBox[{"3", ",", "1", ",", "2"}], "}"}], "\<\"(132)\"\>"},
+     {
+      RowBox[{"{", 
+       RowBox[{"3", ",", "2", ",", "1"}], "}"}], "\<\"(13)\"\>"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}], TraditionalForm]], "Output",
+ CellChangeTimes->{4.000003044758218*^9},
+ CellLabel->
+  "Out[192]=",ExpressionUUID->"f69c925e-19a6-4d22-b1de-c08b7989f2a3"]
+}, Open  ]],
+
+Cell["\<\
+Choose two swaps that do not commute. Predict the two products by following \
+each of the three objects, before evaluating this cell.\
+\>", "Text",ExpressionUUID->"6af04a5d-9347-49b9-abb3-7d49e73d7404"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"g", "=", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "1", ",", "3"}], "}"}]}], ";", 
+  RowBox[{"h", "=", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "3", ",", "2"}], "}"}]}], ";", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"name", "[", "g", "]"}], ",", 
+    RowBox[{"name", "[", "h", "]"}], ",", 
+    RowBox[{"name", "[", 
+     RowBox[{"product", "[", 
+      RowBox[{"g", ",", "h"}], "]"}], "]"}], ",", 
+    RowBox[{"name", "[", 
+     RowBox[{"product", "[", 
+      RowBox[{"h", ",", "g"}], "]"}], "]"}]}], "}"}]}]], "Input",
+ CellLabel->
+  "In[193]:=",ExpressionUUID->"7590d387-33a4-4ebb-ae58-c37c3751d9e4"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"{", 
+   RowBox[{"\<\"(12)\"\>", ",", "\<\"(23)\"\>", ",", "\<\"(123)\"\>", 
+    ",", "\<\"(132)\"\>"}], "}"}], TraditionalForm]], "Output",
+ CellChangeTimes->{4.0000030447880363`*^9},
+ CellLabel->
+  "Out[193]=",ExpressionUUID->"c0ef1488-d47c-4f1b-9b9c-072995b9547c"]
+}, Open  ]],
+
+Cell["\<\
+The products are (123) and (132). Keeping their order is essential: our \
+example is noncommutative. The Frobenius condition will hold anyway.\
+\>", "Text",ExpressionUUID->"6093ee88-457f-4e8d-b673-5e1397e0f942"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["2. Splitting means listing every factorization", "Section",ExpressionUUID->"55177d67-8fba-4d86-85fd-abd4ccf7e9a1"],
+
+Cell[TextData[{
+ "At scale c = 1, define ",
+ Cell[BoxData[
+  RowBox[{
+   RowBox[{"\[CapitalDelta]", "[", 
+    SubscriptBox["e", "g"], "]"}], "=", 
+   UnderscriptBox["\[Sum]", 
+    RowBox[{"a", " ", "b", "=", "g"}]], 
+   RowBox[{
+    SubscriptBox["e", "a"], "\[CircleTimes]", 
+    SubscriptBox["e", "b"]}]}]], "InlineFormula",ExpressionUUID->
+  "6a858cad-0acf-4192-abd8-4d8b711c2c84"],
+ ". This notation means one term for each ordered pair (a,b) with ab = g, \
+each with coefficient one. It is a sum of basis tensors, not a random choice \
+of a factorization."
+}], "Text",ExpressionUUID->"6c0c7fc3-2aec-414a-8aa0-043cd0734814"],
+
+Cell[TextData[{
+ "We can list those pairs without solving equations: for every group element \
+k take (gk, k inverse). Their product is g. Conversely, any factorization ab \
+= g appears once, by choosing ",
+ Cell[BoxData[
+  RowBox[{"k", "\[LongEqual]", 
+   TemplateBox[{"b", 
+     RowBox[{"-", "1"}]},
+    "Superscript"]}]], "InlineFormula",ExpressionUUID->
+  "fadca568-81ab-4288-807a-e4de8f322b91"],
+ ". Hence there are exactly six terms."
+}], "Text",ExpressionUUID->"3d722960-0932-4f47-b5de-92a44a131264"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"split", "[", "p_", "]"}], ":=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"product", "[", 
+        RowBox[{"p", ",", "k"}], "]"}], ",", 
+       RowBox[{"inverse", "[", "k", "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"k", ",", "elements"}], "}"}]}], "]"}]}], ";", 
+  TagBox[
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"name", "/@", "#1"}], "&"}], ")"}], "/@", 
+    RowBox[{"split", "[", "g", "]"}]}],
+   Function[BoxForm`e$, 
+    TableForm[
+    BoxForm`e$, 
+     TableHeadings -> {None, {"Left label a", "Right label b"}}]]]}]], "Input",\
+
+ CellLabel->
+  "In[194]:=",ExpressionUUID->"35841163-3c2a-4044-9060-78c939bc4a95"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"\<\"(12)\"\>", "\<\"1\"\>"},
+     {"\<\"(123)\"\>", "\<\"(23)\"\>"},
+     {"\<\"1\"\>", "\<\"(12)\"\>"},
+     {"\<\"(23)\"\>", "\<\"(132)\"\>"},
+     {"\<\"(13)\"\>", "\<\"(123)\"\>"},
+     {"\<\"(132)\"\>", "\<\"(13)\"\>"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}], TraditionalForm]], "Output",
+ CellChangeTimes->{4.000003044794057*^9},
+ CellLabel->
+  "Out[194]=",ExpressionUUID->"fdac9588-f348-4fdc-9ae0-169ecb5c8ccf"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Association", "[", 
+  RowBox[{
+   RowBox[{"\"\<Exactly six distinct terms\>\"", "\[Rule]", 
+    RowBox[{
+     RowBox[{"Length", "[", 
+      RowBox[{"DeleteDuplicates", "[", 
+       RowBox[{"split", "[", "g", "]"}], "]"}], "]"}], "\[Equal]", "6"}]}], ",", 
+   RowBox[{"\"\<Every displayed pair multiplies to g\>\"", "\[Rule]", 
+    RowBox[{"AllTrue", "[", 
+     RowBox[{
+      RowBox[{"split", "[", "g", "]"}], ",", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"product", "@@", "#1"}], "\[Equal]", "g"}], "&"}]}], 
+     "]"}]}]}], "]"}]], "Input",
+ CellLabel->
+  "In[195]:=",ExpressionUUID->"b851a84a-52e6-469d-b168-82dead73739e"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"\[LeftAssociation]", 
+   RowBox[{
+    RowBox[{"\<\"Exactly six distinct terms\"\>", "\[Rule]", "True"}], ",", 
+    RowBox[{"\<\"Every displayed pair multiplies to g\"\>", "\[Rule]", 
+     "True"}]}], "\[RightAssociation]"}], TraditionalForm]], "Output",
+ CellChangeTimes->{4.000003044795918*^9},
+ CellLabel->
+  "Out[195]=",ExpressionUUID->"f8229c13-ba76-452e-a489-e65f0ec5d755"]
+}, Open  ]],
+
+Cell[TextData[{
+ "For the identity label the six terms are the inverse pairs: ",
+ Cell[BoxData[
+  RowBox[{
+   RowBox[{"\[CapitalDelta]", "[", 
+    SubscriptBox["e", "1"], "]"}], "=", 
+   UnderscriptBox["\[Sum]", 
+    RowBox[{"k", "\[Element]", 
+     SubscriptBox["S", "3"]}]], 
+   RowBox[{
+    SubscriptBox["e", "k"], "\[CircleTimes]", 
+    SubscriptBox["e", 
+     SuperscriptBox["k", 
+      RowBox[{"-", "1"}]]]}]}]], "InlineFormula",ExpressionUUID->
+  "86d848f2-732f-4ca0-8fc7-cbc45149ec38"],
+ ". This will also explain the unit and counit in Section 6."
+}], "Text",ExpressionUUID->"d3b6c7c2-0159-4339-9c9f-f37016678643"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["3. Three routes, with every term visible", "Section",ExpressionUUID->"da78cc78-021d-4d82-99ad-b2339906cfa6"],
+
+Cell[TextData[{
+ "The two Frobenius equalities (17.35)\[Dash](17.36) can be written together \
+as ",
+ Cell[BoxData[
+  RowBox[{
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"id", "\[CircleTimes]", "\[Mu]"}], ")"}], "\[SmallCircle]", 
+    RowBox[{"(", 
+     RowBox[{"\[CapitalDelta]", "\[CircleTimes]", "id"}], ")"}]}], "\[LongEqual]", 
+   RowBox[{"\[CapitalDelta]", "\[SmallCircle]", "\[Mu]"}], "\[LongEqual]", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"\[Mu]", "\[CircleTimes]", "id"}], ")"}], "\[SmallCircle]", 
+    RowBox[{"(", 
+     RowBox[{"id", "\[CircleTimes]", "\[CapitalDelta]"}], ")"}]}]}]], 
+  "InlineFormula",ExpressionUUID->"d034ec9e-230b-4bc6-8743-1b07cc0d66c0"],
+ ". Each route has two inputs and two outputs. Read composition from right to \
+left."
+}], "Text",ExpressionUUID->"e9ea6680-1fe6-4802-9a40-217172ba859d"],
+
+Cell["\<\
+The three diagrams show the same routes. Read every wire upward: the two \
+labels enter at the bottom and the two output labels leave at the top. The \
+blue nodes mark the operation performed at that height.\
+\>", "Text",ExpressionUUID->"598df975-4806-4671-a9dd-adea987530c3"],
+
+Cell[BoxData[
+ GraphicsBox[{
+   {GrayLevel[0.15], Thickness[Large], LineBox[{{-0.6, 0}, {-0.6, 1.1}}], 
+    LineBox[{{-0.6, 1.1}, {-0.6, 3}}], LineBox[{{-0.6, 1.1}, {0.6, 2}}], 
+    LineBox[{{0.6, 0}, {0.6, 2}}], LineBox[{{0.6, 2}, {0.6, 3}}], 
+    LineBox[{{3.4, 0}, {3.4, 1.1}, {4, 1.4}}], 
+    LineBox[{{4.6, 0}, {4.6, 1.1}, {4, 1.4}}], LineBox[{{4, 1.4}, {4, 2.2}}], 
+    LineBox[{{4, 2.2}, {3.5, 3}}], LineBox[{{4, 2.2}, {4.5, 3}}], 
+    LineBox[{{7.4, 0}, {7.4, 2}}], 
+    LineBox[{{8.6, 0}, {8.6, 1.1}, {8.1, 1.45}}], 
+    LineBox[{{8.6, 1.1}, {9.1, 1.45}}], LineBox[{{8.1, 1.45}, {7.4, 2}}], 
+    LineBox[{{7.4, 2}, {7.4, 3}}], LineBox[{{9.1, 1.45}, {9.1, 3}}]}, 
+   {RGBColor[0.16, 0.36, 0.62], DiskBox[{-0.6, 1.1}, 0.14], 
+    DiskBox[{0.6, 2}, 0.14], DiskBox[{4, 1.4}, 0.14], DiskBox[{4, 2.2}, 0.14],
+     DiskBox[{8.6, 1.1}, 0.14], DiskBox[{7.4, 2}, 0.14]}, 
+   {GrayLevel[1], InsetBox[
+     StyleBox["\<\"\[CapitalDelta]\"\>",
+      StripOnInput->False,
+      FontSize->16,
+      FontWeight->Bold], {-0.6, 1.1}], InsetBox[
+     StyleBox["\<\"\[Mu]\"\>",
+      StripOnInput->False,
+      FontSize->16,
+      FontWeight->Bold], {0.6, 2}], InsetBox[
+     StyleBox["\<\"\[Mu]\"\>",
+      StripOnInput->False,
+      FontSize->16,
+      FontWeight->Bold], {4, 1.4}], InsetBox[
+     StyleBox["\<\"\[CapitalDelta]\"\>",
+      StripOnInput->False,
+      FontSize->16,
+      FontWeight->Bold], {4, 2.2}], InsetBox[
+     StyleBox["\<\"\[CapitalDelta]\"\>",
+      StripOnInput->False,
+      FontSize->16,
+      FontWeight->Bold], {8.6, 1.1}], InsetBox[
+     StyleBox["\<\"\[Mu]\"\>",
+      StripOnInput->False,
+      FontSize->16,
+      FontWeight->Bold], {7.4, 2}]}, 
+   {GrayLevel[0], InsetBox[
+     StyleBox["\<\"\[CapitalDelta] on left input; \[Mu] on right\"\>",
+      StripOnInput->False,
+      FontSize->12], {0, -0.42}], InsetBox[
+     StyleBox["\<\"\[Mu], then \[CapitalDelta]\"\>",
+      StripOnInput->False,
+      FontSize->12], {4, -0.42}], InsetBox[
+     StyleBox["\<\"\[CapitalDelta] on right input; \[Mu] on left\"\>",
+      StripOnInput->False,
+      FontSize->12], {8.25, -0.42}], InsetBox[
+     StyleBox["\<\"g\"\>",
+      StripOnInput->False,
+      FontSize->12], {-0.6, -0.18}], InsetBox[
+     StyleBox["\<\"h\"\>",
+      StripOnInput->False,
+      FontSize->12], {0.6, -0.18}], InsetBox[
+     StyleBox["\<\"g\"\>",
+      StripOnInput->False,
+      FontSize->12], {3.4, -0.18}], InsetBox[
+     StyleBox["\<\"h\"\>",
+      StripOnInput->False,
+      FontSize->12], {4.6, -0.18}], InsetBox[
+     StyleBox["\<\"g\"\>",
+      StripOnInput->False,
+      FontSize->12], {7.4, -0.18}], InsetBox[
+     StyleBox["\<\"h\"\>",
+      StripOnInput->False,
+      FontSize->12], {8.6, -0.18}]}, 
+   {GrayLevel[0.4], Dashing[{Small, Small}], LineBox[{{2, -0.7}, {2, 3.3}}], 
+    LineBox[{{6, -0.7}, {6, 3.3}}]}},
+  ImageSize->620,
+  PlotRange->{{-1.4, 10}, {-0.75, 3.35}}]], "Output",ExpressionUUID->\
+"aa632cc1-fc4b-4a01-855e-64c702f73dd9"],
+
+Cell["\<\
+On the input labelled (g,h), join then split lists factorizations of gh. \
+Split h first gives pairs (a,b) with ab = h; joining g to the left label \
+changes each to (ga,b). Split g first gives pairs (a,b) with ab = g; joining \
+h to the right label changes each to (a,bh). These are the only operations in \
+the next cell.\
+\>", "Text",ExpressionUUID->"a0255bdc-a5c7-4f8b-a0dd-061c9d6cb1e7"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"joinThenSplit", "[", 
+    RowBox[{"p_", ",", "q_"}], "]"}], ":=", 
+   RowBox[{"split", "[", 
+    RowBox[{"product", "[", 
+     RowBox[{"p", ",", "q"}], "]"}], "]"}]}], ";", 
+  RowBox[{
+   RowBox[{"splitRightThenJoin", "[", 
+    RowBox[{"p_", ",", "q_"}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"product", "[", 
+         RowBox[{"p", ",", 
+          RowBox[{
+          "#1", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}]}], 
+         "]"}], ",", 
+        RowBox[{
+        "#1", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}]}], "}"}],
+       "&"}], ")"}], "/@", 
+    RowBox[{"split", "[", "q", "]"}]}]}], ";", 
+  RowBox[{
+   RowBox[{"splitLeftThenJoin", "[", 
+    RowBox[{"p_", ",", "q_"}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"#1", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
+        ",", 
+        RowBox[{"product", "[", 
+         RowBox[{
+          RowBox[{
+          "#1", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}], ",", 
+          "q"}], "]"}]}], "}"}], "&"}], ")"}], "/@", 
+    RowBox[{"split", "[", "p", "]"}]}]}], ";", 
+  TagBox[
+   TemplateBox[{
+     RowBox[{"{", 
+       RowBox[{
+         RowBox[{
+           RowBox[{"(", 
+             RowBox[{
+               RowBox[{"name", "/@", "#1"}], "&"}], ")"}], "/@", 
+           RowBox[{"joinThenSplit", "[", 
+             RowBox[{"g", ",", "h"}], "]"}]}], ",", 
+         RowBox[{
+           RowBox[{"(", 
+             RowBox[{
+               RowBox[{"name", "/@", "#1"}], "&"}], ")"}], "/@", 
+           RowBox[{"splitRightThenJoin", "[", 
+             RowBox[{"g", ",", "h"}], "]"}]}], ",", 
+         RowBox[{
+           RowBox[{"(", 
+             RowBox[{
+               RowBox[{"name", "/@", "#1"}], "&"}], ")"}], "/@", 
+           RowBox[{"splitLeftThenJoin", "[", 
+             RowBox[{"g", ",", "h"}], "]"}]}]}], "}"}]},
+    "Transpose"],
+   Function[BoxForm`e$, 
+    TableForm[
+    BoxForm`e$, 
+     TableHeadings -> {
+      None, {"Join then split", "Split h; join on left", 
+        "Split g; join on right"}}]]]}]], "Input",
+ CellLabel->
+  "In[196]:=",ExpressionUUID->"8e6f08a7-903e-465f-b8dd-bed187f76643"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {
+      RowBox[{"{", 
+       RowBox[{"\<\"(123)\"\>", ",", "\<\"1\"\>"}], "}"}], 
+      RowBox[{"{", 
+       RowBox[{"\<\"(123)\"\>", ",", "\<\"1\"\>"}], "}"}], 
+      RowBox[{"{", 
+       RowBox[{"\<\"(12)\"\>", ",", "\<\"(23)\"\>"}], "}"}]},
+     {
+      RowBox[{"{", 
+       RowBox[{"\<\"(12)\"\>", ",", "\<\"(23)\"\>"}], "}"}], 
+      RowBox[{"{", 
+       RowBox[{"\<\"(12)\"\>", ",", "\<\"(23)\"\>"}], "}"}], 
+      RowBox[{"{", 
+       RowBox[{"\<\"(123)\"\>", ",", "\<\"1\"\>"}], "}"}]},
+     {
+      RowBox[{"{", 
+       RowBox[{"\<\"(13)\"\>", ",", "\<\"(12)\"\>"}], "}"}], 
+      RowBox[{"{", 
+       RowBox[{"\<\"(13)\"\>", ",", "\<\"(12)\"\>"}], "}"}], 
+      RowBox[{"{", 
+       RowBox[{"\<\"1\"\>", ",", "\<\"(123)\"\>"}], "}"}]},
+     {
+      RowBox[{"{", 
+       RowBox[{"\<\"(132)\"\>", ",", "\<\"(132)\"\>"}], "}"}], 
+      RowBox[{"{", 
+       RowBox[{"\<\"(132)\"\>", ",", "\<\"(132)\"\>"}], "}"}], 
+      RowBox[{"{", 
+       RowBox[{"\<\"(23)\"\>", ",", "\<\"(13)\"\>"}], "}"}]},
+     {
+      RowBox[{"{", 
+       RowBox[{"\<\"1\"\>", ",", "\<\"(123)\"\>"}], "}"}], 
+      RowBox[{"{", 
+       RowBox[{"\<\"1\"\>", ",", "\<\"(123)\"\>"}], "}"}], 
+      RowBox[{"{", 
+       RowBox[{"\<\"(13)\"\>", ",", "\<\"(12)\"\>"}], "}"}]},
+     {
+      RowBox[{"{", 
+       RowBox[{"\<\"(23)\"\>", ",", "\<\"(13)\"\>"}], "}"}], 
+      RowBox[{"{", 
+       RowBox[{"\<\"(23)\"\>", ",", "\<\"(13)\"\>"}], "}"}], 
+      RowBox[{"{", 
+       RowBox[{"\<\"(132)\"\>", ",", "\<\"(132)\"\>"}], "}"}]}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}], TraditionalForm]], "Output",
+ CellChangeTimes->{4.000003044799637*^9},
+ CellLabel->
+  "Out[196]=",ExpressionUUID->"d83d04dc-0cd4-40c3-a409-c99243ddc89b"]
+}, Open  ]],
+
+Cell["\<\
+Rows need not match: each route may list the terms in a different order. \
+Addition of tensors allows reordering. Sorting the lists compares the same \
+basis terms with the same multiplicities; it does not commute the two labels \
+within any pair.\
+\>", "Text",ExpressionUUID->"f40bc290-1bb2-4bf4-a2a9-3d0ebbf20bfe"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Sort", "[", 
+     RowBox[{"joinThenSplit", "[", 
+      RowBox[{"g", ",", "h"}], "]"}], "]"}], "\[Equal]", 
+    RowBox[{"Sort", "[", 
+     RowBox[{"splitRightThenJoin", "[", 
+      RowBox[{"g", ",", "h"}], "]"}], "]"}]}], ",", 
+   RowBox[{
+    RowBox[{"Sort", "[", 
+     RowBox[{"joinThenSplit", "[", 
+      RowBox[{"g", ",", "h"}], "]"}], "]"}], "\[Equal]", 
+    RowBox[{"Sort", "[", 
+     RowBox[{"splitLeftThenJoin", "[", 
+      RowBox[{"g", ",", "h"}], "]"}], "]"}]}]}], "}"}]], "Input",
+ CellLabel->
+  "In[197]:=",ExpressionUUID->"8d90d890-84bf-47a9-b517-cd3b24a50861"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"{", 
+   RowBox[{"True", ",", "True"}], "}"}], TraditionalForm]], "Output",
+ CellChangeTimes->{4.000003044801674*^9},
+ CellLabel->
+  "Out[197]=",ExpressionUUID->"2c1879f3-6407-4b08-b61e-97e923b88ed7"]
+}, Open  ]],
+
+Cell["\<\
+Both answers are True. We have checked one noncommuting input pair. The \
+reason it works for every pair is more informative than the computation.\
+\>", "Text",ExpressionUUID->"449b6361-75eb-47e4-923b-400f0be29e51"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["4. Why the condition holds for every finite group", "Section",ExpressionUUID->"54974fb4-a996-44c1-83b3-7bf4511a3dea"],
+
+Cell[TextData[{
+ "The first route lists all (u,v) with uv = gh. In the second route, (a,b) \
+becomes (ga,b), and ",
+ Cell[BoxData[
+  RowBox[{
+   RowBox[{"b", " ", 
+    RowBox[{"(", 
+     RowBox[{"a", " ", "g"}], ")"}]}], "\[LongEqual]", 
+   RowBox[{"g", " ", 
+    RowBox[{"(", 
+     RowBox[{"a", " ", "b"}], ")"}]}], "\[LongEqual]", 
+   RowBox[{"g", " ", "h"}]}]], "InlineFormula",ExpressionUUID->
+  "5a33c2be-68bb-47c8-b166-fbb9fd90e850"],
+ ". Conversely, from any (u,v) with uv = gh, recover the unique input labels ",
+ Cell[BoxData[
+  RowBox[{
+   RowBox[{"a", "\[LongEqual]", 
+    RowBox[{"u", " ", 
+     TemplateBox[{"g", 
+       RowBox[{"-", "1"}]},
+      "Superscript"]}]}], "\[And]", 
+   RowBox[{"b", "\[LongEqual]", "v"}]}]], "InlineFormula",ExpressionUUID->
+  "395494e7-ef67-438b-a2f0-7b34c36ddc8c"],
+ ", whose product is h. Thus the second route lists every factorization \
+exactly once."
+}], "Text",ExpressionUUID->"60b89566-597b-4f7c-b47a-c336edade925"],
+
+Cell[TextData[{
+ "In the third route, (a,b) becomes (a,bh), with ",
+ Cell[BoxData[
+  RowBox[{
+   RowBox[{"a", " ", 
+    RowBox[{"(", 
+     RowBox[{"b", " ", "h"}], ")"}]}], "\[LongEqual]", 
+   RowBox[{"h", " ", 
+    RowBox[{"(", 
+     RowBox[{"a", " ", "b"}], ")"}]}], "\[LongEqual]", 
+   RowBox[{"g", " ", "h"}]}]], "InlineFormula",ExpressionUUID->
+  "d66599eb-57e7-4cf7-a1e6-9ee9d6a65479"],
+ ". The inverse correspondence has labels ",
+ Cell[BoxData[
+  RowBox[{
+   RowBox[{"a", "\[LongEqual]", "u"}], "\[And]", 
+   RowBox[{"b", "\[LongEqual]", 
+    RowBox[{"v", " ", 
+     TemplateBox[{"h", 
+       RowBox[{"-", "1"}]},
+      "Superscript"]}]}]}]], "InlineFormula",ExpressionUUID->
+  "b02574ee-55dc-4f61-9bda-4e62aa036359"],
+ ". Again there is neither a missing term nor an extra term. All three sums \
+therefore agree for every finite group, without assuming commutativity."
+}], "Text",ExpressionUUID->"633c9ee7-1a05-452b-bbb0-bdcc74f1c517"],
+
+Cell["\<\
+Each map is linear, so equality on all basis inputs proves equality on every \
+element of A tensor A, including superpositions. The next cell verifies the \
+36 basis inputs for S3; the bijection above is the general proof.\
+\>", "Text",ExpressionUUID->"4e3ef4dd-2729-45a0-92da-f7838009bbef"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"basisChecks", "=", 
+   RowBox[{"Flatten", "[", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"Sort", "[", 
+         RowBox[{"joinThenSplit", "[", 
+          RowBox[{"p", ",", "q"}], "]"}], "]"}], "\[Equal]", 
+        RowBox[{"Sort", "[", 
+         RowBox[{"splitRightThenJoin", "[", 
+          RowBox[{"p", ",", "q"}], "]"}], "]"}]}], "&&", 
+       RowBox[{
+        RowBox[{"Sort", "[", 
+         RowBox[{"joinThenSplit", "[", 
+          RowBox[{"p", ",", "q"}], "]"}], "]"}], "\[Equal]", 
+        RowBox[{"Sort", "[", 
+         RowBox[{"splitLeftThenJoin", "[", 
+          RowBox[{"p", ",", "q"}], "]"}], "]"}]}]}], ",", 
+      RowBox[{"{", 
+       RowBox[{"p", ",", "elements"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", "elements"}], "}"}]}], "]"}], "]"}]}], ";", 
+  RowBox[{"Association", "[", 
+   RowBox[{
+    RowBox[{"\"\<Basis inputs tested\>\"", "\[Rule]", 
+     RowBox[{"Length", "[", "basisChecks", "]"}]}], ",", 
+    RowBox[{"\"\<Both Frobenius equalities hold\>\"", "\[Rule]", 
+     RowBox[{"And", "@@", "basisChecks"}]}]}], "]"}]}]], "Input",
+ CellLabel->
+  "In[198]:=",ExpressionUUID->"3eba33cc-de57-4395-bb4b-b19dcbffb0d5"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"\[LeftAssociation]", 
+   RowBox[{
+    RowBox[{"\<\"Basis inputs tested\"\>", "\[Rule]", "36"}], ",", 
+    RowBox[{"\<\"Both Frobenius equalities hold\"\>", "\[Rule]", "True"}]}], 
+   "\[RightAssociation]"}], TraditionalForm]], "Output",
+ CellChangeTimes->{4.000003044813033*^9},
+ CellLabel->
+  "Out[198]=",ExpressionUUID->"f74d189f-7f3b-480e-afb1-f2d17a55fe8e"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["5. Why simply copying the label is different", "Section",ExpressionUUID->"0f3ae94b-e585-4780-923e-a3547a9e1440"],
+
+Cell[TextData[{
+ "The group algebra also has the Hopf coproduct ",
+ Cell[BoxData[
+  RowBox[{
+   RowBox[{
+    SubscriptBox["\[CapitalDelta]", "H"], "(", 
+    SubscriptBox["e", "g"], ")"}], "\[LongEqual]", 
+   RowBox[{
+    SubscriptBox["e", "g"], "\[CircleTimes]", 
+    SubscriptBox["e", "g"]}]}]], "InlineFormula",ExpressionUUID->
+  "837b8673-5fad-4886-b64c-ec27d69e37b1"],
+ ". This copies the group label into both slots. It is not the factorization \
+coproduct used here. On our chosen input, joining then copying gives (gh,gh), \
+whereas copying h then joining on the left gives (gh,h)."
+}], "Text",ExpressionUUID->"fc783c34-6ed3-4a13-9af1-a97b747c343d"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"hopfJoinThenCopy", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"product", "[", 
+      RowBox[{"g", ",", "h"}], "]"}], ",", 
+     RowBox[{"product", "[", 
+      RowBox[{"g", ",", "h"}], "]"}]}], "}"}]}], ";", 
+  RowBox[{"hopfCopyThenJoin", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"product", "[", 
+      RowBox[{"g", ",", "h"}], "]"}], ",", "h"}], "}"}]}], ";", 
+  RowBox[{"Association", "[", 
+   RowBox[{
+    RowBox[{"\"\<Join then copy\>\"", "\[Rule]", 
+     RowBox[{"name", "/@", "hopfJoinThenCopy"}]}], ",", 
+    RowBox[{"\"\<Copy h then join on left\>\"", "\[Rule]", 
+     RowBox[{"name", "/@", "hopfCopyThenJoin"}]}], ",", 
+    RowBox[{"\"\<Frobenius equality\>\"", "\[Rule]", 
+     RowBox[{"hopfJoinThenCopy", "\[Equal]", "hopfCopyThenJoin"}]}]}], 
+   "]"}]}]], "Input",
+ CellLabel->
+  "In[199]:=",ExpressionUUID->"36c6e792-b573-40a7-a8d8-d45dc9491eb0"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"\[LeftAssociation]", 
+   RowBox[{
+    RowBox[{"\<\"Join then copy\"\>", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"\<\"(123)\"\>", ",", "\<\"(123)\"\>"}], "}"}]}], ",", 
+    RowBox[{"\<\"Copy h then join on left\"\>", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"\<\"(123)\"\>", ",", "\<\"(23)\"\>"}], "}"}]}], ",", 
+    RowBox[{"\<\"Frobenius equality\"\>", "\[Rule]", "False"}]}], 
+   "\[RightAssociation]"}], TraditionalForm]], "Output",
+ CellChangeTimes->{4.000003044815115*^9},
+ CellLabel->
+  "Out[199]=",ExpressionUUID->"31331e9b-d795-4a62-83e7-857ddf8a6de7"]
+}, Open  ]],
+
+Cell["\<\
+The False answer is the expected counterexample: these are two different \
+basis tensors. It does not say the Hopf coproduct is invalid; it obeys a \
+different compatibility with multiplication.\
+\>", "Text",ExpressionUUID->"348cf5fd-b50f-45dd-afea-79707864d316"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["6. Counit and normalization: connect back to the notes", "Section",ExpressionUUID->"96b94426-05f4-4f4a-a790-375a9b4b9559"],
+
+Cell[TextData[{
+ "For any nonzero complex number c set ",
+ Cell[BoxData[
+  RowBox[{
+   RowBox[{
+    SubscriptBox["\[CapitalDelta]", "c"], "[", 
+    SubscriptBox["e", "g"], "]"}], "=", "c", 
+   UnderscriptBox["\[Sum]", 
+    RowBox[{"a", " ", "b", "=", "g"}]], 
+   RowBox[{
+    SubscriptBox["e", "a"], "\[CircleTimes]", 
+    SubscriptBox["e", "b"]}]}]], "InlineFormula",ExpressionUUID->
+  "99bea887-a75a-4093-acc8-12acc3dbb037"],
+ " and ",
+ Cell[BoxData[
+  RowBox[{
+   RowBox[{
+    SubscriptBox["\[CurlyEpsilon]", "c"], "(", 
+    SubscriptBox["e", "g"], ")"}], "\[LongEqual]", 
+   FractionBox[
+    SubscriptBox["\[Delta]", 
+     RowBox[{"1", " ", "g"}]], "c"]}]], "InlineFormula",ExpressionUUID->
+  "1bb6c55d-066b-4c10-8a66-8a41e9526e93"],
+ ". The symbol on the right is the Kronecker delta: one for the identity \
+label and zero otherwise. The unit remains ",
+ Cell[BoxData[
+  RowBox[{
+   RowBox[{"\[Eta]", "(", "1", ")"}], "\[LongEqual]", 
+   SubscriptBox["e", "1"]}]], "InlineFormula",ExpressionUUID->
+  "39b5a216-4a06-42bb-b7a5-0cb42b7c9b2a"],
+ "."
+}], "Text",ExpressionUUID->"817a523d-33c1-4382-a947-475bfba9fb93"],
+
+Cell["\<\
+The counit removes one output: only the term with identity in that slot \
+survives, and the factors c and 1/c cancel. This returns the original basis \
+vector. Every Frobenius route contains one splitting, so rescaling it \
+multiplies all three routes by the same c. Coassociativity contains two \
+splittings on either side; both sides list each triple factorization once \
+with coefficient c squared.\
+\>", "Text",ExpressionUUID->"27a2d440-ce5f-480e-b3fe-653e458220ff"],
+
+Cell[TextData[{
+ "Joining after splitting returns the same label six times: ",
+ Cell[BoxData[
+  RowBox[{
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"\[Mu]", "\[SmallCircle]", 
+      SubscriptBox["\[CapitalDelta]", "c"]}], ")"}], "\[InvisibleApplication]", 
+    RowBox[{"(", 
+     SubscriptBox["e", "g"], ")"}]}], "\[LongEqual]", 
+   RowBox[{"6", " ", "c", " ", 
+    SubscriptBox["e", "g"]}]}]], "InlineFormula",ExpressionUUID->
+  "b03783a0-bfe7-43e3-a6dc-0d85e6683e21"],
+ ". Also ",
+ Cell[BoxData[
+  RowBox[{
+   RowBox[{
+    SubscriptBox["\[CurlyEpsilon]", "c"], "(", 
+    RowBox[{"\[Eta]", "(", "1", ")"}], ")"}], "\[LongEqual]", 
+   FractionBox["1", "c"]}]], "InlineFormula",ExpressionUUID->
+  "a852a84c-b72e-4a42-9868-e4cde2bf747f"],
+ ". More generally, replace six by the order of the finite group."
+}], "Text",ExpressionUUID->"bfad1aa6-f9a0-40f2-be98-cabb69e05b23"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ TagBox[
+  TagBox[GridBox[{
+     {
+      TagBox["\"\<Convention\>\"",
+       HoldForm], 
+      TagBox["\"\<c\>\"",
+       HoldForm], 
+      TagBox["\"\<Scalar in join after split\>\"",
+       HoldForm], 
+      TagBox["\"\<Counit after unit\>\"",
+       HoldForm]},
+     {"\"\<Initial teaching convention\>\"", "1", "6", "1"},
+     {"\"\<Notes (17.38)\>\"", "6", "36", 
+      FractionBox["1", "6"]},
+     {"\"\<Special convention (17.42)\>\"", 
+      FractionBox["1", "6"], "1", "6"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Baseline}}},
+    GridBoxDividers->{
+     "Columns" -> {{False}}, "Rows" -> {False, True, {False}, False}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[2.0999999999999996`]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}],
+   {None, OutputFormsDump`HeadedColumns}],
+  Function[BoxForm`e$, 
+   TableForm[
+   BoxForm`e$, 
+    TableHeadings -> {
+     None, {"Convention", "c", "Scalar in join after split", 
+       "Counit after unit"}}]]]], "Input",
+ CellLabel->
+  "In[200]:=",ExpressionUUID->"1d7bbd00-e588-40ad-8c04-f5d866b56df7"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"\<\"Initial teaching convention\"\>", "1", "6", "1"},
+     {"\<\"Notes (17.38)\"\>", "6", "36", 
+      FractionBox["1", "6"]},
+     {"\<\"Special convention (17.42)\"\>", 
+      FractionBox["1", "6"], "1", "6"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}], TraditionalForm]], "Output",
+ CellChangeTimes->{4.0000030448176813`*^9},
+ CellLabel->
+  "Out[200]=",ExpressionUUID->"861c9bc2-ab7d-4e84-a5ce-81f644a93cee"]
+}, Open  ]],
+
+Cell["\<\
+The notes use c = |G|, hence c = 6 for S3. That structure is Frobenius but is \
+not special with the definition (17.42). Choosing c = 1/|G| makes joining \
+after splitting the identity, and the counit after the unit equals dim(A) = \
+|G|. Both special conditions then hold. This distinction is a change of \
+normalization, not a contradiction in the notes.\
+\>", "Text",ExpressionUUID->"0eac8927-00e1-4ae1-857e-283d00ed87f2"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["7. Check your understanding", "Section",ExpressionUUID->"954ae926-a85e-4bf4-be97-330397d48bcd"],
+
+Cell["\<\
+Before opening the optional matrix check: (a) Write all six inverse pairs in \
+the splitting of the identity. (b) Explain why reordering the six terms is \
+allowed but swapping the two slots is a different operation. (c) For a group \
+of order N, choose c to make joining after splitting the identity. (d) \
+Explain where the proof in Section 4 uses an inverse, and why commutativity \
+is unnecessary.\
+\>", "Text",ExpressionUUID->"0922924d-4ce0-4843-8087-c4911e213531"],
+
+Cell["\<\
+Answers: (a) (1,1), ((23),(23)), ((12),(12)), ((123),(132)), ((132),(123)), \
+((13),(13)). (b) Addition is commutative, but tensor slots are ordered. (c) c \
+= 1/N, with counit value N on the identity basis vector. (d) The inverse maps \
+recover (g inverse times u,v) and (u,v times h inverse); associativity gives \
+the product equalities.\
+\>", "Text",ExpressionUUID->"f75a0b32-7139-404c-b925-35509f9c1f76"],
+
+Cell["\<\
+The idea to retain is the bijection of factorizations. Matrix calculations \
+below verify the same maps and all algebra/coalgebra axioms, and show a \
+superposition explicitly. They are optional; no index-contraction machinery \
+is needed to understand the proof.\
+\>", "Text",ExpressionUUID->"7fcd9fda-3649-4447-915c-fa466d3e13f5"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Optional matrix check: maps, axioms and a superposition", "Section",ExpressionUUID->"43b2da8f-8d18-4b4c-878c-ea08d115bb8f"],
+
+Cell["\<\
+Matrices are built from the basis images already described. Each column is \
+the output on one input basis vector. Tensor pairs follow Tuples[elements,2], \
+so the second label changes fastest. We display dimensions and Boolean \
+checks, not large arrays.\
+\>", "Text",ExpressionUUID->"c1349977-12c6-472f-b58a-68a2ca7e3181"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"n", "=", 
+   RowBox[{"Length", "[", "elements", "]"}]}], ";", 
+  RowBox[{"pairBasis", "=", 
+   RowBox[{"Tuples", "[", 
+    RowBox[{"elements", ",", "2"}], "]"}]}], ";", 
+  RowBox[{
+   RowBox[{"vector", "[", "p_", "]"}], ":=", 
+   RowBox[{"UnitVector", "[", 
+    RowBox[{"n", ",", 
+     RowBox[{"First", "[", 
+      RowBox[{"FirstPosition", "[", 
+       RowBox[{"elements", ",", "p"}], "]"}], "]"}]}], "]"}]}], ";", 
+  RowBox[{
+   RowBox[{"tensorVector", "[", 
+    RowBox[{"u_", ",", "v_"}], "]"}], ":=", 
+   RowBox[{"Flatten", "[", 
+    RowBox[{"KroneckerProduct", "[", 
+     RowBox[{"u", ",", "v"}], "]"}], "]"}]}], ";", 
+  RowBox[{"mu", "=", 
+   TemplateBox[{
+     RowBox[{"Table", "[", 
+       RowBox[{
+         RowBox[{"vector", "[", 
+           RowBox[{"product", "@@", "pair"}], "]"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"pair", ",", "pairBasis"}], "}"}]}], "]"}]},
+    "Transpose"]}], ";", 
+  RowBox[{"deltaOne", "=", 
+   TemplateBox[{
+     RowBox[{"Table", "[", 
+       RowBox[{
+         RowBox[{"Total", "[", 
+           RowBox[{
+             RowBox[{"(", 
+               RowBox[{
+                 RowBox[{"tensorVector", "[", 
+                   RowBox[{
+                    RowBox[{"vector", "[", 
+                    
+                    RowBox[{
+                    "#1", "\[LeftDoubleBracket]", "1", 
+                    "\[RightDoubleBracket]"}], "]"}], ",", 
+                    RowBox[{"vector", "[", 
+                    
+                    RowBox[{
+                    "#1", "\[LeftDoubleBracket]", "2", 
+                    "\[RightDoubleBracket]"}], "]"}]}], "]"}], "&"}], ")"}], 
+             "/@", 
+             RowBox[{"split", "[", "p", "]"}]}], "]"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"p", ",", "elements"}], "}"}]}], "]"}]},
+    "Transpose"]}], ";", 
+  RowBox[{"unit", "=", 
+   TemplateBox[{
+     RowBox[{"{", 
+       RowBox[{"vector", "[", "identity", "]"}], "}"}]},
+    "Transpose"]}], ";", 
+  RowBox[{"counitOne", "=", 
+   RowBox[{"{", 
+    RowBox[{"vector", "[", "identity", "]"}], "}"}]}], ";", 
+  RowBox[{"id", "=", 
+   RowBox[{"IdentityMatrix", "[", "n", "]"}]}], ";", 
+  RowBox[{"Association", "[", 
+   RowBox[{
+    RowBox[{"\"\<Multiplication dimensions\>\"", "\[Rule]", 
+     RowBox[{"Dimensions", "[", "mu", "]"}]}], ",", 
+    RowBox[{"\"\<Splitting dimensions\>\"", "\[Rule]", 
+     RowBox[{"Dimensions", "[", "deltaOne", "]"}]}], ",", 
+    RowBox[{"\"\<Unit dimensions\>\"", "\[Rule]", 
+     RowBox[{"Dimensions", "[", "unit", "]"}]}], ",", 
+    RowBox[{"\"\<Counit dimensions\>\"", "\[Rule]", 
+     RowBox[{"Dimensions", "[", "counitOne", "]"}]}]}], "]"}]}]], "Input",
+ CellLabel->
+  "In[201]:=",ExpressionUUID->"e31f0840-b4be-4285-864a-f278279594f9"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"\[LeftAssociation]", 
+   RowBox[{
+    RowBox[{"\<\"Multiplication dimensions\"\>", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"6", ",", "36"}], "}"}]}], ",", 
+    RowBox[{"\<\"Splitting dimensions\"\>", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"36", ",", "6"}], "}"}]}], ",", 
+    RowBox[{"\<\"Unit dimensions\"\>", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"6", ",", "1"}], "}"}]}], ",", 
+    RowBox[{"\<\"Counit dimensions\"\>", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "6"}], "}"}]}]}], "\[RightAssociation]"}], 
+  TraditionalForm]], "Output",
+ CellChangeTimes->{4.000003044829269*^9},
+ CellLabel->
+  "Out[201]=",ExpressionUUID->"6482f02c-004c-4476-a391-c93386d93c3c"]
+}, Open  ]],
+
+Cell["\<\
+The general nonzero scale remains symbolic. In the expressions below a dot \
+composes linear maps and KroneckerProduct makes them act on separate tensor \
+slots.\
+\>", "Text",ExpressionUUID->"87c4a3ec-1146-4d88-887a-9c1390fa917a"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Clear", "[", "c", "]"}], ";", 
+  RowBox[{"deltaC", "=", 
+   RowBox[{"c", " ", "deltaOne"}]}], ";", 
+  RowBox[{"counitC", "=", 
+   FractionBox["counitOne", "c"]}], ";", 
+  RowBox[{"routeJoin", "=", 
+   RowBox[{"deltaC", ".", "mu"}]}], ";", 
+  RowBox[{"routeRight", "=", 
+   RowBox[{
+    RowBox[{"KroneckerProduct", "[", 
+     RowBox[{"mu", ",", "id"}], "]"}], ".", 
+    RowBox[{"KroneckerProduct", "[", 
+     RowBox[{"id", ",", "deltaC"}], "]"}]}]}], ";", 
+  RowBox[{"routeLeft", "=", 
+   RowBox[{
+    RowBox[{"KroneckerProduct", "[", 
+     RowBox[{"id", ",", "mu"}], "]"}], ".", 
+    RowBox[{"KroneckerProduct", "[", 
+     RowBox[{"deltaC", ",", "id"}], "]"}]}]}], ";", 
+  RowBox[{"studentChecks", "=", 
+   RowBox[{"Association", "[", 
+    RowBox[{
+     RowBox[{"\"\<Associativity\>\"", "\[Rule]", 
+      RowBox[{
+       RowBox[{"mu", ".", 
+        RowBox[{"KroneckerProduct", "[", 
+         RowBox[{"mu", ",", "id"}], "]"}]}], "\[Equal]", 
+       RowBox[{"mu", ".", 
+        RowBox[{"KroneckerProduct", "[", 
+         RowBox[{"id", ",", "mu"}], "]"}]}]}]}], ",", 
+     RowBox[{"\"\<Left unit\>\"", "\[Rule]", 
+      RowBox[{
+       RowBox[{"mu", ".", 
+        RowBox[{"KroneckerProduct", "[", 
+         RowBox[{"unit", ",", "id"}], "]"}]}], "\[Equal]", "id"}]}], ",", 
+     RowBox[{"\"\<Right unit\>\"", "\[Rule]", 
+      RowBox[{
+       RowBox[{"mu", ".", 
+        RowBox[{"KroneckerProduct", "[", 
+         RowBox[{"id", ",", "unit"}], "]"}]}], "\[Equal]", "id"}]}], ",", 
+     RowBox[{"\"\<Coassociativity\>\"", "\[Rule]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"KroneckerProduct", "[", 
+         RowBox[{"deltaC", ",", "id"}], "]"}], ".", "deltaC"}], "\[Equal]", 
+       RowBox[{
+        RowBox[{"KroneckerProduct", "[", 
+         RowBox[{"id", ",", "deltaC"}], "]"}], ".", "deltaC"}]}]}], ",", 
+     RowBox[{"\"\<Left counit\>\"", "\[Rule]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"KroneckerProduct", "[", 
+         RowBox[{"counitC", ",", "id"}], "]"}], ".", "deltaC"}], "\[Equal]", 
+       "id"}]}], ",", 
+     RowBox[{"\"\<Right counit\>\"", "\[Rule]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"KroneckerProduct", "[", 
+         RowBox[{"id", ",", "counitC"}], "]"}], ".", "deltaC"}], "\[Equal]", 
+       "id"}]}], ",", 
+     RowBox[{"\"\<Frobenius: split on right\>\"", "\[Rule]", 
+      RowBox[{"routeJoin", "\[Equal]", "routeRight"}]}], ",", 
+     RowBox[{"\"\<Frobenius: split on left\>\"", "\[Rule]", 
+      RowBox[{"routeJoin", "\[Equal]", "routeLeft"}]}], ",", 
+     RowBox[{"\"\<Join after split is 6 c times identity\>\"", "\[Rule]", 
+      RowBox[{
+       RowBox[{"mu", ".", "deltaC"}], "\[Equal]", 
+       RowBox[{"6", " ", "c", " ", "id"}]}]}], ",", 
+     RowBox[{"\"\<Counit after unit is 1/c\>\"", "\[Rule]", 
+      RowBox[{
+       RowBox[{"counitC", ".", "unit"}], "\[Equal]", 
+       RowBox[{"{", 
+        RowBox[{"{", 
+         FractionBox["1", "c"], "}"}], "}"}]}]}], ",", 
+     RowBox[{"\"\<Special at c=1/6\>\"", "\[Rule]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"mu", ".", "deltaC"}], "/.", "\[VeryThinSpace]", 
+          RowBox[{"c", "\[Rule]", 
+           FractionBox["1", "6"]}]}], ")"}], "\[Equal]", "id"}], "&&", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"counitC", ".", "unit"}], "/.", "\[VeryThinSpace]", 
+          RowBox[{"c", "\[Rule]", 
+           FractionBox["1", "6"]}]}], ")"}], "\[Equal]", 
+        RowBox[{"{", 
+         RowBox[{"{", "6", "}"}], "}"}]}]}]}]}], "]"}]}], ";", 
+  RowBox[{"studentChecks", "=", 
+   RowBox[{"FullSimplify", "[", 
+    RowBox[{"studentChecks", ",", 
+     RowBox[{
+      RowBox[{"c", "\[Element]", 
+       TemplateBox[{},
+        "Complexes"]}], "&&", 
+      RowBox[{"c", "\[NotEqual]", "0"}]}]}], "]"}]}], ";", 
+  TagBox[
+   RowBox[{"KeyValueMap", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"#1", ",", "#2"}], "}"}], "&"}], ",", "studentChecks"}], "]"}],
+   
+   Function[BoxForm`e$, 
+    TableForm[BoxForm`e$]]]}]], "Input",
+ CellLabel->
+  "In[202]:=",ExpressionUUID->"daa90bef-76b7-4f6b-8690-fcc1dcec4b9d"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"\<\"Associativity\"\>", "True"},
+     {"\<\"Left unit\"\>", "True"},
+     {"\<\"Right unit\"\>", "True"},
+     {"\<\"Coassociativity\"\>", "True"},
+     {"\<\"Left counit\"\>", "True"},
+     {"\<\"Right counit\"\>", "True"},
+     {"\<\"Frobenius: split on right\"\>", "True"},
+     {"\<\"Frobenius: split on left\"\>", "True"},
+     {"\<\"Join after split is 6 c times identity\"\>", "True"},
+     {"\<\"Counit after unit is 1/c\"\>", "True"},
+     {"\<\"Special at c=1/6\"\>", "True"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}], TraditionalForm]], "Output",
+ CellChangeTimes->{4.0000030448729067`*^9},
+ CellLabel->
+  "Out[202]=",ExpressionUUID->"ffd9e694-0061-4e56-a942-aaabeacdfe27"]
+}, Open  ]],
+
+Cell[TextData[{
+ "A concrete superposition is ",
+ Cell[BoxData[
+  RowBox[{"x", "\[LongEqual]", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"2", " ", 
+       SubscriptBox["e", "g"]}], "+", 
+      SubscriptBox["e", "1"]}], ")"}], "\[CircleTimes]", 
+    RowBox[{"(", 
+     RowBox[{
+      SubscriptBox["e", "h"], "-", 
+      RowBox[{"\[ImaginaryI]", " ", 
+       SubscriptBox["e", "1"]}]}], ")"}]}]}]], "InlineFormula",ExpressionUUID->
+  "7ebefce2-9675-4a9b-9962-7eff69564fe4"],
+ ". At c = 1, compare all three outputs and list their nonzero coefficients. \
+Linearity predicts that the answer is the sum of four splittings, with \
+coefficients 1, -i, 2 and -2i."
+}], "Text",ExpressionUUID->"c319961d-9ec9-4185-8a38-e4bdce7624d2"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"x", "=", 
+   RowBox[{"tensorVector", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"vector", "[", "identity", "]"}], "+", 
+      RowBox[{"2", " ", 
+       RowBox[{"vector", "[", "g", "]"}]}]}], ",", 
+     RowBox[{
+      RowBox[{"vector", "[", "h", "]"}], "-", 
+      RowBox[{"\[ImaginaryI]", " ", 
+       RowBox[{"vector", "[", "identity", "]"}]}]}]}], "]"}]}], ";", 
+  RowBox[{"y", "=", 
+   RowBox[{"deltaOne", ".", "mu", ".", "x"}]}], ";", 
+  RowBox[{"expected", "=", 
+   RowBox[{
+    RowBox[{"deltaOne", ".", 
+     RowBox[{"vector", "[", "h", "]"}]}], "-", 
+    RowBox[{"\[ImaginaryI]", " ", 
+     RowBox[{"deltaOne", ".", 
+      RowBox[{"vector", "[", "identity", "]"}]}]}], "+", 
+    RowBox[{"2", " ", 
+     RowBox[{"deltaOne", ".", 
+      RowBox[{"vector", "[", 
+       RowBox[{"product", "[", 
+        RowBox[{"g", ",", "h"}], "]"}], "]"}]}]}], "-", 
+    RowBox[{"2", " ", "\[ImaginaryI]", " ", 
+     RowBox[{"deltaOne", ".", 
+      RowBox[{"vector", "[", "g", "]"}]}]}]}]}], ";", 
+  RowBox[{"Association", "[", 
+   RowBox[{
+    RowBox[{"\"\<All routes agree on the superposition\>\"", "\[Rule]", 
+     RowBox[{
+      RowBox[{"y", "\[Equal]", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"routeRight", "/.", "\[VeryThinSpace]", 
+          RowBox[{"c", "\[Rule]", "1"}]}], ")"}], ".", "x"}]}], "&&", 
+      RowBox[{"y", "\[Equal]", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"routeLeft", "/.", "\[VeryThinSpace]", 
+          RowBox[{"c", "\[Rule]", "1"}]}], ")"}], ".", "x"}]}]}]}], ",", 
+    RowBox[{"\"\<Four-term linear expansion agrees\>\"", "\[Rule]", 
+     RowBox[{"y", "\[Equal]", "expected"}]}], ",", 
+    RowBox[{"\"\<Nonzero output coefficients\>\"", "\[Rule]", 
+     RowBox[{"Count", "[", 
+      RowBox[{"y", ",", 
+       RowBox[{"Except", "[", "0", "]"}]}], "]"}]}]}], "]"}]}]], "Input",
+ CellLabel->
+  "In[203]:=",ExpressionUUID->"2fcb79d5-d7a8-4696-9091-71cf1eba8b0b"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"\[LeftAssociation]", 
+   RowBox[{
+    RowBox[{"\<\"All routes agree on the superposition\"\>", "\[Rule]", 
+     "True"}], ",", 
+    RowBox[{"\<\"Four-term linear expansion agrees\"\>", "\[Rule]", "True"}], 
+    ",", 
+    RowBox[{"\<\"Nonzero output coefficients\"\>", "\[Rule]", "24"}]}], 
+   "\[RightAssociation]"}], TraditionalForm]], "Output",
+ CellChangeTimes->{4.00000304487488*^9},
+ CellLabel->
+  "Out[203]=",ExpressionUUID->"e488fd59-553f-48c9-a640-8ba386053f98"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"Select", "[", 
+   RowBox[{
+    RowBox[{"MapThread", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"name", "/@", "#1"}], ",", "#2"}], "}"}], "&"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"pairBasis", ",", "y"}], "}"}]}], "]"}], ",", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Last", "[", "#1", "]"}], "\[NotEqual]", "0"}], "&"}]}], "]"}],
+  Function[BoxForm`e$, 
+   TableForm[
+   BoxForm`e$, 
+    TableHeadings -> {
+     None, {"Output basis labels", "Coefficient"}}]]]], "Input",
+ CellLabel->
+  "In[204]:=",ExpressionUUID->"40413e82-81b4-4765-9ceb-eb238193742c"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {
+      RowBox[{"{", 
+       RowBox[{"\<\"1\"\>", ",", "\<\"1\"\>"}], "}"}], 
+      RowBox[{"-", "\[ImaginaryI]"}]},
+     {
+      RowBox[{"{", 
+       RowBox[{"\<\"1\"\>", ",", "\<\"(23)\"\>"}], "}"}], "1"},
+     {
+      RowBox[{"{", 
+       RowBox[{"\<\"1\"\>", ",", "\<\"(12)\"\>"}], "}"}], 
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "\[ImaginaryI]"}]},
+     {
+      RowBox[{"{", 
+       RowBox[{"\<\"1\"\>", ",", "\<\"(123)\"\>"}], "}"}], "2"},
+     {
+      RowBox[{"{", 
+       RowBox[{"\<\"(23)\"\>", ",", "\<\"1\"\>"}], "}"}], "1"},
+     {
+      RowBox[{"{", 
+       RowBox[{"\<\"(23)\"\>", ",", "\<\"(23)\"\>"}], "}"}], 
+      RowBox[{"-", "\[ImaginaryI]"}]},
+     {
+      RowBox[{"{", 
+       RowBox[{"\<\"(23)\"\>", ",", "\<\"(132)\"\>"}], "}"}], 
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "\[ImaginaryI]"}]},
+     {
+      RowBox[{"{", 
+       RowBox[{"\<\"(23)\"\>", ",", "\<\"(13)\"\>"}], "}"}], "2"},
+     {
+      RowBox[{"{", 
+       RowBox[{"\<\"(12)\"\>", ",", "\<\"1\"\>"}], "}"}], 
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "\[ImaginaryI]"}]},
+     {
+      RowBox[{"{", 
+       RowBox[{"\<\"(12)\"\>", ",", "\<\"(23)\"\>"}], "}"}], "2"},
+     {
+      RowBox[{"{", 
+       RowBox[{"\<\"(12)\"\>", ",", "\<\"(12)\"\>"}], "}"}], 
+      RowBox[{"-", "\[ImaginaryI]"}]},
+     {
+      RowBox[{"{", 
+       RowBox[{"\<\"(12)\"\>", ",", "\<\"(123)\"\>"}], "}"}], "1"},
+     {
+      RowBox[{"{", 
+       RowBox[{"\<\"(123)\"\>", ",", "\<\"1\"\>"}], "}"}], "2"},
+     {
+      RowBox[{"{", 
+       RowBox[{"\<\"(123)\"\>", ",", "\<\"(23)\"\>"}], "}"}], 
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "\[ImaginaryI]"}]},
+     {
+      RowBox[{"{", 
+       RowBox[{"\<\"(123)\"\>", ",", "\<\"(132)\"\>"}], "}"}], 
+      RowBox[{"-", "\[ImaginaryI]"}]},
+     {
+      RowBox[{"{", 
+       RowBox[{"\<\"(123)\"\>", ",", "\<\"(13)\"\>"}], "}"}], "1"},
+     {
+      RowBox[{"{", 
+       RowBox[{"\<\"(132)\"\>", ",", "\<\"(12)\"\>"}], "}"}], "1"},
+     {
+      RowBox[{"{", 
+       RowBox[{"\<\"(132)\"\>", ",", "\<\"(123)\"\>"}], "}"}], 
+      RowBox[{"-", "\[ImaginaryI]"}]},
+     {
+      RowBox[{"{", 
+       RowBox[{"\<\"(132)\"\>", ",", "\<\"(132)\"\>"}], "}"}], "2"},
+     {
+      RowBox[{"{", 
+       RowBox[{"\<\"(132)\"\>", ",", "\<\"(13)\"\>"}], "}"}], 
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "\[ImaginaryI]"}]},
+     {
+      RowBox[{"{", 
+       RowBox[{"\<\"(13)\"\>", ",", "\<\"(12)\"\>"}], "}"}], "2"},
+     {
+      RowBox[{"{", 
+       RowBox[{"\<\"(13)\"\>", ",", "\<\"(123)\"\>"}], "}"}], 
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "\[ImaginaryI]"}]},
+     {
+      RowBox[{"{", 
+       RowBox[{"\<\"(13)\"\>", ",", "\<\"(132)\"\>"}], "}"}], "1"},
+     {
+      RowBox[{"{", 
+       RowBox[{"\<\"(13)\"\>", ",", "\<\"(13)\"\>"}], "}"}], 
+      RowBox[{"-", "\[ImaginaryI]"}]}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}], TraditionalForm]], "Output",
+ CellChangeTimes->{4.0000030448795424`*^9},
+ CellLabel->
+  "Out[204]=",ExpressionUUID->"8561a0c2-f74d-4003-8ca0-ef93b1133e44"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1304, 803},
+WindowMargins->{{4, Automatic}, {Automatic, 4}},
+WindowTitle->"Frobenius: joining and splitting",
+Magnification:>2. Inherited,
+FrontEndVersion->"15.0 for Mac OS X ARM (64-bit) (July 2, 2026)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"c5c59305-d005-4261-92db-0cca805e5a4a"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[622, 23, 158, 2, 127, "Title",ExpressionUUID->"2a60d4f9-b28e-4991-a955-b2ccaea448d4"],
+Cell[783, 27, 460, 7, 242, "Text",ExpressionUUID->"4c583e09-0c58-429d-b020-48e3cf895a48"],
+Cell[1246, 36, 718, 12, 292, "Text",ExpressionUUID->"d3daea10-532a-4a9c-9dcb-90cbd7758f3d"],
+Cell[CellGroupData[{
+Cell[1989, 52, 113, 0, 132, "Section",ExpressionUUID->"cc5716b1-a94d-4d72-b946-3d4f3e71c45f"],
+Cell[2105, 54, 961, 23, 210, "Text",ExpressionUUID->"c8e8a710-f6c6-41dd-b73f-53b3157f85be"],
+Cell[3069, 79, 349, 5, 198, "Text",ExpressionUUID->"5e62cbc1-80ee-4710-87ec-1d8de92cf980"],
+Cell[CellGroupData[{
+Cell[3443, 88, 1489, 43, 344, "Input",ExpressionUUID->"007385b3-ba2f-405e-af9e-6158df87fa7e"],
+Cell[4935, 133, 1096, 32, 226, "Output",ExpressionUUID->"f69c925e-19a6-4d22-b1de-c08b7989f2a3"]
+}, Open  ]],
+Cell[6046, 168, 212, 3, 111, "Text",ExpressionUUID->"6af04a5d-9347-49b9-abb3-7d49e73d7404"],
+Cell[CellGroupData[{
+Cell[6283, 175, 633, 19, 140, "Input",ExpressionUUID->"7590d387-33a4-4ebb-ae58-c37c3751d9e4"],
+Cell[6919, 196, 301, 7, 60, "Output",ExpressionUUID->"c0ef1488-d47c-4f1b-9b9c-072995b9547c"]
+}, Open  ]],
+Cell[7235, 206, 221, 3, 111, "Text",ExpressionUUID->"6093ee88-457f-4e8d-b673-5e1397e0f942"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7493, 214, 120, 0, 132, "Section",ExpressionUUID->"55177d67-8fba-4d86-85fd-abd4ccf7e9a1"],
+Cell[7616, 216, 627, 15, 163, "Text",ExpressionUUID->"6c0c7fc3-2aec-414a-8aa0-043cd0734814"],
+Cell[8246, 233, 507, 11, 158, "Text",ExpressionUUID->"3d722960-0932-4f47-b5de-92a44a131264"],
+Cell[CellGroupData[{
+Cell[8778, 248, 742, 25, 99, "Input",ExpressionUUID->"35841163-3c2a-4044-9060-78c939bc4a95"],
+Cell[9523, 275, 771, 20, 226, "Output",ExpressionUUID->"fdac9588-f348-4fdc-9ae0-169ecb5c8ccf"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10331, 300, 656, 17, 181, "Input",ExpressionUUID->"b851a84a-52e6-469d-b168-82dead73739e"],
+Cell[10990, 319, 413, 9, 60, "Output",ExpressionUUID->"f8229c13-ba76-452e-a489-e65f0ec5d755"]
+}, Open  ]],
+Cell[11418, 331, 623, 16, 119, "Text",ExpressionUUID->"d3b6c7c2-0159-4339-9c9f-f37016678643"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12078, 352, 114, 0, 132, "Section",ExpressionUUID->"da78cc78-021d-4d82-99ad-b2339906cfa6"],
+Cell[12195, 354, 830, 19, 158, "Text",ExpressionUUID->"e9ea6680-1fe6-4802-9a40-217172ba859d"],
+Cell[13028, 375, 286, 4, 155, "Text",ExpressionUUID->"598df975-4806-4671-a9dd-adea987530c3"],
+Cell[13317, 381, 2946, 72, 479, "Output",ExpressionUUID->"aa632cc1-fc4b-4a01-855e-64c702f73dd9"],
+Cell[16266, 455, 402, 6, 198, "Text",ExpressionUUID->"a0255bdc-a5c7-4f8b-a0dd-061c9d6cb1e7"],
+Cell[CellGroupData[{
+Cell[16693, 465, 2305, 71, 273, "Input",ExpressionUUID->"8e6f08a7-903e-465f-b8dd-bed187f76643"],
+Cell[19001, 538, 2051, 56, 226, "Output",ExpressionUUID->"d83d04dc-0cd4-40c3-a409-c99243ddc89b"]
+}, Open  ]],
+Cell[21067, 597, 326, 5, 155, "Text",ExpressionUUID->"f40bc290-1bb2-4bf4-a2a9-3d0ebbf20bfe"],
+Cell[CellGroupData[{
+Cell[21418, 606, 638, 18, 99, "Input",ExpressionUUID->"8d90d890-84bf-47a9-b517-cd3b24a50861"],
+Cell[22059, 626, 234, 6, 60, "Output",ExpressionUUID->"2c1879f3-6407-4b08-b61e-97e923b88ed7"]
+}, Open  ]],
+Cell[22308, 635, 225, 3, 111, "Text",ExpressionUUID->"449b6361-75eb-47e4-923b-400f0be29e51"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[22570, 643, 123, 0, 132, "Section",ExpressionUUID->"54974fb4-a996-44c1-83b3-7bf4511a3dea"],
+Cell[22696, 645, 965, 25, 206, "Text",ExpressionUUID->"60b89566-597b-4f7c-b47a-c336edade925"],
+Cell[23664, 672, 944, 24, 206, "Text",ExpressionUUID->"633c9ee7-1a05-452b-bbb0-bdcc74f1c517"],
+Cell[24611, 698, 301, 4, 155, "Text",ExpressionUUID->"4e3ef4dd-2729-45a0-92da-f7838009bbef"],
+Cell[CellGroupData[{
+Cell[24937, 706, 1233, 32, 303, "Input",ExpressionUUID->"3eba33cc-de57-4395-bb4b-b19dcbffb0d5"],
+Cell[26173, 740, 396, 9, 60, "Output",ExpressionUUID->"f74d189f-7f3b-480e-afb1-f2d17a55fe8e"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26618, 755, 118, 0, 132, "Section",ExpressionUUID->"0f3ae94b-e585-4780-923e-a3547a9e1440"],
+Cell[26739, 757, 656, 14, 204, "Text",ExpressionUUID->"fc783c34-6ed3-4a13-9af1-a97b747c343d"],
+Cell[CellGroupData[{
+Cell[27420, 775, 907, 24, 222, "Input",ExpressionUUID->"36c6e792-b573-40a7-a8d8-d45dc9491eb0"],
+Cell[28330, 801, 604, 14, 60, "Output",ExpressionUUID->"31331e9b-d795-4a62-83e7-857ddf8a6de7"]
+}, Open  ]],
+Cell[28949, 818, 273, 4, 155, "Text",ExpressionUUID->"348cf5fd-b50f-45dd-afea-79707864d316"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[29259, 827, 128, 0, 206, "Section",ExpressionUUID->"96b94426-05f4-4f4a-a790-375a9b4b9559"],
+Cell[29390, 829, 1117, 31, 175, "Text",ExpressionUUID->"817a523d-33c1-4382-a947-475bfba9fb93"],
+Cell[30510, 862, 480, 7, 242, "Text",ExpressionUUID->"27a2d440-ce5f-480e-b3fe-653e458220ff"],
+Cell[30993, 871, 870, 22, 125, "Text",ExpressionUUID->"bfad1aa6-f9a0-40f2-be98-cabb69e05b23"],
+Cell[CellGroupData[{
+Cell[31888, 897, 1215, 36, 185, "Input",ExpressionUUID->"1d7bbd00-e588-40ad-8c04-f5d866b56df7"],
+Cell[33106, 935, 760, 19, 151, "Output",ExpressionUUID->"861c9bc2-ab7d-4e84-a5ce-81f644a93cee"]
+}, Open  ]],
+Cell[33881, 957, 435, 6, 198, "Text",ExpressionUUID->"0eac8927-00e1-4ae1-857e-283d00ed87f2"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[34353, 968, 101, 0, 132, "Section",ExpressionUUID->"954ae926-a85e-4bf4-be97-330397d48bcd"],
+Cell[34457, 970, 480, 7, 242, "Text",ExpressionUUID->"0922924d-4ce0-4843-8087-c4911e213531"],
+Cell[34940, 979, 419, 6, 198, "Text",ExpressionUUID->"f75a0b32-7139-404c-b925-35509f9c1f76"],
+Cell[35362, 987, 342, 5, 155, "Text",ExpressionUUID->"7fcd9fda-3649-4447-915c-fa466d3e13f5"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[35741, 997, 129, 0, 206, "Section",ExpressionUUID->"43b2da8f-8d18-4b4c-878c-ea08d115bb8f"],
+Cell[35873, 999, 334, 5, 155, "Text",ExpressionUUID->"c1349977-12c6-472f-b58a-68a2ca7e3181"],
+Cell[CellGroupData[{
+Cell[36232, 1008, 2756, 75, 599, "Input",ExpressionUUID->"e31f0840-b4be-4285-864a-f278279594f9"],
+Cell[38991, 1085, 729, 19, 92, "Output",ExpressionUUID->"6482f02c-004c-4476-a391-c93386d93c3c"]
+}, Open  ]],
+Cell[39735, 1107, 240, 4, 111, "Text",ExpressionUUID->"87c4a3ec-1146-4d88-887a-9c1390fa917a"],
+Cell[CellGroupData[{
+Cell[40000, 1115, 4149, 110, 1146, "Input",ExpressionUUID->"daa90bef-76b7-4f6b-8690-fcc1dcec4b9d"],
+Cell[44152, 1227, 1035, 25, 395, "Output",ExpressionUUID->"ffd9e694-0061-4e56-a942-aaabeacdfe27"]
+}, Open  ]],
+Cell[45202, 1255, 740, 19, 160, "Text",ExpressionUUID->"c319961d-9ec9-4185-8a38-e4bdce7624d2"],
+Cell[CellGroupData[{
+Cell[45967, 1278, 1948, 51, 385, "Input",ExpressionUUID->"2fcb79d5-d7a8-4696-9091-71cf1eba8b0b"],
+Cell[47918, 1331, 505, 12, 92, "Output",ExpressionUUID->"e488fd59-553f-48c9-a640-8ba386053f98"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[48460, 1348, 642, 21, 58, "Input",ExpressionUUID->"40413e82-81b4-4765-9ceb-eb238193742c"],
+Cell[49105, 1371, 3365, 104, 835, "Output",ExpressionUUID->"8561a0c2-f74d-4003-8ca0-ef93b1133e44"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

@@ -1,0 +1,972 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 15.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     33711,        964]
+NotebookOptionsPosition[     27716,        858]
+NotebookOutlinePosition[     28160,        876]
+CellTagsIndexPosition[     28117,        873]
+WindowTitle->Automatic
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Three spins: choosing different pairs", "Subsubsection",
+ CellChangeTimes->{{4.003139892026807*^9, 
+  4.003139893123645*^9}},ExpressionUUID->"82b8c2bc-9224-4614-bb8d-\
+9591c6c955e0"],
+
+Cell["\<\
+A short demonstration following the two-spin exercise. First we make a \
+singlet from spins A and B and leave C pointing up. Then we ask: what changes \
+if B and C form the singlet instead?\
+\>", "Text",
+ CellChangeTimes->{
+  4.0029939789867992`*^9},ExpressionUUID->"12e8062c-1eca-4776-b9ff-\
+93eb60f5fd4c"],
+
+Cell[TextData[{
+ StyleBox["Source",
+  FontWeight->"Bold"],
+ ": SMSA section 1.3, ",
+ StyleBox["\[OpenCurlyDoubleQuote]Outlook: category theory\
+\[CloseCurlyDoubleQuote] [currently a PDF as Start info for Lecture 1]",
+  FontSlant->"Italic"],
+ ", the section ",
+ StyleBox["Combining quantum systems",
+  FontSlant->"Italic"],
+ ". The current file is a worked example. We use ordinary angular momentum, \
+three separate spin-1/2 factors ordered A, B, C. The Pauli operators are \
+\[Sigma], \[Tau] and \[Rho] . The corresponding spin operators are \[HBar]/2 \
+times these operators. "
+}], "Text",
+ CellChangeTimes->{{4.002993991851222*^9, 4.00299399260717*^9}, {
+  4.0031398313422213`*^9, 4.003139886203391*^9}, {4.00314023436766*^9, 
+  4.0031403407984543`*^9}},ExpressionUUID->"e591f4fe-4d14-49e1-a0ed-\
+257261ffee2b"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["1. Add a third spin", "Subsubsection",ExpressionUUID->"f4e14ba9-5505-47b6-a405-4a65064c9f58"],
+
+Cell[TextData[{
+ "Write |ud\[RightAngleBracket] for spin A up and spin B down. With three \
+spins, |udu\[RightAngleBracket] means A up, B down, C up. ",
+ StyleBox["KroneckerProduct", "Input"],
+ " combines factors, ",
+ StyleBox["Flatten", "Input"],
+ " writes the resulting state as one column of coefficients."
+}], "Text",
+ CellChangeTimes->{{4.003139932477428*^9, 
+  4.003139963829792*^9}},ExpressionUUID->"6b643943-f404-49df-a9f0-\
+4e0eaf0448b6"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Remove", "[", "\"\<Global`*\>\"", "]"}], " ", "//", "Quiet"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"up", "=", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "0"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"down", "=", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "1"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"state", "[", 
+    RowBox[{"x_", ",", "y_", ",", "z_"}], "]"}], ":=", 
+   RowBox[{"Flatten", "[", 
+    RowBox[{"KroneckerProduct", "[", 
+     RowBox[{"x", ",", "y", ",", "z"}], "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"state", "[", 
+  RowBox[{"up", ",", "down", ",", "up"}], "]"}]}], "Input",
+ CellChangeTimes->{{4.002993860586012*^9, 4.002993876911305*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"572be8e6-4054-4d61-af89-a8983fcb96a4"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"{", 
+   RowBox[{
+   "0", ",", "0", ",", "1", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+    "0"}], "}"}], TraditionalForm]], "Output",
+ CellChangeTimes->{4.002994011989398*^9},
+ CellLabel->"Out[5]=",ExpressionUUID->"43ad4724-1830-4551-8435-6cd7c1cfe945"]
+}, Open  ]],
+
+Cell[TextData[{
+ "The eight entries refer, in order, to ",
+ Cell[BoxData[
+  RowBox[{"|", "uuu", "\[RightAngleBracket]"}]], "InlineFormula",
+  ExpressionUUID->"4a1b9f93-4e6a-4ffe-95e3-8274519898c0"],
+ ", ",
+ Cell[BoxData[
+  RowBox[{"|", "uud", "\[RightAngleBracket]"}]], "InlineFormula",
+  ExpressionUUID->"61f5592b-8d75-472d-b2a5-583e51af02a8"],
+ ", ",
+ Cell[BoxData[
+  RowBox[{"|", "udu", "\[RightAngleBracket]"}]], "InlineFormula",
+  ExpressionUUID->"9083c292-83a8-450b-89ce-26f8d9f6f0c3"],
+ ", ",
+ Cell[BoxData[
+  RowBox[{"|", "udd", "\[RightAngleBracket]"}]], "InlineFormula",
+  ExpressionUUID->"9b0427b1-0776-446f-b346-a181d053ce0a"],
+ ", ",
+ Cell[BoxData[
+  RowBox[{"|", "duu", "\[RightAngleBracket]"}]], "InlineFormula",
+  ExpressionUUID->"e98a4910-cda4-4b67-8d5f-1c63824aba14"],
+ ", ",
+ Cell[BoxData[
+  RowBox[{"|", "dud", "\[RightAngleBracket]"}]], "InlineFormula",
+  ExpressionUUID->"4268ac31-ba57-4180-b0d9-ffc129450ec2"],
+ ", ",
+ Cell[BoxData[
+  RowBox[{"|", "ddu", "\[RightAngleBracket]"}]], "InlineFormula",
+  ExpressionUUID->"d83afc4e-2469-4e63-9431-2f188ea84e22"],
+ ", ",
+ Cell[BoxData[
+  RowBox[{"|", "ddd", "\[RightAngleBracket]"}]], "InlineFormula",
+  ExpressionUUID->"4ed1f5c4-09de-48cc-9003-702f2ffd3176"],
+ ". Next define the familiar Pauli matrices in the order x, y, z. (They are \
+also predefined, but to be clear.)"
+}], "Text",
+ CellChangeTimes->{{4.003140003294899*^9, 
+  4.003140011557143*^9}},ExpressionUUID->"219d7c13-3b82-40af-ae82-\
+1a26b1335d56"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"pauli", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"0", ",", "1"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", "0"}], "}"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"0", ",", 
+         RowBox[{"-", "\[ImaginaryI]"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"\[ImaginaryI]", ",", "0"}], "}"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"1", ",", "0"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", 
+         RowBox[{"-", "1"}]}], "}"}]}], "}"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"id", "=", 
+   RowBox[{"IdentityMatrix", "[", "2", "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{
+  4.003139981638945*^9},ExpressionUUID->"513277e1-d8c7-4adf-aebe-\
+11abddee5e77"],
+
+Cell[TextData[{
+ "As in the test problem, ",
+ Cell[BoxData[
+ "\[Sigma]"], "InlineFormula",ExpressionUUID->
+  "5e6c9ac3-8f0d-47de-8964-8c7d8c249f9b"],
+ " acts on A and ",
+ Cell[BoxData[
+ "\[Tau]"], "InlineFormula",ExpressionUUID->
+  "60bcfa3f-c866-45a4-8459-67b82dc3d3bc"],
+ " on B; ",
+ Cell[BoxData[
+ "\[Rho]"], "InlineFormula",ExpressionUUID->
+  "ab6f9f17-fdbc-4338-9c1c-e1188dc3f54e"],
+ " acts on C. Identity matrices leave the other spins alone. Table builds the \
+x, y and z components, [[i]] selects one component."
+}], "Text",
+ CellChangeTimes->{{4.00313998720583*^9, 
+  4.003139987938408*^9}},ExpressionUUID->"0b29d834-0e8b-48d5-accd-\
+40a100cb6bb2"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"sigma", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"KroneckerProduct", "[", 
+      RowBox[{
+       RowBox[{
+       "pauli", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}], ",", 
+       "id", ",", "id"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "3"}], "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"tau", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"KroneckerProduct", "[", 
+      RowBox[{"id", ",", 
+       RowBox[{
+       "pauli", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}], ",", 
+       "id"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "3"}], "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"rho", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"KroneckerProduct", "[", 
+      RowBox[{"id", ",", "id", ",", 
+       RowBox[{
+       "pauli", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}]}], 
+      "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "3"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]"}], "Input",
+ CellLabel->"In[8]:=",ExpressionUUID->"8efb1f27-5a4a-44b8-a7b1-3a062096ebdb"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["2. Which pair forms a singlet?", "Subsubsection",ExpressionUUID->"3c48eec3-bbd6-4706-9cdc-b6f3dd66a5d8"],
+
+Cell[TextData[{
+ "Start with the familiar singlet in AB and an up spin at C: ",
+ Cell[BoxData[
+  RowBox[{
+   StyleBox["a", "Input"], "\[LongEqual]", 
+   FractionBox[
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"|", "udu", "\[RightAngleBracket]"}], ")"}], "-", 
+     RowBox[{"(", 
+      RowBox[{"|", "duu", "\[RightAngleBracket]"}], ")"}]}], 
+    SqrtBox["2"]]}]], "InlineFormula",ExpressionUUID->
+  "63887098-8dca-420d-85fe-ea073f8c990e"],
+ ". The code stores its coefficient vector."
+}], "Text",ExpressionUUID->"521492d5-d69f-48a8-a8e1-f6a58f94229a"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"a", "=", 
+   FractionBox[
+    RowBox[{
+     RowBox[{"state", "[", 
+      RowBox[{"up", ",", "down", ",", "up"}], "]"}], "-", 
+     RowBox[{"state", "[", 
+      RowBox[{"down", ",", "up", ",", "up"}], "]"}]}], 
+    SqrtBox["2"]]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Simplify", "[", 
+  RowBox[{
+   RowBox[{"Conjugate", "[", "a", "]"}], ".", "a"}], "]"}]}], "Input",
+ CellLabel->"In[11]:=",ExpressionUUID->"5817c63a-ee51-4794-93a4-d1561c1c2011"],
+
+Cell[BoxData[
+ FormBox["1", TraditionalForm]], "Output",
+ CellChangeTimes->{4.002994012152442*^9},
+ CellLabel->"Out[12]=",ExpressionUUID->"9b845cd8-01a9-4d68-8efc-1dc14bfe2f98"]
+}, Open  ]],
+
+Cell[TextData[{
+ "The output 1 checks normalization. Recall the test operator ",
+ Cell[BoxData[
+  RowBox[{
+   SuperscriptBox["L", "2"], "\[LongEqual]", 
+   RowBox[{
+    FractionBox["1", "4"], " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"2", " ", 
+       RowBox[{"\[Sigma]", "\[CenterDot]", "\[Tau]"}]}], "+", 
+      RowBox[{"6", " ", 
+       SubscriptBox["I", "4"]}]}], ")"}]}]}]], "InlineFormula",ExpressionUUID->
+  "a68e58d9-dcbe-4bd8-985d-da5a559e1e98"],
+ " (with \[HBar] taken out): the singlet has pair-dot-product eigenvalue -3, \
+while a triplet has +1. Dot (.) in the code performs matrix multiplication or \
+an inner product."
+}], "Text",
+ CellChangeTimes->{{4.002993904366684*^9, 4.002993904366748*^9}, {
+  4.00314003706546*^9, 
+  4.003140044542878*^9}},ExpressionUUID->"d16a259f-500b-412e-87b0-\
+6707ee94f3fe"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"ab", "=", 
+   RowBox[{
+    UnderoverscriptBox["\[Sum]", "i", "3"], 
+    RowBox[{
+     RowBox[{"sigma", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}], 
+     ".", 
+     RowBox[{
+     "tau", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}]}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"bc", "=", 
+   RowBox[{
+    UnderoverscriptBox["\[Sum]", "i", "3"], 
+    RowBox[{
+     RowBox[{"tau", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}], ".", 
+     RowBox[{
+     "rho", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}]}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Simplify", "[", 
+  RowBox[{
+   RowBox[{"ab", ".", "a"}], "\[Equal]", 
+   RowBox[{
+    RowBox[{"-", "3"}], " ", "a"}]}], "]"}]}], "Input",
+ CellLabel->"In[13]:=",ExpressionUUID->"c308b2c0-fc02-42a0-b79a-f8b08e1e49c6"],
+
+Cell[BoxData[
+ FormBox["True", TraditionalForm]], "Output",
+ CellChangeTimes->{4.002994012158152*^9},
+ CellLabel->"Out[15]=",ExpressionUUID->"6a1e896f-132c-4a4b-b455-d5270d9e44ee"]
+}, Open  ]],
+
+Cell[TextData[{
+ "Now let BC form the singlet, with A up: ",
+ Cell[BoxData[
+  RowBox[{
+   StyleBox["c", "Input"], "\[LongEqual]", 
+   FractionBox[
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"|", "uud", "\[RightAngleBracket]"}], ")"}], "-", 
+     RowBox[{"(", 
+      RowBox[{"|", "udu", "\[RightAngleBracket]"}], ")"}]}], 
+    SqrtBox["2"]]}]], "InlineFormula",ExpressionUUID->
+  "f3c8379f-ff52-42e2-b201-cd984d48d7df"],
+ ". Predict: is this the same state as a? Is it orthogonal to a?"
+}], "Text",ExpressionUUID->"bc83738f-c777-4d2c-8348-cfbcbbce773e"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"c", "=", 
+   FractionBox[
+    RowBox[{
+     RowBox[{"state", "[", 
+      RowBox[{"up", ",", "up", ",", "down"}], "]"}], "-", 
+     RowBox[{"state", "[", 
+      RowBox[{"up", ",", "down", ",", "up"}], "]"}]}], 
+    SqrtBox["2"]]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Simplify", "[", 
+  RowBox[{
+   RowBox[{"bc", ".", "c"}], "\[Equal]", 
+   RowBox[{
+    RowBox[{"-", "3"}], " ", "c"}]}], "]"}]}], "Input",
+ CellLabel->"In[16]:=",ExpressionUUID->"3392984c-d1d4-4012-bcc8-c5bcac878a3d"],
+
+Cell[BoxData[
+ FormBox["True", TraditionalForm]], "Output",
+ CellChangeTimes->{4.002994012159902*^9},
+ CellLabel->"Out[17]=",ExpressionUUID->"1e1583a8-ddb9-4a01-a0d7-5050e4f720d0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"overlap", "=", 
+  RowBox[{"Simplify", "[", 
+   RowBox[{
+    RowBox[{"Conjugate", "[", "a", "]"}], ".", "c"}], "]"}]}]], "Input",
+ CellLabel->"In[18]:=",ExpressionUUID->"b1c01f58-c018-400d-84a8-bad23d079908"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"-", 
+   FractionBox["1", "2"]}], TraditionalForm]], "Output",
+ CellChangeTimes->{4.002994012161489*^9},
+ CellLabel->"Out[18]=",ExpressionUUID->"d93ab646-fe54-48f4-8c5c-c39bab76958d"]
+}, Open  ]],
+
+Cell[TextData[{
+ "The overlap is ",
+ Cell[BoxData[
+  RowBox[{"-", 
+   FractionBox["1", "2"]}]], "InlineFormula",ExpressionUUID->
+  "1b3e87b5-e4c2-4b1a-a385-b6c75e9e75d1"],
+ ". These are different, nonorthogonal states: choosing which pair is a \
+singlet matters. The minus sign follows from the phases in our definitions."
+}], "Text",ExpressionUUID->"df9b414b-500f-4efc-ad6a-467f478c0e7a"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["3. Express the new state in the old coupling basis", "Subsubsection",ExpressionUUID->"a9b7d056-7b9c-4ea1-b349-dc00313c4c97"],
+
+Cell[TextData[{
+ "We need a second state alongside a. Use ",
+ Cell[BoxData[
+  RowBox[{
+   StyleBox["b", "Input"], "\[LongEqual]", 
+   FractionBox[
+    RowBox[{
+     RowBox[{"-", 
+      RowBox[{"(", 
+       RowBox[{"|", "duu", "\[RightAngleBracket]"}], ")"}]}], "-", 
+     RowBox[{"(", 
+      RowBox[{"|", "udu", "\[RightAngleBracket]"}], ")"}], "+", 
+     RowBox[{"2", " ", 
+      RowBox[{"(", 
+       RowBox[{"|", "uud", "\[RightAngleBracket]"}], ")"}]}]}], 
+    SqrtBox["6"]]}]], "InlineFormula",ExpressionUUID->
+  "7cf2d2d7-3403-4c01-bb5c-63e86165e730"],
+ ". Its first pair is a triplet; combining that pair with the third spin \
+gives total spin 1/2. We supply these coefficients here and check their \
+properties below."
+}], "Text",ExpressionUUID->"f3a67753-0b34-4946-8352-bef9f3305fd1"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"b", "=", 
+   FractionBox[
+    RowBox[{
+     RowBox[{"2", " ", 
+      RowBox[{"state", "[", 
+       RowBox[{"up", ",", "up", ",", "down"}], "]"}]}], "-", 
+     RowBox[{"state", "[", 
+      RowBox[{"up", ",", "down", ",", "up"}], "]"}], "-", 
+     RowBox[{"state", "[", 
+      RowBox[{"down", ",", "up", ",", "up"}], "]"}]}], 
+    SqrtBox["6"]]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Simplify", "[", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Conjugate", "[", "b", "]"}], ".", "b"}], ",", 
+    RowBox[{
+     RowBox[{"Conjugate", "[", "a", "]"}], ".", "b"}], ",", 
+    RowBox[{
+     RowBox[{"ab", ".", "b"}], "\[Equal]", "b"}]}], "}"}], "]"}]}], "Input",
+ CellLabel->"In[19]:=",ExpressionUUID->"c13a2a91-88df-4378-a02f-b223eae5319c"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"{", 
+   RowBox[{"1", ",", "0", ",", "True"}], "}"}], TraditionalForm]], "Output",
+ CellChangeTimes->{4.002994012163184*^9},
+ CellLabel->"Out[20]=",ExpressionUUID->"25a5ff34-70a5-457d-8cc4-ff67ac95fc35"]
+}, Open  ]],
+
+Cell["\<\
+The outputs {1, 0, True} say that b is normalized, orthogonal to a, and has \
+AB in the triplet channel. Project c onto these two states to find its \
+coefficients.\
+\>", "Text",ExpressionUUID->"f555d94a-d66d-4403-a844-2dcb852e4f84"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"coefficients", "=", 
+  RowBox[{"Simplify", "[", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Conjugate", "[", "a", "]"}], ".", "c"}], ",", 
+     RowBox[{
+      RowBox[{"Conjugate", "[", "b", "]"}], ".", "c"}]}], "}"}], 
+   "]"}]}]], "Input",
+ CellLabel->"In[21]:=",ExpressionUUID->"5e1986a2-28d8-4389-b1b8-4a2d3b9bd571"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"-", 
+     FractionBox["1", "2"]}], ",", 
+    FractionBox[
+     SqrtBox["3"], "2"]}], "}"}], TraditionalForm]], "Output",
+ CellChangeTimes->{4.0029940121791887`*^9},
+ CellLabel->"Out[21]=",ExpressionUUID->"100eb94f-533a-4c6f-9cd6-afbfb8765914"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Simplify", "[", 
+  RowBox[{"c", "\[Equal]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+     "coefficients", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], " ",
+      "a"}], "+", 
+    RowBox[{
+     RowBox[{
+     "coefficients", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}], " ",
+      "b"}]}]}], "]"}]], "Input",
+ CellLabel->"In[22]:=",ExpressionUUID->"7b17d12e-037e-413e-81a0-b3c980f4b345"],
+
+Cell[BoxData[
+ FormBox["True", TraditionalForm]], "Output",
+ CellChangeTimes->{4.002994012189487*^9},
+ CellLabel->"Out[22]=",ExpressionUUID->"03311513-3b46-4a55-a677-d7c155dde4cf"]
+}, Open  ]],
+
+Cell[TextData[{
+ "We see that ",
+ Cell[BoxData[
+  RowBox[{
+   StyleBox["c", "Input"], "\[LongEqual]", 
+   RowBox[{
+    FractionBox[
+     RowBox[{
+      SqrtBox["3"], " ", 
+      StyleBox["b", "Input"]}], "2"], "-", 
+    FractionBox[
+     StyleBox["a", "Input"], "2"]}]}]], "InlineFormula",ExpressionUUID->
+  "a71aa25d-52ff-4029-be9f-403c8e02c580"],
+ ". ",
+ StyleBox["A definite singlet channel for BC is a superposition of singlet \
+and triplet channels for AB",
+  FontWeight->"Bold"],
+ ". This change of coupling description is recoupling."
+}], "Text",
+ CellChangeTimes->{{4.003140155382052*^9, 
+  4.003140159836421*^9}},ExpressionUUID->"9b3f5bba-1afe-4c1d-b766-\
+c0c17bee517e"],
+
+Cell[TextData[{
+ StyleBox["Question",
+  FontSlant->"Italic"],
+ ": if the system is in state c and we measure the total spin of AB, what are \
+the probabilities of singlet and triplet? Square the absolute values of the \
+two coefficients."
+}], "Text",ExpressionUUID->"4f9ce2ba-8f30-49df-bb0f-241efc3d553b"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Simplify", "[", 
+  SuperscriptBox[
+   RowBox[{"Abs", "[", "coefficients", "]"}], "2"], "]"}]], "Input",
+ CellLabel->"In[23]:=",ExpressionUUID->"b073d47b-d04f-4070-b760-cc3863d7f3f8"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"{", 
+   RowBox[{
+    FractionBox["1", "4"], ",", 
+    FractionBox["3", "4"]}], "}"}], TraditionalForm]], "Output",
+ CellChangeTimes->{4.00299401219376*^9},
+ CellLabel->"Out[23]=",ExpressionUUID->"306531f0-435a-4dca-a034-9e69f416c84f"]
+}, Open  ]],
+
+Cell["\<\
+Answer: singlet 1/4, triplet 3/4. The recoupling coefficients give \
+probabilities for a different pair measurement.\
+\>", "Text",ExpressionUUID->"c167f5c6-fa2a-42a7-9865-a684df59b056"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["4. The same coefficients from SixJSymbol", "Subsubsection",ExpressionUUID->"4cf3f4ec-6222-4ded-aca0-202233e69ef1"],
+
+Cell[TextData[{
+ "Mathematica can calculate these overlaps directly from the angular-momentum \
+labels. Its ",
+ StyleBox["SixJSymbol", "Input"],
+ " takes two rows of three labels: ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"{", 
+    SubscriptBox["j", "A"]}], TraditionalForm]],
+  FormatType->TraditionalForm,ExpressionUUID->
+  "6ebd4b37-fc56-4e25-8594-5d883ab826ab"],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["j", "B"], TraditionalForm]],
+  FormatType->TraditionalForm,ExpressionUUID->
+  "99ec5940-838c-4881-a75d-b152e620a9b6"],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["j", "AB"], TraditionalForm]],
+  FormatType->TraditionalForm,ExpressionUUID->
+  "dbb79541-f22f-4d49-88c6-8f5e7e530481"],
+ "} and ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"{", 
+    SubscriptBox["j", "C"]}], TraditionalForm]],
+  FormatType->TraditionalForm,ExpressionUUID->
+  "93bb1698-aaf6-4476-8450-d42a8d8d807b"],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["J", "total"], TraditionalForm]],
+  FormatType->TraditionalForm,ExpressionUUID->
+  "cdd87d13-6a16-4a9e-9715-427f86378a9b"],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["j", "BC"], TraditionalForm]],
+  FormatType->TraditionalForm,ExpressionUUID->
+  "b52c8f16-d65c-4aeb-a19b-3ee41e5272f6"],
+ "}. Here all three individual spins and the total spin are 1/2. State ",
+ StyleBox["c", "Input"],
+ " has ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["j", "BC"], TraditionalForm]],
+  FormatType->TraditionalForm,ExpressionUUID->
+  "46c730c4-369e-41f0-9631-5cd7cd7b9ea6"],
+ " = 0, states ",
+ StyleBox["a", "Input"],
+ " and ",
+ StyleBox["b", "Input"],
+ " have ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["j", "AB"], TraditionalForm]],
+  FormatType->TraditionalForm,ExpressionUUID->
+  "c653be9e-e0bc-4fc5-81d8-2add5daa6561"],
+ " = 0 and 1, respectively."
+}], "Text",
+ CellChangeTimes->{{4.003140554975348*^9, 
+  4.003140602641913*^9}},ExpressionUUID->"bea1e0b2-1615-4c53-9617-\
+76cb19635f97"],
+
+Cell[TextData[{
+ "With the phases used above, multiply the 6j symbol by ",
+ Cell[BoxData[
+  SqrtBox[
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"2", " ", "jAB"}], "+", "1"}], ")"}], " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"2", " ", "jBC"}], "+", "1"}], ")"}]}]]], "InlineFormula",
+  ExpressionUUID->"039ec067-76c9-4f76-b53a-bcdde050a120"],
+ ". The usual overall phase is ",
+ Cell[BoxData[
+  SuperscriptBox[
+   RowBox[{"(", 
+    RowBox[{"-", "1"}], ")"}], 
+   RowBox[{"jA", "+", "jB", "+", "jC", "+", "Jtotal"}]]], "InlineFormula",
+  ExpressionUUID->"647b02f8-b505-4642-afd2-b30d11b9ad1a"],
+ ", which is +1 here. Since ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["j", "BC"], TraditionalForm]],
+  FormatType->TraditionalForm,ExpressionUUID->
+  "5930d1f9-f580-495d-b7d7-55f062f68424"],
+ " = 0 for ",
+ StyleBox["c", "Input"],
+ ", the two coefficients are:"
+}], "Text",
+ CellChangeTimes->{{4.0031406165902777`*^9, 
+  4.0031406276792603`*^9}},ExpressionUUID->"572799c3-bad5-4a67-ab79-\
+35a2a20a0ad0"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"sixJCoefficients", "=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{
+     SqrtBox[
+      RowBox[{
+       RowBox[{"2", " ", "jAB"}], "+", "1"}]], " ", 
+     RowBox[{"SixJSymbol", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         FractionBox["1", "2"], ",", 
+         FractionBox["1", "2"], ",", "jAB"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         FractionBox["1", "2"], ",", 
+         FractionBox["1", "2"], ",", "0"}], "}"}]}], "]"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"jAB", ",", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "1"}], "}"}]}], "}"}]}], "]"}]}]], "Input",
+ CellLabel->"In[24]:=",ExpressionUUID->"e24f049f-865e-42aa-9f35-64bf6a114481"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"-", 
+     FractionBox["1", "2"]}], ",", 
+    FractionBox[
+     SqrtBox["3"], "2"]}], "}"}], TraditionalForm]], "Output",
+ CellChangeTimes->{4.002994012201642*^9},
+ CellLabel->"Out[24]=",ExpressionUUID->"1cbf67a4-0f6e-438b-8040-e4f30543d4ca"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Simplify", "[", 
+  RowBox[{"sixJCoefficients", "\[Equal]", "coefficients"}], "]"}]], "Input",
+ CellLabel->"In[25]:=",ExpressionUUID->"4a02e9e3-6205-492c-80c9-e244f3de82ac"],
+
+Cell[BoxData[
+ FormBox["True", TraditionalForm]], "Output",
+ CellChangeTimes->{4.002994012203401*^9},
+ CellLabel->"Out[25]=",ExpressionUUID->"1eefbf7f-03c7-44a8-bec0-6c9b227bdb7c"]
+}, Open  ]],
+
+Cell["\<\
+OK. \[LineSeparator]This used the 6j calculation to confirm our explicit \
+state-vector overlaps. The six labels record the three individual spins, the \
+total spin, and the two pair spins. Three constituent spins already suffice \
+for this calculation.\
+\>", "Text",
+ CellChangeTimes->{{4.0031406517121677`*^9, 
+  4.0031406743901997`*^9}},ExpressionUUID->"3b0e89dd-83da-4af2-a4bf-\
+ea96947a3e5a"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Optional: verify the total spin", "Subsubsection",ExpressionUUID->"ee6fddf9-3b2f-412a-8ade-2fac8a8e0d1d"],
+
+Cell[TextData[{
+ "All three states have two up spins and one down spin, so ",
+ Cell[BoxData[
+  RowBox[{
+   SubscriptBox["J", "z"], "\[LongEqual]", 
+   FractionBox["1", "2"]}]], "InlineFormula",ExpressionUUID->
+  "625d60b6-2759-4cf2-b296-fcfc9a92599e"],
+ ". Define the dimensionless total spin ",
+ Cell[BoxData[
+  RowBox[{"J", "\[LongEqual]", 
+   RowBox[{
+    FractionBox["1", "2"], " ", 
+    RowBox[{"(", 
+     RowBox[{"\[Rho]", "+", "\[Sigma]", "+", "\[Tau]"}], ")"}]}]}]], 
+  "InlineFormula",ExpressionUUID->"a10b3a65-c673-4c49-93aa-744354eaa7fd"],
+ ". We can verify that a, b and c all have ",
+ Cell[BoxData[
+  RowBox[{
+   SuperscriptBox["J", "2"], "\[LongEqual]", 
+   RowBox[{
+    FractionBox["1", "2"], " ", 
+    RowBox[{"(", 
+     RowBox[{
+      FractionBox["1", "2"], "+", "1"}], ")"}]}], "\[LongEqual]", 
+   FractionBox["3", "4"]}]], "InlineFormula",ExpressionUUID->
+  "050f9315-4d00-44ce-862c-dfa39c8ae0c2"],
+ ". Their pair channels differ while their total spin agrees."
+}], "Text",ExpressionUUID->"d785114e-feb7-4012-8029-d19ee6783360"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"j", "=", 
+   RowBox[{
+    FractionBox["1", "2"], " ", 
+    RowBox[{"(", 
+     RowBox[{"sigma", "+", "tau", "+", "rho"}], ")"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"jSquared", "=", 
+   RowBox[{
+    UnderoverscriptBox["\[Sum]", "i", "3"], 
+    RowBox[{
+     RowBox[{"j", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}], ".", 
+     RowBox[{
+     "j", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}]}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Simplify", "[", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"jSquared", ".", "a"}], "\[Equal]", 
+     FractionBox[
+      RowBox[{"3", " ", "a"}], "4"]}], ",", 
+    RowBox[{
+     RowBox[{"jSquared", ".", "b"}], "\[Equal]", 
+     FractionBox[
+      RowBox[{"3", " ", "b"}], "4"]}], ",", 
+    RowBox[{
+     RowBox[{"jSquared", ".", "c"}], "\[Equal]", 
+     FractionBox[
+      RowBox[{"3", " ", "c"}], "4"]}]}], "}"}], "]"}]}], "Input",
+ CellLabel->"In[26]:=",ExpressionUUID->"a863eaa2-3feb-4635-a7af-d369dcdcdaf7"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"{", 
+   RowBox[{"True", ",", "True", ",", "True"}], "}"}], 
+  TraditionalForm]], "Output",
+ CellChangeTimes->{4.002994012210586*^9},
+ CellLabel->"Out[28]=",ExpressionUUID->"949c203e-c403-45f9-9d23-aaf642f022fc"]
+}, Open  ]],
+
+Cell[TextData[{
+ "Two independent states ",
+ StyleBox["a", "Input"],
+ " and ",
+ StyleBox["b", "Input"],
+ " therefore have the same total spin 1/2 and the same magnetic quantum \
+number 1/2. Their different AB channels distinguish them."
+}], "Text",ExpressionUUID->"0809198a-ca95-470f-879b-a8275f845a51"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Where this leads", "Subsubsection",ExpressionUUID->"b027fa31-d979-46a6-807f-d2687da57e40"],
+
+Cell[TextData[{
+ "For three spins, the changes between coupling bases are described by Wigner \
+6j symbols. We have calculated one column of such a change of basis directly, \
+using state vectors. With four spins, several sequences of recouplings reach \
+the same final coupling scheme; comparing those routes leads to the pentagon \
+condition. The ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox[
+    RowBox[{"SU", "(", "2", ")"}], "2"], TraditionalForm]],ExpressionUUID->
+  "d4c8644f-9484-4cf6-a5a0-be1c358f1853"],
+ " example in SMSA section 1.3, ",
+ StyleBox["\[OpenCurlyDoubleQuote]Outlook: category theory\
+\[CloseCurlyDoubleQuote]",
+  FontSlant->"Italic"],
+ " uses the same idea with truncated fusion rules and different numerical \
+coefficients."
+}], "Text",
+ CellChangeTimes->{{4.0029939375096483`*^9, 4.00299393876165*^9}, {
+   4.0031402430008707`*^9, 4.0031402458467093`*^9}, 
+   4.003140297062484*^9},ExpressionUUID->"26b2a1ee-cc17-48a5-b982-\
+5813539dd668"]
+}, Open  ]]
+},
+WindowSize->{1259, 834},
+WindowMargins->{{9, Automatic}, {Automatic, 5}},
+WindowTitle->Automatic,
+Magnification:>2. Inherited,
+FrontEndVersion->"15.0 for Mac OS X ARM (64-bit) (July 2, 2026)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"cc89e7ef-b1e5-4cdb-bc2f-494d4e01b72b"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[599, 23, 188, 3, 87, "Subsubsection",ExpressionUUID->"82b8c2bc-9224-4614-bb8d-9591c6c955e0"],
+Cell[790, 28, 317, 7, 155, "Text",ExpressionUUID->"12e8062c-1eca-4776-b9ff-93eb60f5fd4c"],
+Cell[1110, 37, 814, 18, 242, "Text",ExpressionUUID->"e591f4fe-4d14-49e1-a0ed-257261ffee2b"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1961, 60, 99, 0, 87, "Subsubsection",ExpressionUUID->"f4e14ba9-5505-47b6-a405-4a65064c9f58"],
+Cell[2063, 62, 447, 10, 155, "Text",ExpressionUUID->"6b643943-f404-49df-a9f0-4e0eaf0448b6"],
+Cell[CellGroupData[{
+Cell[2535, 76, 844, 21, 222, "Input",ExpressionUUID->"572be8e6-4054-4d61-af89-a8983fcb96a4"],
+Cell[3382, 99, 292, 7, 60, "Output",ExpressionUUID->"43ad4724-1830-4551-8435-6cd7c1cfe945"]
+}, Open  ]],
+Cell[3689, 109, 1479, 38, 162, "Text",ExpressionUUID->"219d7c13-3b82-40af-ae82-1a26b1335d56"],
+Cell[5171, 149, 920, 30, 99, "Input",ExpressionUUID->"513277e1-d8c7-4adf-aebe-11abddee5e77"],
+Cell[6094, 181, 657, 18, 158, "Text",ExpressionUUID->"0b29d834-0e8b-48d5-accd-40a100cb6bb2"],
+Cell[6754, 201, 1180, 35, 181, "Input",ExpressionUUID->"8efb1f27-5a4a-44b8-a7b1-3a062096ebdb"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7971, 241, 110, 0, 87, "Subsubsection",ExpressionUUID->"3c48eec3-bbd6-4706-9cdc-b6f3dd66a5d8"],
+Cell[8084, 243, 553, 14, 124, "Text",ExpressionUUID->"521492d5-d69f-48a8-a8e1-f6a58f94229a"],
+Cell[CellGroupData[{
+Cell[8662, 261, 485, 13, 145, "Input",ExpressionUUID->"5817c63a-ee51-4794-93a4-d1561c1c2011"],
+Cell[9150, 276, 177, 3, 60, "Output",ExpressionUUID->"9b845cd8-01a9-4d68-8efc-1dc14bfe2f98"]
+}, Open  ]],
+Cell[9342, 282, 829, 21, 207, "Text",ExpressionUUID->"d16a259f-500b-412e-87b0-6707ee94f3fe"],
+Cell[CellGroupData[{
+Cell[10196, 307, 861, 25, 253, "Input",ExpressionUUID->"c308b2c0-fc02-42a0-b79a-f8b08e1e49c6"],
+Cell[11060, 334, 180, 3, 60, "Output",ExpressionUUID->"6a1e896f-132c-4a4b-b455-d5270d9e44ee"]
+}, Open  ]],
+Cell[11255, 340, 555, 14, 124, "Text",ExpressionUUID->"bc83738f-c777-4d2c-8348-cfbcbbce773e"],
+Cell[CellGroupData[{
+Cell[11835, 358, 524, 15, 145, "Input",ExpressionUUID->"3392984c-d1d4-4012-bcc8-c5bcac878a3d"],
+Cell[12362, 375, 180, 3, 60, "Output",ExpressionUUID->"1e1583a8-ddb9-4a01-a0d7-5050e4f720d0"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12579, 383, 231, 5, 58, "Input",ExpressionUUID->"b1c01f58-c018-400d-84a8-bad23d079908"],
+Cell[12813, 390, 217, 5, 87, "Output",ExpressionUUID->"d93ab646-fe54-48f4-8c5c-c39bab76958d"]
+}, Open  ]],
+Cell[13045, 398, 389, 8, 119, "Text",ExpressionUUID->"df9b414b-500f-4efc-ad6a-467f478c0e7a"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13471, 411, 130, 0, 87, "Subsubsection",ExpressionUUID->"a9b7d056-7b9c-4ea1-b349-dc00313c4c97"],
+Cell[13604, 413, 792, 20, 168, "Text",ExpressionUUID->"f3a67753-0b34-4946-8352-bef9f3305fd1"],
+Cell[CellGroupData[{
+Cell[14421, 437, 784, 22, 145, "Input",ExpressionUUID->"c13a2a91-88df-4378-a02f-b223eae5319c"],
+Cell[15208, 461, 237, 5, 60, "Output",ExpressionUUID->"25a5ff34-70a5-457d-8cc4-ff67ac95fc35"]
+}, Open  ]],
+Cell[15460, 469, 243, 4, 111, "Text",ExpressionUUID->"f555d94a-d66d-4403-a844-2dcb852e4f84"],
+Cell[CellGroupData[{
+Cell[15728, 477, 359, 10, 58, "Input",ExpressionUUID->"5e1986a2-28d8-4389-b1b8-4a2d3b9bd571"],
+Cell[16090, 489, 308, 9, 94, "Output",ExpressionUUID->"100eb94f-533a-4c6f-9cd6-afbfb8765914"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[16435, 503, 430, 12, 58, "Input",ExpressionUUID->"7b17d12e-037e-413e-81a0-b3c980f4b345"],
+Cell[16868, 517, 180, 3, 60, "Output",ExpressionUUID->"03311513-3b46-4a55-a677-d7c155dde4cf"]
+}, Open  ]],
+Cell[17063, 523, 679, 21, 163, "Text",ExpressionUUID->"9b3f5bba-1afe-4c1d-b766-c0c17bee517e"],
+Cell[17745, 546, 305, 6, 111, "Text",ExpressionUUID->"4f9ce2ba-8f30-49df-bb0f-241efc3d553b"],
+Cell[CellGroupData[{
+Cell[18075, 556, 206, 4, 62, "Input",ExpressionUUID->"b073d47b-d04f-4070-b760-cc3863d7f3f8"],
+Cell[18284, 562, 269, 7, 87, "Output",ExpressionUUID->"306531f0-435a-4dca-a034-9e69f416c84f"]
+}, Open  ]],
+Cell[18568, 572, 195, 3, 111, "Text",ExpressionUUID->"c167f5c6-fa2a-42a7-9865-a684df59b056"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18800, 580, 120, 0, 87, "Subsubsection",ExpressionUUID->"4cf3f4ec-6222-4ded-aca0-202233e69ef1"],
+Cell[18923, 582, 1930, 64, 198, "Text",ExpressionUUID->"bea1e0b2-1615-4c53-9617-76cb19635f97"],
+Cell[20856, 648, 1022, 31, 158, "Text",ExpressionUUID->"572799c3-bad5-4a67-ab79-35a2a20a0ad0"],
+Cell[CellGroupData[{
+Cell[21903, 683, 719, 22, 128, "Input",ExpressionUUID->"e24f049f-865e-42aa-9f35-64bf6a114481"],
+Cell[22625, 707, 306, 9, 94, "Output",ExpressionUUID->"1cbf67a4-0f6e-438b-8040-e4f30543d4ca"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[22968, 721, 196, 3, 58, "Input",ExpressionUUID->"4a02e9e3-6205-492c-80c9-e244f3de82ac"],
+Cell[23167, 726, 180, 3, 60, "Output",ExpressionUUID->"1eefbf7f-03c7-44a8-bec0-6c9b227bdb7c"]
+}, Open  ]],
+Cell[23362, 732, 407, 8, 198, "Text",ExpressionUUID->"3b0e89dd-83da-4af2-a4bf-ea96947a3e5a"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23806, 745, 111, 0, 87, "Subsubsection",ExpressionUUID->"ee6fddf9-3b2f-412a-8ade-2fac8a8e0d1d"],
+Cell[23920, 747, 1047, 27, 179, "Text",ExpressionUUID->"d785114e-feb7-4012-8029-d19ee6783360"],
+Cell[CellGroupData[{
+Cell[24992, 778, 1039, 31, 260, "Input",ExpressionUUID->"a863eaa2-3feb-4635-a7af-d369dcdcdaf7"],
+Cell[26034, 811, 246, 6, 60, "Output",ExpressionUUID->"949c203e-c403-45f9-9d23-aaf642f022fc"]
+}, Open  ]],
+Cell[26295, 820, 303, 7, 111, "Text",ExpressionUUID->"0809198a-ca95-470f-879b-a8275f845a51"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26635, 832, 96, 0, 87, "Subsubsection",ExpressionUUID->"b027fa31-d979-46a6-807f-d2687da57e40"],
+Cell[26734, 834, 966, 21, 286, "Text",ExpressionUUID->"26b2a1ee-cc17-48a5-b982-5813539dd668"]
+}, Open  ]]
+}
+]
+*)
+

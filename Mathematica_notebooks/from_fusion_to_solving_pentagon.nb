@@ -194,7 +194,7 @@ Cell[TextData[{
     RowBox[{"c", ")"}], "f"], TraditionalForm]],
   FontSlant->"Italic",ExpressionUUID->
   "debbbcd2-a9e6-4423-ac5b-3166ada10f43"],
- " f)",
+ ")",
  Cell[BoxData[
   FormBox[
    SubscriptBox["", "d"], TraditionalForm]],ExpressionUUID->
@@ -243,7 +243,8 @@ Cell[BoxData[{
 
 Cell["\<\
 First fix the standard unit gauge: inadmissible entries are zero, while an \
-associator involving the vacuum 1 is set to 1. All other admissible entries \
+associator with at least one of the inputs a, b, c equal to the vacuum 1 is \
+set to 1. All other admissible entries \
 remain independent real unknowns.\
 \>", "Text",ExpressionUUID->"d9ebbdef-8b60-4cc2-99ea-1ece18b2a0ca"],
 
@@ -855,8 +856,8 @@ Cell[TextData[{
  "Note these are ",
  StyleBox["two solutions",
   FontWeight->"Bold"],
- ". \[LineSeparator]For compactness, pick solution #2 (but feel free to \
-change it below):"
+ ". \[LineSeparator]For compactness, pick the branch whose F^{222}_2 \
+block has a positive upper-left entry:"
 }], "Text",
  CellChangeTimes->{{3.996044501388422*^9, 3.9960445092981653`*^9}, {
   3.996045057719387*^9, 3.996045075435676*^9}, {3.996047725379612*^9, 
@@ -890,8 +891,11 @@ Cell[BoxData[{
    RowBox[{"Prepend", "[", 
     RowBox[{
      RowBox[{"solutionTable", "[", 
-      RowBox[{"solutions", "[", 
-       RowBox[{"[", "2", "]"}], "]"}], "]"}], ",", 
+      RowBox[{"SelectFirst", "[", 
+       RowBox[{"solutions", ",", 
+        RowBox[{RowBox[{"TrueQ", "[", 
+           RowBox[{RowBox[{"(", RowBox[{"f222211", "/.", "#"}], ")"}], ">", "0"}], 
+           "]"}], "&"}]}], "]"}], "]"}], ",", 
      RowBox[{"{", 
       RowBox[{"\"\<{\!\(\*StyleBox[\"a\",FontSlant->\"Italic\"]\)\!\(\*\
 StyleBox[\",\",FontSlant->\"Italic\"]\)\!\(\*StyleBox[\"b\",FontSlant->\"\
@@ -1029,8 +1033,11 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"sol", " ", "=", " ", 
-  RowBox[{"solutions", "[", 
-   RowBox[{"[", "2", "]"}], "]"}]}]], "Input",
+  RowBox[{"SelectFirst", "[", 
+   RowBox[{"solutions", ",", 
+    RowBox[{RowBox[{"TrueQ", "[", 
+       RowBox[{RowBox[{"(", RowBox[{"f222211", "/.", "#"}], ")"}], ">", "0"}], 
+       "]"}], "&"}]}], "]"}]}]], "Input",
  CellChangeTimes->{{3.996045259509548*^9, 3.996045265405134*^9}, 
    3.996046877498064*^9},
  CellLabel->

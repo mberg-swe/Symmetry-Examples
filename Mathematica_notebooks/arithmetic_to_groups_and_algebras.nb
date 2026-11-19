@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       154,          7]
-NotebookDataLength[     49728,       1318]
+NotebookDataLength[     49830,       1320]
 NotebookOptionsPosition[     41044,       1175]
-NotebookOutlinePosition[     41579,       1195]
-CellTagsIndexPosition[     41536,       1192]
+NotebookOutlinePosition[     41681,       1197]
+CellTagsIndexPosition[     41638,       1194]
 WindowTitle->From arithmetic to groups and algebras
 WindowFrame->Normal*)
 
@@ -1173,11 +1173,13 @@ understanding ordinary groups and algebras is a necessary starting point.",
   4.000877975676251*^9}},ExpressionUUID->"0c8e0791-e168-45cc-9e0c-\
 e135e0731656"]
 },
-WindowSize->{1752, 1286},
-WindowMargins->{{292, Automatic}, {1052, Automatic}},
+WindowSize->{1752, 895},
+WindowMargins->{{144, Automatic}, {Automatic, 0}},
 WindowTitle->"From arithmetic to groups and algebras",
 PrintingCopies->1,
 PrintingPageRange->{1, Automatic},
+PrintingOptions->{"PaperOrientation"->"Portrait",
+"PaperSize"->{457.69230769230774`, 647.6923076923077}},
 Magnification:>2. Inherited,
 FrontEndVersion->"15.0 for Mac OS X ARM (64-bit) (July 2, 2026)",
 StyleDefinitions->"Default.nb",
@@ -1209,12 +1211,12 @@ Cell[3132, 92, 182, 4, 87, "Output",ExpressionUUID->"5be6b709-e88d-44b9-ac09-594
 }, Open  ]],
 Cell[3329, 99, 731, 14, 242, "Text",ExpressionUUID->"5d6729e5-2087-445e-9a13-1a0050191ac0"],
 Cell[CellGroupData[{
-Cell[4085, 117, 204, 6, 58, "Input",ExpressionUUID->"2b01608d-42d2-490a-8e33-8eb8dc709ec6"],
-Cell[4292, 125, 229, 6, 87, "Output",ExpressionUUID->"a8bad121-62e5-4372-8d04-bc094f16faaa"]
+Cell[4085, 117, 204, 6, 70, "Input",ExpressionUUID->"2b01608d-42d2-490a-8e33-8eb8dc709ec6"],
+Cell[4292, 125, 229, 6, 70, "Output",ExpressionUUID->"a8bad121-62e5-4372-8d04-bc094f16faaa"]
 }, Open  ]],
-Cell[4536, 134, 1099, 21, 373, "Text",ExpressionUUID->"220d8aec-2fe5-443c-b83c-c97b7673ffa6"],
+Cell[4536, 134, 1099, 21, 70, "Text",ExpressionUUID->"220d8aec-2fe5-443c-b83c-c97b7673ffa6"],
 Cell[CellGroupData[{
-Cell[5660, 159, 133, 3, 58, "Input",ExpressionUUID->"1f2d5977-fe00-49cc-8819-985480570551"],
+Cell[5660, 159, 133, 3, 70, "Input",ExpressionUUID->"1f2d5977-fe00-49cc-8819-985480570551"],
 Cell[5796, 164, 182, 4, 70, "Output",ExpressionUUID->"a6abcc36-3755-4cb0-b4d9-510b4e4f883a"]
 }, Open  ]],
 Cell[5993, 171, 213, 5, 70, "Text",ExpressionUUID->"29061a8a-52fd-4b88-91f1-16e21a7c7784"],
@@ -1319,7 +1321,7 @@ Cell[CellGroupData[{
 Cell[37973, 1094, 232, 5, 70, "Input",ExpressionUUID->"b37c6421-ce3a-4c0b-b72a-8e663705f064"],
 Cell[38208, 1101, 184, 4, 70, "Output",ExpressionUUID->"cf9bcf51-cc49-40eb-b5e6-85b9375222d5"]
 }, Open  ]],
-Cell[38407, 1108, 2633, 65, 70, "Text",ExpressionUUID->"0c8e0791-e168-45cc-9e0c-e135e0731656"]
+Cell[38407, 1108, 2633, 65, 679, "Text",ExpressionUUID->"0c8e0791-e168-45cc-9e0c-e135e0731656"]
 }
 ]
 *)
