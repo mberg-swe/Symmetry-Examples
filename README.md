@@ -1,6 +1,8 @@
 # Symmetry Examples
 
-Examples for the course [FYAD11 Symmetry](https://www.kau.se/en/education/programmes-and-courses/courses/FYAD11).
+Examples for the course [FYAD11 Symmetry](https://www.kau.se/en/education/programmes-and-courses/courses/FYAD11). I hope to eventually make this a [Nordic Curriculum course](https://nordita.org/education/courses).
+
+Recommended: read the Outlook (Ch.19) first, at least superficially.
 
 ## Mathematica notebooks
 
