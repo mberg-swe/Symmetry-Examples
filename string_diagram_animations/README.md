@@ -14,8 +14,6 @@ Each animation shows two equations above the pictures: first applied to elements
 
 <img src="dual_map_2_92_with_eqs.gif" alt="Dual map" width="616">
 
-The same animation [without equations](dual_map_2_92.gif).
-
 ### A proof by crossing two wires: k k F = 0
 
 <img src="flip_kkF_3_59_with_eqs.gif" alt="A proof by crossing two wires" width="506">
